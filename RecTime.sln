@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecTimeLogic", "RecTimeLogic\RecTimeLogic.csproj", "{69FF41B9-F5DA-42ED-B324-55768F5F24D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecTimeLogic.Tests", "RecTimeLogic.Tests\RecTimeLogic.Tests.csproj", "{181D27C1-0520-4305-B90F-8F41A1717948}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecTime.Console", "RecTime.Console\RecTime.Console.csproj", "{D3087E2E-A656-475F-B8B3-0B012C187AE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecTime", "RecTime\RecTime.csproj", "{F814E85C-B6A8-41D2-90BF-810071ADCC6D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69FF41B9-F5DA-42ED-B324-55768F5F24D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69FF41B9-F5DA-42ED-B324-55768F5F24D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69FF41B9-F5DA-42ED-B324-55768F5F24D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69FF41B9-F5DA-42ED-B324-55768F5F24D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{181D27C1-0520-4305-B90F-8F41A1717948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{181D27C1-0520-4305-B90F-8F41A1717948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{181D27C1-0520-4305-B90F-8F41A1717948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{181D27C1-0520-4305-B90F-8F41A1717948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3087E2E-A656-475F-B8B3-0B012C187AE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3087E2E-A656-475F-B8B3-0B012C187AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3087E2E-A656-475F-B8B3-0B012C187AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3087E2E-A656-475F-B8B3-0B012C187AE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F814E85C-B6A8-41D2-90BF-810071ADCC6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F814E85C-B6A8-41D2-90BF-810071ADCC6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F814E85C-B6A8-41D2-90BF-810071ADCC6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F814E85C-B6A8-41D2-90BF-810071ADCC6D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
