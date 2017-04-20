@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChannelInfo.cs" />
+    <Compile Include="ChannelInfoFile.cs" />
     <Compile Include="FFmpegInfoParser.cs" />
     <Compile Include="GoogleAnalyticsTracker.cs" />
     <Compile Include="IStreamDownloader.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="StreamManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StreamInfo.cs" />
+    <Compile Include="StringXmlSerializer.cs" />
     <Compile Include="UrlHelper.cs" />
     <Compile Include="UrStreamManager.cs" />
   </ItemGroup>

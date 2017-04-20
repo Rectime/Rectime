@@ -56,6 +56,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ChannelInfoFileTests.cs" />
+    <Compile Include="ChannelInfoTests.cs" />
     <Compile Include="FfmpegInfoParserTests.cs" />
     <Compile Include="StreamManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,6 +70,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ChannelData\kunskapskanalen.svt.se_2017-04-20.xml.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="ChannelData\svt1.svt.se_2017-04-20.xml.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="ChannelData\svt2.svt.se_2017-04-20.xml.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="ChannelData\svt24.svt.se_2017-04-20.xml.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="ChannelData\svtb.svt.se_2017-04-20.xml.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>
