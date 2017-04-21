@@ -63,6 +63,16 @@ namespace RecTime.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap barnkanalen {
+            get {
+                object obj = ResourceManager.GetObject("barnkanalen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap donate {
             get {
                 object obj = ResourceManager.GetObject("donate", resourceCulture);
@@ -86,6 +96,46 @@ namespace RecTime.Properties {
         internal static System.Drawing.Bitmap icon_small {
             get {
                 object obj = ResourceManager.GetObject("icon_small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap kunskapskanalen {
+            get {
+                object obj = ResourceManager.GetObject("kunskapskanalen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap svt1 {
+            get {
+                object obj = ResourceManager.GetObject("svt1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap svt2 {
+            get {
+                object obj = ResourceManager.GetObject("svt2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap svt24 {
+            get {
+                object obj = ResourceManager.GetObject("svt24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

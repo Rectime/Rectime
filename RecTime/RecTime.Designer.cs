@@ -58,16 +58,24 @@
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
             this.lblStatus = new MaterialSkin.Controls.MaterialLabel();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.pictureBoxFFmpeg = new System.Windows.Forms.PictureBox();
             this.pictureBoxDonate = new System.Windows.Forms.PictureBox();
+            this.btnChannelSvtb = new System.Windows.Forms.Button();
+            this.btnSvt1 = new System.Windows.Forms.Button();
+            this.btnSvt2 = new System.Windows.Forms.Button();
+            this.btnSvtKunskap = new System.Windows.Forms.Button();
+            this.btnSvt24 = new System.Windows.Forms.Button();
+            this.lblChannel = new MaterialSkin.Controls.MaterialLabel();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDuration)).BeginInit();
+            this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFFmpeg)).BeginInit();
@@ -77,6 +85,7 @@
             // materialTabControl1
             // 
             this.materialTabControl1.Controls.Add(this.tabPage1);
+            this.materialTabControl1.Controls.Add(this.tabPage5);
             this.materialTabControl1.Controls.Add(this.tabPage2);
             this.materialTabControl1.Controls.Add(this.tabPage3);
             this.materialTabControl1.Depth = 0;
@@ -239,10 +248,10 @@
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.labelFFmpeg);
-            this.tabPage3.Controls.Add(this.pictureBoxFFmpeg);
             this.tabPage3.Controls.Add(this.materialLabelVersion);
-            this.tabPage3.Controls.Add(this.pictureBoxDonate);
             this.tabPage3.Controls.Add(this.materialLabel1);
+            this.tabPage3.Controls.Add(this.pictureBoxFFmpeg);
+            this.tabPage3.Controls.Add(this.pictureBoxDonate);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(516, 311);
@@ -471,6 +480,21 @@
             this.lblStatus.TabIndex = 3;
             this.lblStatus.Text = "Status:";
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.lblChannel);
+            this.tabPage5.Controls.Add(this.btnSvt24);
+            this.tabPage5.Controls.Add(this.btnSvtKunskap);
+            this.tabPage5.Controls.Add(this.btnSvt2);
+            this.tabPage5.Controls.Add(this.btnSvt1);
+            this.tabPage5.Controls.Add(this.btnChannelSvtb);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(516, 311);
+            this.tabPage5.TabIndex = 3;
+            this.tabPage5.Text = "Live";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
             // pictureBoxLogo
             // 
             this.pictureBoxLogo.BackColor = System.Drawing.Color.Transparent;
@@ -510,6 +534,69 @@
             this.pictureBoxDonate.TabStop = false;
             this.pictureBoxDonate.Click += new System.EventHandler(this.pictureBoxDonate_Click);
             // 
+            // btnChannelSvtb
+            // 
+            this.btnChannelSvtb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
+            this.btnChannelSvtb.Image = global::RecTime.Properties.Resources.barnkanalen;
+            this.btnChannelSvtb.Location = new System.Drawing.Point(8, 40);
+            this.btnChannelSvtb.Name = "btnChannelSvtb";
+            this.btnChannelSvtb.Size = new System.Drawing.Size(227, 54);
+            this.btnChannelSvtb.TabIndex = 1;
+            this.btnChannelSvtb.UseVisualStyleBackColor = false;
+            // 
+            // btnSvt1
+            // 
+            this.btnSvt1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
+            this.btnSvt1.Image = global::RecTime.Properties.Resources.svt1;
+            this.btnSvt1.Location = new System.Drawing.Point(8, 100);
+            this.btnSvt1.Name = "btnSvt1";
+            this.btnSvt1.Size = new System.Drawing.Size(227, 54);
+            this.btnSvt1.TabIndex = 2;
+            this.btnSvt1.UseVisualStyleBackColor = false;
+            // 
+            // btnSvt2
+            // 
+            this.btnSvt2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
+            this.btnSvt2.Image = global::RecTime.Properties.Resources.svt2;
+            this.btnSvt2.Location = new System.Drawing.Point(8, 160);
+            this.btnSvt2.Name = "btnSvt2";
+            this.btnSvt2.Size = new System.Drawing.Size(227, 54);
+            this.btnSvt2.TabIndex = 3;
+            this.btnSvt2.UseVisualStyleBackColor = false;
+            // 
+            // btnSvtKunskap
+            // 
+            this.btnSvtKunskap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
+            this.btnSvtKunskap.Image = global::RecTime.Properties.Resources.kunskapskanalen;
+            this.btnSvtKunskap.Location = new System.Drawing.Point(241, 40);
+            this.btnSvtKunskap.Name = "btnSvtKunskap";
+            this.btnSvtKunskap.Size = new System.Drawing.Size(227, 54);
+            this.btnSvtKunskap.TabIndex = 4;
+            this.btnSvtKunskap.UseVisualStyleBackColor = false;
+            // 
+            // btnSvt24
+            // 
+            this.btnSvt24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
+            this.btnSvt24.Image = global::RecTime.Properties.Resources.svt24;
+            this.btnSvt24.Location = new System.Drawing.Point(241, 100);
+            this.btnSvt24.Name = "btnSvt24";
+            this.btnSvt24.Size = new System.Drawing.Size(227, 54);
+            this.btnSvt24.TabIndex = 5;
+            this.btnSvt24.UseVisualStyleBackColor = false;
+            // 
+            // lblChannel
+            // 
+            this.lblChannel.AutoSize = true;
+            this.lblChannel.Depth = 0;
+            this.lblChannel.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblChannel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblChannel.Location = new System.Drawing.Point(4, 18);
+            this.lblChannel.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblChannel.Name = "lblChannel";
+            this.lblChannel.Size = new System.Drawing.Size(75, 19);
+            this.lblChannel.TabIndex = 6;
+            this.lblChannel.Text = "Välj kanal";
+            // 
             // RecTime
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -537,6 +624,8 @@
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDuration)).EndInit();
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFFmpeg)).EndInit();
@@ -581,6 +670,13 @@
         private MaterialSkin.Controls.MaterialLabel materialLabelVersion;
         private System.Windows.Forms.Label labelFFmpeg;
         private System.Windows.Forms.PictureBox pictureBoxFFmpeg;
+        private System.Windows.Forms.TabPage tabPage5;
+        private MaterialSkin.Controls.MaterialLabel lblChannel;
+        private System.Windows.Forms.Button btnSvt24;
+        private System.Windows.Forms.Button btnSvtKunskap;
+        private System.Windows.Forms.Button btnSvt2;
+        private System.Windows.Forms.Button btnSvt1;
+        private System.Windows.Forms.Button btnChannelSvtb;
     }
 }
 

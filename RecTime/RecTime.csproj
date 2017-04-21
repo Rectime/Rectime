@@ -105,6 +105,11 @@
     </Content>
     <Content Include="icon.ico" />
     <Content Include="record-icon.ico" />
+    <None Include="Resources\svt24.png" />
+    <None Include="Resources\svt2.png" />
+    <None Include="Resources\svt1.png" />
+    <None Include="Resources\kunskapskanalen.png" />
+    <None Include="Resources\barnkanalen.png" />
     <None Include="Resources\icon_small.png" />
     <None Include="Resources\ffmpeg.png" />
     <None Include="Resources\donate.gif" />
