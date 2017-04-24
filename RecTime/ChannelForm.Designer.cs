@@ -1,0 +1,148 @@
+﻿namespace RecTime
+{
+    partial class ChannelForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.btnPrevDate = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.btnNextDate = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.lblDate = new MaterialSkin.Controls.MaterialLabel();
+            this.panelPrograms = new System.Windows.Forms.Panel();
+            this.pictureBoxLoading = new System.Windows.Forms.PictureBox();
+            this.btnAddSelection = new MaterialSkin.Controls.MaterialRaisedButton();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoading)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // btnPrevDate
+            // 
+            this.btnPrevDate.AutoSize = true;
+            this.btnPrevDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnPrevDate.Depth = 0;
+            this.btnPrevDate.Icon = null;
+            this.btnPrevDate.Location = new System.Drawing.Point(12, 75);
+            this.btnPrevDate.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnPrevDate.Name = "btnPrevDate";
+            this.btnPrevDate.Primary = true;
+            this.btnPrevDate.Size = new System.Drawing.Size(28, 36);
+            this.btnPrevDate.TabIndex = 0;
+            this.btnPrevDate.Text = "<";
+            this.btnPrevDate.UseVisualStyleBackColor = true;
+            this.btnPrevDate.Click += new System.EventHandler(this.btnPrevDate_Click);
+            // 
+            // btnNextDate
+            // 
+            this.btnNextDate.AutoSize = true;
+            this.btnNextDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNextDate.Depth = 0;
+            this.btnNextDate.Icon = null;
+            this.btnNextDate.Location = new System.Drawing.Point(147, 75);
+            this.btnNextDate.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnNextDate.Name = "btnNextDate";
+            this.btnNextDate.Primary = true;
+            this.btnNextDate.Size = new System.Drawing.Size(28, 36);
+            this.btnNextDate.TabIndex = 1;
+            this.btnNextDate.Text = ">";
+            this.btnNextDate.UseVisualStyleBackColor = true;
+            this.btnNextDate.Click += new System.EventHandler(this.btnNextDate_Click);
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.Depth = 0;
+            this.lblDate.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblDate.Location = new System.Drawing.Point(46, 83);
+            this.lblDate.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(37, 19);
+            this.lblDate.TabIndex = 2;
+            this.lblDate.Text = "Idag";
+            // 
+            // panelPrograms
+            // 
+            this.panelPrograms.AutoScroll = true;
+            this.panelPrograms.Location = new System.Drawing.Point(12, 117);
+            this.panelPrograms.Name = "panelPrograms";
+            this.panelPrograms.Size = new System.Drawing.Size(309, 374);
+            this.panelPrograms.TabIndex = 3;
+            // 
+            // pictureBoxLoading
+            // 
+            this.pictureBoxLoading.Image = global::RecTime.Properties.Resources.loader;
+            this.pictureBoxLoading.Location = new System.Drawing.Point(519, 75);
+            this.pictureBoxLoading.Name = "pictureBoxLoading";
+            this.pictureBoxLoading.Size = new System.Drawing.Size(33, 34);
+            this.pictureBoxLoading.TabIndex = 4;
+            this.pictureBoxLoading.TabStop = false;
+            // 
+            // btnAddSelection
+            // 
+            this.btnAddSelection.AutoSize = true;
+            this.btnAddSelection.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAddSelection.Depth = 0;
+            this.btnAddSelection.Icon = null;
+            this.btnAddSelection.Location = new System.Drawing.Point(465, 455);
+            this.btnAddSelection.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnAddSelection.Name = "btnAddSelection";
+            this.btnAddSelection.Primary = true;
+            this.btnAddSelection.Size = new System.Drawing.Size(87, 36);
+            this.btnAddSelection.TabIndex = 5;
+            this.btnAddSelection.Text = "Lägg till";
+            this.btnAddSelection.UseVisualStyleBackColor = true;
+            // 
+            // ChannelForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(564, 503);
+            this.Controls.Add(this.btnAddSelection);
+            this.Controls.Add(this.pictureBoxLoading);
+            this.Controls.Add(this.panelPrograms);
+            this.Controls.Add(this.lblDate);
+            this.Controls.Add(this.btnNextDate);
+            this.Controls.Add(this.btnPrevDate);
+            this.MaximizeBox = false;
+            this.Name = "ChannelForm";
+            this.Sizable = false;
+            this.Text = "TV-Tablå - ";
+            this.Load += new System.EventHandler(this.ChannelForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoading)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private MaterialSkin.Controls.MaterialRaisedButton btnPrevDate;
+        private MaterialSkin.Controls.MaterialRaisedButton btnNextDate;
+        private MaterialSkin.Controls.MaterialLabel lblDate;
+        private System.Windows.Forms.Panel panelPrograms;
+        private System.Windows.Forms.PictureBox pictureBoxLoading;
+        private MaterialSkin.Controls.MaterialRaisedButton btnAddSelection;
+    }
+}

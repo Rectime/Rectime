@@ -48,6 +48,16 @@ namespace RecTime
 
         #region Component Events
 
+        private void btnChannel_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            if (btn == null)
+                return;
+
+            var form = new ChannelForm() {Channel = btn.Tag.ToString()};
+            form.Show();
+        }
+
         private void txtOutputLocation_Enter(object sender, EventArgs e)
         {
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)

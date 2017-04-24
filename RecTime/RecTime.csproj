@@ -57,6 +57,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChannelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChannelForm.Designer.cs">
+      <DependentUpon>ChannelForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="InfoBackgroundWorker.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -71,6 +77,9 @@
     <Compile Include="StreamBackgroundWorker.cs">
       <SubType>Component</SubType>
     </Compile>
+    <EmbeddedResource Include="ChannelForm.resx">
+      <DependentUpon>ChannelForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RecTime.resx">
       <DependentUpon>RecTime.cs</DependentUpon>
     </EmbeddedResource>
@@ -105,6 +114,7 @@
     </Content>
     <Content Include="icon.ico" />
     <Content Include="record-icon.ico" />
+    <None Include="Resources\loader.gif" />
     <None Include="Resources\svt24.png" />
     <None Include="Resources\svt2.png" />
     <None Include="Resources\svt1.png" />
