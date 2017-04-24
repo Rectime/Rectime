@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
+using RecTimeLogic;
 
 namespace RecTime
 {
@@ -17,10 +18,14 @@ namespace RecTime
     {
         public string Channel { get; set; }
         public DateTime CurrentDate { get; set; }
+        public List<ProgramInfo> SelectedPrograms { get; set; }
+
+        private ChannelInfoBackgroundWorker _worker;
 
         public ChannelForm()
         {
             InitializeComponent();
+            SelectedPrograms = new List<ProgramInfo>();
             this.StartPosition = FormStartPosition.CenterScreen;
 
             var materialSkinManager = MaterialSkinManager.Instance;
@@ -33,15 +38,106 @@ namespace RecTime
         {
             this.Text += Channel;
             CurrentDate = DateTime.Today;
-            UpdateDateText();
+            _worker = new ChannelInfoBackgroundWorker(Channel, CurrentDate);
+            _worker.RunWorkerCompleted += _worker_RunWorkerCompleted;
 
-            for (int i = 0; i < 15; i++)
+            var image = Properties.Resources.svt1;
+
+            switch (Channel)
             {
-                var btn = new MaterialRaisedButton();
-                btn.Text = "10.00-13.00: Antikrundan special ...";
-                btn.Location = new Point(5, 15 + i*33);
-                panelPrograms.Controls.Add(btn);
+                case "Barnkanalen": image = Properties.Resources.barnkanalen; break;
+                case "Kunskapskanalen": image = Properties.Resources.kunskapskanalen; break;
+                case "Svt1": image = Properties.Resources.svt1; break;
+                case "Svt2": image = Properties.Resources.svt2; break;
+                case "Svt24": image = Properties.Resources.svt24; break;
             }
+            pictureBoxChannel.Image = image;
+
+            StartWorker();
+        }
+
+        private void StartWorker()
+        {
+            UpdateDateText();
+            _worker.Date = CurrentDate;
+            SetControlsEnabled(false);
+            _worker.RunWorkerAsync();
+        }
+
+        private void _worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            foreach (Button oldButton in panelPrograms.Controls)
+            {
+                oldButton.MouseEnter -= Btn_MouseEnter;
+                oldButton.Click -= Btn_Click;
+            }
+            panelPrograms.Controls.Clear();
+            int i = 0;
+            var font = new Font("Roboto", 11);
+
+            foreach (var program in _worker.Info.Programs)
+            {
+                var btn = new Button
+                {
+                    Text = program.TimeAndTitle,
+                    BackColor = SelectedPrograms.Contains(program) ? Color.FromArgb(78, 100, 106) : Color.FromArgb(38, 50, 56),
+                    Location = new Point(5, 15 + i * 36),
+                    Size = new Size(360, 36),
+                    Tag = program,
+                    ForeColor = Color.White,
+                    Font = font
+                };
+                btn.MouseEnter += Btn_MouseEnter;
+                btn.Click += Btn_Click;
+                panelPrograms.Controls.Add(btn);
+                i++;
+            }
+            SetControlsEnabled(true);
+        }
+
+        private void Btn_Click(object sender, EventArgs e)
+        {
+            var btn = sender as Button;
+            if (btn?.Tag == null)
+                return;
+
+            ProgramInfo info = (ProgramInfo)btn.Tag;
+            if (SelectedPrograms.Contains(info))
+            {
+                SelectedPrograms.Remove(info);
+                btn.BackColor = Color.FromArgb(38, 50, 56);
+            }
+            else
+            {
+                SelectedPrograms.Add(info);
+                btn.BackColor = Color.FromArgb(78, 100, 106);
+            }
+
+            if (SelectedPrograms.Count > 0)
+                lblCount.Text = SelectedPrograms.Count + " valda";
+            else
+                lblCount.Text = string.Empty;
+        }
+
+        private void Btn_MouseEnter(object sender, EventArgs e)
+        {
+            var btn = sender as Button;
+            if (btn?.Tag == null)
+                return;
+
+            ProgramInfo info = (ProgramInfo)btn.Tag;
+            lblDescription.Text = info.Description;
+        }
+
+        private void SetControlsEnabled(bool status)
+        {
+            btnAddSelection.Enabled = status;
+            btnNextDate.Enabled = status;
+            btnPrevDate.Enabled = status;
+            lblDate.Enabled = status;
+            lblDescription.Enabled = status;
+            lblCount.Enabled = status;
+            pictureBoxLoading.Visible = !status;
         }
 
         private void UpdateDateText()
@@ -64,13 +160,18 @@ namespace RecTime
                 return;
 
             CurrentDate -= TimeSpan.FromDays(1);
-            UpdateDateText();
+            StartWorker();
         }
 
         private void btnNextDate_Click(object sender, EventArgs e)
         {
             CurrentDate += TimeSpan.FromDays(1);
-            UpdateDateText();
+            StartWorker();
+        }
+
+        private void btnAddSelection_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
         }
     }
 }

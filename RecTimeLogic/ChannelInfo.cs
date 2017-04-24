@@ -11,6 +11,7 @@ namespace RecTimeLogic
     [XmlRoot("tv")]
     public class ChannelInfo
     {
+        public SourceType Type { get; set; }
         [XmlElement("programme")]
         public List<ProgramInfo> Programs { get; set; }
 
@@ -38,6 +39,7 @@ namespace RecTimeLogic
         private const string DatePattern = "yyyyMMddHHmmss zzz";
         public DateTime StartTime => DateTimeOffset.ParseExact(Start, DatePattern, CultureInfo.InvariantCulture).DateTime;
         public DateTime StopTime => DateTimeOffset.ParseExact(Stop, DatePattern, CultureInfo.InvariantCulture).DateTime;
-        
+
+        public string TimeAndTitle => $"{StartTime:HH.mm}-{StopTime:HH.mm}: {Title}";
     }
 }

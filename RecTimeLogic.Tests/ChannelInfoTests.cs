@@ -78,5 +78,12 @@ namespace RecTimeLogic.Tests
             Assert.AreEqual(new DateTime(2017, 4, 20, 11, 0, 0),
                 underTest.Programs.First().StopTime);
         }
+
+        [TestMethod]
+        public void ShouldFormatTimeAndTitle()
+        {
+            Assert.AreEqual("10.00-11.00: Engelska Antikrundan",
+                underTest.Programs.First().TimeAndTitle);
+        }
     }
 }

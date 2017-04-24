@@ -60,6 +60,7 @@
     <Compile Include="GoogleAnalyticsTracker.cs" />
     <Compile Include="IStreamDownloader.cs" />
     <Compile Include="LiveStreamManager.cs" />
+    <Compile Include="SourceType.cs" />
     <Compile Include="StreamDownloader.cs" />
     <Compile Include="StreamManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
