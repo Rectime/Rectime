@@ -34,7 +34,8 @@ namespace RecTimeLogic
         [XmlAttribute("stop")]
         public string Stop { get; set; }
 
-        public SourceType Type { get; set; }
+        public string Filename
+            => $"_{StartTime:yyyyMMdd}_{StartTime:HHmm}-{Title}.mp4"; 
 
         private const string DatePattern = "yyyyMMddHHmmss zzz";
         public DateTime StartTime => DateTimeOffset.ParseExact(Start, DatePattern, CultureInfo.InvariantCulture).DateTime;

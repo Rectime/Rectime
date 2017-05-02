@@ -66,6 +66,9 @@
     <Compile Include="Workers\ChannelInfoBackgroundWorker.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Workers\ChannelRecorderBackgroundWorker.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Workers\InfoBackgroundWorker.cs">
       <SubType>Component</SubType>
     </Compile>

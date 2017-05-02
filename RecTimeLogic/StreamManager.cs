@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace RecTimeLogic
 {
@@ -45,9 +39,13 @@ namespace RecTimeLogic
             Streams = new List<StreamInfo>();
 
             this.BaseUrl = uri;
-            var result = UrlHelper.ParseUrl(uri);
-            this.Type = result.Item1;
-            this.DataUrl = result.Item2;
+
+            if (!string.IsNullOrEmpty(uri))
+            {
+                var result = UrlHelper.ParseUrl(uri);
+                this.Type = result.Item1;
+                this.DataUrl = result.Item2;
+            }
         } 
 
         public virtual void DownloadAndParseData()

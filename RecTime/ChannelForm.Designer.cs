@@ -37,6 +37,7 @@
             this.lblDescription = new MaterialSkin.Controls.MaterialLabel();
             this.lblCount = new MaterialSkin.Controls.MaterialLabel();
             this.pictureBoxChannel = new System.Windows.Forms.PictureBox();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoading)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxChannel)).BeginInit();
             this.SuspendLayout();
@@ -155,11 +156,25 @@
             this.pictureBoxChannel.TabIndex = 8;
             this.pictureBoxChannel.TabStop = false;
             // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.ForeColor = System.Drawing.Color.Maroon;
+            this.materialLabel1.Location = new System.Drawing.Point(190, 83);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(428, 19);
+            this.materialLabel1.TabIndex = 9;
+            this.materialLabel1.Text = "Live-sändningar kan skilja mot programtablån. Se inställningar.";
+            // 
             // ChannelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(686, 503);
+            this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.pictureBoxChannel);
             this.Controls.Add(this.lblCount);
             this.Controls.Add(this.lblDescription);
@@ -192,5 +207,6 @@
         private MaterialSkin.Controls.MaterialLabel lblDescription;
         private MaterialSkin.Controls.MaterialLabel lblCount;
         private System.Windows.Forms.PictureBox pictureBoxChannel;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
     }
 }

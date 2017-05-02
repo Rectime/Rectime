@@ -4,8 +4,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
@@ -23,6 +21,8 @@ namespace RecTime
         private List<StreamBackgroundWorker> _workers = new List<StreamBackgroundWorker>(); 
         private Dictionary<MaterialRadioButton, StreamInfo> _streamButtons = new Dictionary<MaterialRadioButton, StreamInfo>();
         private bool _closing = false;
+
+        #region Constructor 
 
         public RecTime()
         {
@@ -46,7 +46,18 @@ namespace RecTime
                 Properties.Settings.Default.UserId.ToString());
         }
 
+        #endregion
+
         #region Component Events
+
+        private void timerChannels_Tick(object sender, EventArgs e)
+        {
+            _workers.OfType<ChannelRecorderBackgroundWorker>().Where(w => !w.IsBusy && !w.HasRun && w.Info.StartTime <= DateTime.Now && w.Info.StopTime >= DateTime.Now)
+                .ToList().ForEach(w => w.RunWorkerAsync());
+
+            _workers.OfType<ChannelRecorderBackgroundWorker>().Where(w => w.Info.StartTime > DateTime.Now).
+                ToList().ForEach(w => UpdateQueueStatus(w, "om " + (w.Info.StartTime - DateTime.Now).ToString(@"hh\:mm\:ss")));
+        }
 
         private void btnChannel_Click(object sender, EventArgs e)
         {
@@ -55,7 +66,45 @@ namespace RecTime
                 return;
 
             var form = new ChannelForm() {Channel = btn.Tag.ToString()};
+            _workers.OfType<ChannelRecorderBackgroundWorker>().ToList().ForEach(w => form.QueuedPrograms.Add(w.Info));
+
+            form.FormClosed += Form_FormClosed;
             form.Show();
+        }
+
+        private void Form_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            var form = sender as ChannelForm;
+            form.FormClosed -= Form_FormClosed;
+
+            if (form.DialogResult == DialogResult.OK)
+            {
+                foreach (var program in form.SelectedPrograms)
+                {
+                    _tracker.SendEvent("Download " + form.Type, program.Title, null, 0);
+                    var worker = new ChannelRecorderBackgroundWorker(form.Type, program, txtOutputLocation.Text);
+                    
+                    var filename = txtOutputLocation.Text + @"\" + worker.OutputFilename;
+                    if (File.Exists(filename))
+                    {
+                        MessageBox.Show(this, "Filen finns redan: " + worker.OutputFilename, "Konflikt", MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                            continue;
+                    }
+
+                    //no dupes
+                    if(_workers.OfType<ChannelRecorderBackgroundWorker>().Any(w => w.Info.Equals(program)))
+                        continue;
+                    _workers.Add(worker);
+
+                    var data = new[] { program.Title, form.Type.ToString(), "0 %" };
+                    var item = new ListViewItem(data) { Tag = worker };
+                    listViewQueue.Items.Add(item);
+
+                    worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+                    worker.ProgressChanged += Worker_ProgressChanged;
+                }
+            }
         }
 
         private void txtOutputLocation_Enter(object sender, EventArgs e)
@@ -121,24 +170,6 @@ namespace RecTime
             }
         }
 
-        private void radioBtnLive_CheckedChanged(object sender, EventArgs e)
-        {
-            var btn = sender as MaterialRadioButton;
-
-            if (btn != null && btn.Checked)
-            {
-                switch (btn.Tag as string)
-                {
-                    case "svt1":
-                        _infoWorker = new InfoBackgroundWorker("http://www.svtplay.se/kanaler/svt1");
-                        _infoWorker.RunWorkerCompleted += _infoWorker_RunWorkerCompleted;
-                        _infoWorker.RunWorkerAsync();
-                        break;
-                }
-            }
-
-        }
-
         private void materialTabControl1_Selected(object sender, TabControlEventArgs e)
         {
             _tracker.SendView(e.TabPage.Text);
@@ -196,17 +227,14 @@ namespace RecTime
 
                 int workerCount = _workers.Count;
                 int workerInProgress = _workers.Count(w => w.HasRun || w.IsBusy);
+                var channel = worker as ChannelRecorderBackgroundWorker;
 
                 if (TimeSpan.TryParse(infoData.Time, out timeNow) &&
                     TimeSpan.TryParse(worker.Duration, out timeDuration) && timeDuration.TotalSeconds > 0)
                 {
                     string percentage = string.Format("{0:0.0 %}", (timeNow.TotalSeconds/timeDuration.TotalSeconds));
                     lblStatus.Text = string.Format("Status: {0,6} {1} ({2}/{3})",percentage, infoData, workerInProgress, workerCount);
-                    foreach (ListViewItem item in listViewQueue.Items)
-                    {
-                        if (item.Tag == worker)
-                            item.SubItems[2].Text = percentage;
-                    }
+                    UpdateQueueStatus(worker, percentage);
                 }
                 else
                     lblStatus.Text = string.Format("Status: {0} ({1}/{2})", infoData, workerInProgress, workerCount);
@@ -244,12 +272,24 @@ namespace RecTime
             var worker = _workers.FirstOrDefault(w => !w.IsBusy && !w.HasRun);
             worker?.RunWorkerAsync();
         }
+
         #endregion
 
         #region Form events
 
         private void RecTime_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (_workers.Any(w => w.IsBusy) || _workers.OfType<ChannelRecorderBackgroundWorker>().Any(w => !w.HasRun))
+            {
+                if (
+                    MessageBox.Show(this, "Du har pågående nedladdningar eller köade nedladdningar som inte är klara.\n\r\n\rVill du avsluta?" , "Ej klar", MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning) == DialogResult.No)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+
             _closing = true;
             foreach (var streamBackgroundWorker in _workers)
             {
@@ -281,6 +321,17 @@ namespace RecTime
 
         #endregion
 
+        #region Private Helper Methods
+
+        private void UpdateQueueStatus(StreamBackgroundWorker worker, string text)
+        {
+            foreach (ListViewItem item in listViewQueue.Items)
+            {
+                if (item.Tag == worker)
+                    item.SubItems[2].Text = text;
+            }
+        }
+
         private bool IsValidUrl(string url)
         {
             if (string.IsNullOrEmpty(url))
@@ -291,6 +342,10 @@ namespace RecTime
                 && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
             return (validUrl && UrlHelper.ParseUrl(url).Item1 != SourceType.Unknown);
         }
+
+        #endregion
+
+        #region PictureBox Events
 
         private void pictureBoxDonate_Click(object sender, EventArgs e)
         {
@@ -316,5 +371,8 @@ namespace RecTime
         {
             System.Diagnostics.Process.Start("https://ffmpeg.org");
         }
+
+        #endregion
+
     }
 }

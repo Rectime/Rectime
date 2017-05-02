@@ -9,29 +9,31 @@ namespace RecTime
 {
     class StreamBackgroundWorker : BackgroundWorker
     {
-        private readonly StreamInfo _streamInfo;
+        protected StreamInfo StreamInfo;
         private readonly string _outputDirectory;
-        private readonly string _outputFilename;
-        string argFormat = @" -i ""{0}"" -acodec copy -vcodec copy -absf aac_adtstoasc ""{1}""";
+        string argFormat = @" -i ""{0}"" {2} -acodec copy -vcodec copy -absf aac_adtstoasc ""{1}""";
 
-        public string Duration { get; private set; }
+        public string OutputFilename { get; private set; }
+        public string Duration { get; protected set; }
         public int Percentage { get; private set; }
-        public bool HasRun { get; private set; }
+        public bool HasRun { get; protected set; }
+        public TimeSpan? TimeLimit { get; set; }
+        public virtual bool IsChannelRecorder => false;
 
         public StreamBackgroundWorker(StreamInfo streamInfo, string outputDirectory, string outputFilename)
         {
             string invalidChars = Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
             string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
 
-            this._outputFilename = Regex.Replace(outputFilename, invalidRegStr, "_");
+            this.OutputFilename = Regex.Replace(outputFilename, invalidRegStr, "_");
             this._outputDirectory = outputDirectory;
-            this._streamInfo = streamInfo;
+            this.StreamInfo = streamInfo;
             this.WorkerReportsProgress = true;
             this.WorkerSupportsCancellation = true;
             this.DoWork += DownloadStream;
         }
 
-        private void DownloadStream(object sender, DoWorkEventArgs e)
+        protected virtual void DownloadStream(object sender, DoWorkEventArgs e)
         {
             Process process = new Process();
             process.StartInfo.UseShellExecute = false;
@@ -39,7 +41,8 @@ namespace RecTime
             process.StartInfo.RedirectStandardError = true;
             process.StartInfo.CreateNoWindow = true;
             process.StartInfo.FileName = "ffmpeg.exe";
-            process.StartInfo.Arguments = string.Format(argFormat, _streamInfo.Url, _outputDirectory + @"\" + _outputFilename);
+            var timeLimit = TimeLimit == null ? "" : "-t "+TimeLimit.Value;
+            process.StartInfo.Arguments = string.Format(argFormat, StreamInfo.Url, _outputDirectory + @"\" + OutputFilename, timeLimit);
             process.ErrorDataReceived += ProcessErrorDataReceived;
             process.OutputDataReceived += ProcessOutputDataReceived;
 

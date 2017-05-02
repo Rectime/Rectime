@@ -17,15 +17,20 @@ namespace RecTime
     public partial class ChannelForm : MaterialForm
     {
         public string Channel { get; set; }
+        public SourceType Type { get; private set; }
         public DateTime CurrentDate { get; set; }
         public List<ProgramInfo> SelectedPrograms { get; set; }
+        public List<ProgramInfo> QueuedPrograms { get; set; }
 
         private ChannelInfoBackgroundWorker _worker;
+
+        #region Constructor
 
         public ChannelForm()
         {
             InitializeComponent();
             SelectedPrograms = new List<ProgramInfo>();
+            QueuedPrograms = new List<ProgramInfo>();
             this.StartPosition = FormStartPosition.CenterScreen;
 
             var materialSkinManager = MaterialSkinManager.Instance;
@@ -33,6 +38,10 @@ namespace RecTime
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
         }
+
+        #endregion
+
+        #region Form Events
 
         private void ChannelForm_Load(object sender, EventArgs e)
         {
@@ -56,13 +65,9 @@ namespace RecTime
             StartWorker();
         }
 
-        private void StartWorker()
-        {
-            UpdateDateText();
-            _worker.Date = CurrentDate;
-            SetControlsEnabled(false);
-            _worker.RunWorkerAsync();
-        }
+        #endregion
+
+        #region BackgroundWorker Events
 
         private void _worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -77,6 +82,8 @@ namespace RecTime
 
             foreach (var program in _worker.Info.Programs)
             {
+                if(program.StopTime < DateTime.Now)
+                    continue;
                 var btn = new Button
                 {
                     Text = program.TimeAndTitle,
@@ -85,8 +92,15 @@ namespace RecTime
                     Size = new Size(360, 36),
                     Tag = program,
                     ForeColor = Color.White,
-                    Font = font
+                    Font = font,
+                    TextAlign = ContentAlignment.MiddleLeft
                 };
+
+                if (QueuedPrograms.Contains(program))
+                {
+                    btn.Enabled = false;
+                    btn.Text += " (redan köad)";
+                }
                 btn.MouseEnter += Btn_MouseEnter;
                 btn.Click += Btn_Click;
                 panelPrograms.Controls.Add(btn);
@@ -94,6 +108,10 @@ namespace RecTime
             }
             SetControlsEnabled(true);
         }
+
+        #endregion
+
+        #region Button Events
 
         private void Btn_Click(object sender, EventArgs e)
         {
@@ -129,6 +147,39 @@ namespace RecTime
             lblDescription.Text = info.Description;
         }
 
+        private void btnPrevDate_Click(object sender, EventArgs e)
+        {
+            if (CurrentDate <= DateTime.Today)
+                return;
+
+            CurrentDate -= TimeSpan.FromDays(1);
+            StartWorker();
+        }
+
+        private void btnNextDate_Click(object sender, EventArgs e)
+        {
+            CurrentDate += TimeSpan.FromDays(1);
+            StartWorker();
+        }
+
+        private void btnAddSelection_Click(object sender, EventArgs e)
+        {
+            Type = _worker.Info.Type;
+            DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        #endregion
+
+        #region Private Helper Methods
+        private void StartWorker()
+        {
+            UpdateDateText();
+            _worker.Date = CurrentDate;
+            SetControlsEnabled(false);
+            _worker.RunWorkerAsync();
+        }
+
         private void SetControlsEnabled(bool status)
         {
             btnAddSelection.Enabled = status;
@@ -153,25 +204,6 @@ namespace RecTime
                 lblDate.Text = CurrentDate.ToShortDateString();
         }
 
-
-        private void btnPrevDate_Click(object sender, EventArgs e)
-        {
-            if (CurrentDate <= DateTime.Today)
-                return;
-
-            CurrentDate -= TimeSpan.FromDays(1);
-            StartWorker();
-        }
-
-        private void btnNextDate_Click(object sender, EventArgs e)
-        {
-            CurrentDate += TimeSpan.FromDays(1);
-            StartWorker();
-        }
-
-        private void btnAddSelection_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.OK;
-        }
+        #endregion
     }
 }
