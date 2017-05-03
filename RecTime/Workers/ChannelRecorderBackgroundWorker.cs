@@ -19,6 +19,13 @@ namespace RecTime
             Type = type;
         }
 
+        public void StartAndUpdateOffsetTime(int stopOffset)
+        {
+            TimeLimit = Info.StopTime + TimeSpan.FromSeconds(stopOffset) - DateTime.Now;
+            Duration = TimeLimit.Value.ToString();
+            this.RunWorkerAsync();
+        }
+
         protected override void DownloadStream(object sender, DoWorkEventArgs e)
         {
             var manager = new LiveStreamManager(Type, new StreamDownloader());

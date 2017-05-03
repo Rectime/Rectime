@@ -71,6 +71,15 @@
             this.lblStatus = new MaterialSkin.Controls.MaterialLabel();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.timerChannels = new System.Windows.Forms.Timer(this.components);
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.numericLiveStartOffset = new System.Windows.Forms.NumericUpDown();
+            this.lblSeconds1 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblStart = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblStop = new MaterialSkin.Controls.MaterialLabel();
+            this.lblSeconds2 = new MaterialSkin.Controls.MaterialLabel();
+            this.numericLiveStopOffset = new System.Windows.Forms.NumericUpDown();
+            this.lblOffsetInfo = new MaterialSkin.Controls.MaterialLabel();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -82,6 +91,9 @@
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDuration)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
+            this.tabPage6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericLiveStartOffset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericLiveStopOffset)).BeginInit();
             this.SuspendLayout();
             // 
             // materialTabControl1
@@ -89,6 +101,7 @@
             this.materialTabControl1.Controls.Add(this.tabPage1);
             this.materialTabControl1.Controls.Add(this.tabPage5);
             this.materialTabControl1.Controls.Add(this.tabPage2);
+            this.materialTabControl1.Controls.Add(this.tabPage6);
             this.materialTabControl1.Controls.Add(this.tabPage3);
             this.materialTabControl1.Depth = 0;
             this.materialTabControl1.Location = new System.Drawing.Point(12, 125);
@@ -432,12 +445,12 @@
             // 
             this.labelLength.AutoSize = true;
             this.labelLength.Depth = 0;
-            this.labelLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.labelLength.Font = new System.Drawing.Font("Roboto", 11F);
             this.labelLength.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.labelLength.Location = new System.Drawing.Point(34, 250);
             this.labelLength.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelLength.Name = "labelLength";
-            this.labelLength.Size = new System.Drawing.Size(115, 18);
+            this.labelLength.Size = new System.Drawing.Size(118, 19);
             this.labelLength.TabIndex = 7;
             this.labelLength.Text = "Längd (minuter):";
             // 
@@ -475,7 +488,7 @@
             // radioBtnKunskap
             // 
             this.radioBtnKunskap.Depth = 0;
-            this.radioBtnKunskap.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.radioBtnKunskap.Font = new System.Drawing.Font("Roboto", 10F);
             this.radioBtnKunskap.Location = new System.Drawing.Point(0, 0);
             this.radioBtnKunskap.Margin = new System.Windows.Forms.Padding(0);
             this.radioBtnKunskap.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -488,7 +501,7 @@
             // radioBtnSvt24
             // 
             this.radioBtnSvt24.Depth = 0;
-            this.radioBtnSvt24.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.radioBtnSvt24.Font = new System.Drawing.Font("Roboto", 10F);
             this.radioBtnSvt24.Location = new System.Drawing.Point(0, 0);
             this.radioBtnSvt24.Margin = new System.Windows.Forms.Padding(0);
             this.radioBtnSvt24.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -501,7 +514,7 @@
             // radioBtnSvt2
             // 
             this.radioBtnSvt2.Depth = 0;
-            this.radioBtnSvt2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.radioBtnSvt2.Font = new System.Drawing.Font("Roboto", 10F);
             this.radioBtnSvt2.Location = new System.Drawing.Point(0, 0);
             this.radioBtnSvt2.Margin = new System.Windows.Forms.Padding(0);
             this.radioBtnSvt2.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -514,7 +527,7 @@
             // radioBtnSvt1
             // 
             this.radioBtnSvt1.Depth = 0;
-            this.radioBtnSvt1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.radioBtnSvt1.Font = new System.Drawing.Font("Roboto", 10F);
             this.radioBtnSvt1.Location = new System.Drawing.Point(0, 0);
             this.radioBtnSvt1.Margin = new System.Windows.Forms.Padding(0);
             this.radioBtnSvt1.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -591,6 +604,140 @@
             this.timerChannels.Interval = 1000;
             this.timerChannels.Tick += new System.EventHandler(this.timerChannels_Tick);
             // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.lblOffsetInfo);
+            this.tabPage6.Controls.Add(this.lblStop);
+            this.tabPage6.Controls.Add(this.lblSeconds2);
+            this.tabPage6.Controls.Add(this.numericLiveStopOffset);
+            this.tabPage6.Controls.Add(this.materialLabel2);
+            this.tabPage6.Controls.Add(this.lblStart);
+            this.tabPage6.Controls.Add(this.lblSeconds1);
+            this.tabPage6.Controls.Add(this.numericLiveStartOffset);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Size = new System.Drawing.Size(516, 311);
+            this.tabPage6.TabIndex = 4;
+            this.tabPage6.Text = "Inställningar";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // numericLiveStartOffset
+            // 
+            this.numericLiveStartOffset.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericLiveStartOffset.Location = new System.Drawing.Point(56, 33);
+            this.numericLiveStartOffset.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericLiveStartOffset.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.numericLiveStartOffset.Name = "numericLiveStartOffset";
+            this.numericLiveStartOffset.Size = new System.Drawing.Size(87, 24);
+            this.numericLiveStartOffset.TabIndex = 0;
+            this.numericLiveStartOffset.ValueChanged += new System.EventHandler(this.numericLiveStartOffset_ValueChanged);
+            // 
+            // lblSeconds1
+            // 
+            this.lblSeconds1.AutoSize = true;
+            this.lblSeconds1.Depth = 0;
+            this.lblSeconds1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblSeconds1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblSeconds1.Location = new System.Drawing.Point(149, 35);
+            this.lblSeconds1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblSeconds1.Name = "lblSeconds1";
+            this.lblSeconds1.Size = new System.Drawing.Size(70, 19);
+            this.lblSeconds1.TabIndex = 1;
+            this.lblSeconds1.Text = "sekunder";
+            // 
+            // lblStart
+            // 
+            this.lblStart.AutoSize = true;
+            this.lblStart.Depth = 0;
+            this.lblStart.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblStart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblStart.Location = new System.Drawing.Point(5, 35);
+            this.lblStart.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblStart.Name = "lblStart";
+            this.lblStart.Size = new System.Drawing.Size(45, 19);
+            this.lblStart.TabIndex = 2;
+            this.lblStart.Text = "Start:";
+            // 
+            // materialLabel2
+            // 
+            this.materialLabel2.AutoSize = true;
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel2.Location = new System.Drawing.Point(5, 13);
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            this.materialLabel2.Size = new System.Drawing.Size(186, 19);
+            this.materialLabel2.TabIndex = 3;
+            this.materialLabel2.Text = "Live kanaler förskjutningar\r\n";
+            // 
+            // lblStop
+            // 
+            this.lblStop.AutoSize = true;
+            this.lblStop.Depth = 0;
+            this.lblStop.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblStop.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblStop.Location = new System.Drawing.Point(5, 65);
+            this.lblStop.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblStop.Name = "lblStop";
+            this.lblStop.Size = new System.Drawing.Size(44, 19);
+            this.lblStop.TabIndex = 6;
+            this.lblStop.Text = "Stop:";
+            // 
+            // lblSeconds2
+            // 
+            this.lblSeconds2.AutoSize = true;
+            this.lblSeconds2.Depth = 0;
+            this.lblSeconds2.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblSeconds2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblSeconds2.Location = new System.Drawing.Point(149, 65);
+            this.lblSeconds2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblSeconds2.Name = "lblSeconds2";
+            this.lblSeconds2.Size = new System.Drawing.Size(70, 19);
+            this.lblSeconds2.TabIndex = 5;
+            this.lblSeconds2.Text = "sekunder";
+            // 
+            // numericLiveStopOffset
+            // 
+            this.numericLiveStopOffset.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericLiveStopOffset.Location = new System.Drawing.Point(56, 63);
+            this.numericLiveStopOffset.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericLiveStopOffset.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.numericLiveStopOffset.Name = "numericLiveStopOffset";
+            this.numericLiveStopOffset.Size = new System.Drawing.Size(87, 24);
+            this.numericLiveStopOffset.TabIndex = 4;
+            this.numericLiveStopOffset.ValueChanged += new System.EventHandler(this.numericLiveStopOffset_ValueChanged);
+            // 
+            // lblOffsetInfo
+            // 
+            this.lblOffsetInfo.Depth = 0;
+            this.lblOffsetInfo.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblOffsetInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblOffsetInfo.Location = new System.Drawing.Point(234, 13);
+            this.lblOffsetInfo.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblOffsetInfo.Name = "lblOffsetInfo";
+            this.lblOffsetInfo.Size = new System.Drawing.Size(279, 104);
+            this.lblOffsetInfo.TabIndex = 7;
+            this.lblOffsetInfo.Text = "Använd för att justera start o stop av inspelning då tablåtiderna ej är helt synk" +
+    "ade med Live-sändningarna.\r\nÄndringar påverkar kön men ej pågående nedladdningar" +
+    "!\r\n";
+            // 
             // RecTime
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -624,6 +771,10 @@
             this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDuration)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericLiveStartOffset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericLiveStopOffset)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -672,6 +823,15 @@
         private System.Windows.Forms.Button btnSvt1;
         private System.Windows.Forms.Button btnChannelSvtb;
         private System.Windows.Forms.Timer timerChannels;
+        private System.Windows.Forms.TabPage tabPage6;
+        private MaterialSkin.Controls.MaterialLabel lblOffsetInfo;
+        private MaterialSkin.Controls.MaterialLabel lblStop;
+        private MaterialSkin.Controls.MaterialLabel lblSeconds2;
+        private System.Windows.Forms.NumericUpDown numericLiveStopOffset;
+        private MaterialSkin.Controls.MaterialLabel materialLabel2;
+        private MaterialSkin.Controls.MaterialLabel lblStart;
+        private MaterialSkin.Controls.MaterialLabel lblSeconds1;
+        private System.Windows.Forms.NumericUpDown numericLiveStartOffset;
     }
 }
 

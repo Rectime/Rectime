@@ -50,13 +50,29 @@ namespace RecTime
 
         #region Component Events
 
+        private void numericLiveStartOffset_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.LiveStartOffset = (int)numericLiveStartOffset.Value;
+            Properties.Settings.Default.Save();
+        }
+
+        private void numericLiveStopOffset_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.LiveStopOffset = (int)numericLiveStopOffset.Value;
+            Properties.Settings.Default.Save();
+        }
+
         private void timerChannels_Tick(object sender, EventArgs e)
         {
-            _workers.OfType<ChannelRecorderBackgroundWorker>().Where(w => !w.IsBusy && !w.HasRun && w.Info.StartTime <= DateTime.Now && w.Info.StopTime >= DateTime.Now)
-                .ToList().ForEach(w => w.RunWorkerAsync());
+            int startOffset = Properties.Settings.Default.LiveStartOffset;
+            int stopOffset = Properties.Settings.Default.LiveStartOffset;
 
-            _workers.OfType<ChannelRecorderBackgroundWorker>().Where(w => w.Info.StartTime > DateTime.Now).
-                ToList().ForEach(w => UpdateQueueStatus(w, "om " + (w.Info.StartTime - DateTime.Now).ToString(@"hh\:mm\:ss")));
+            _workers.OfType<ChannelRecorderBackgroundWorker>().Where(w => !w.IsBusy && !w.HasRun && 
+                (w.Info.StartTime + TimeSpan.FromSeconds(startOffset)) <= DateTime.Now && (w.Info.StopTime + TimeSpan.FromSeconds(stopOffset)) >= DateTime.Now)
+                .ToList().ForEach(w => w.StartAndUpdateOffsetTime(stopOffset));
+
+            _workers.OfType<ChannelRecorderBackgroundWorker>().Where(w => (w.Info.StartTime + TimeSpan.FromSeconds(startOffset)) > DateTime.Now).
+                ToList().ForEach(w => UpdateQueueStatus(w, "om " + (w.Info.StartTime + TimeSpan.FromSeconds(startOffset) - DateTime.Now).ToString(@"hh\:mm\:ss")));
         }
 
         private void btnChannel_Click(object sender, EventArgs e)
@@ -317,6 +333,9 @@ namespace RecTime
             AutoUpdater.Start("http://rectime.se/update/latest.xml");
             _tracker.SendView(materialTabControl1.TabPages[0].Text);
             materialLabelVersion.Text = "v." + Application.ProductVersion;
+
+            numericLiveStartOffset.Value = Properties.Settings.Default.LiveStartOffset;
+            numericLiveStopOffset.Value = Properties.Settings.Default.LiveStopOffset;
         }
 
         #endregion
