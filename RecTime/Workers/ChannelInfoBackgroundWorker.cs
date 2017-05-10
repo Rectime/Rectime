@@ -17,7 +17,7 @@ namespace RecTime
         public ChannelInfo Info { get; set; }
 
         private SourceType _type;
-        private const string DbUrl = "http://xmltv.tvsajten.com/xmltv/";
+        private const string DbUrl = "http://xmltv.xmltv.se/";
         
         public ChannelInfoBackgroundWorker(string channel, DateTime date)
         {
@@ -44,15 +44,20 @@ namespace RecTime
             var loader = new StreamDownloader();
 
             WebClient wc = new WebClient();
-            MemoryStream stream = new MemoryStream(wc.DownloadData(DbUrl + fileInfo.FileName)); 
-            GZipStream uncompressed = new GZipStream(stream, CompressionMode.Decompress);
-            MemoryStream output = new MemoryStream();
-            uncompressed.CopyTo(output);
+            wc.Encoding = System.Text.Encoding.UTF8;
+            var tmp = wc.DownloadString(DbUrl + fileInfo.FileName);
 
-            var data = output.ToArray();
-            Encoding ansi = Encoding.GetEncoding(1252);
-            var s = ansi.GetString(data);
-            Info = StringXmlSerializer.Deserialize<ChannelInfo>(s);
+            // ** XMLTV uses no real GZIP
+            //MemoryStream stream = new MemoryStream(wc.DownloadData(DbUrl + fileInfo.FileName)); 
+            //GZipStream uncompressed = new GZipStream(stream, CompressionMode.Decompress);
+            //MemoryStream output = new MemoryStream();
+            //uncompressed.CopyTo(output);
+
+            //var data = output.ToArray();
+            //Encoding ansi = Encoding.GetEncoding(1252);
+            //var s = ansi.GetString(data);
+
+            Info = StringXmlSerializer.Deserialize<ChannelInfo>(tmp);
             Info.Type = _type;
         }
     }
