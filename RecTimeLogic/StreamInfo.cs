@@ -14,6 +14,12 @@ namespace RecTimeLogic
         public string Codec { get; set; }
         public int ApproxSize { get; set; }
         public string Extra { get; set; }
+        public string FileEnding { get; set; }
+
+        public StreamInfo()
+        {
+            FileEnding = ".mp4";
+        }
 
         public override string ToString()
         {

@@ -12,6 +12,7 @@
         Svt2Live,
         Svt24Live,
         SvtBarnLive,
-        SvtKunskapLive
+        SvtKunskapLive,
+        YouTube
     }
 }

@@ -18,8 +18,8 @@ namespace RecTimeLogic
                 return null;
 
             string data = string.Empty;
-
             WebClient wc = new WebClient();
+
             using (MemoryStream stream = new MemoryStream(wc.DownloadData(url)))
             {
                 var sr = new StreamReader(stream);

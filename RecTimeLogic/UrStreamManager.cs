@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace RecTimeLogic
 {
@@ -32,6 +28,7 @@ namespace RecTimeLogic
             if (imageMatch.Success)
             {
                 PosterUrl = UnEscapeString(imageMatch.Groups[1].Value);
+                PosterUrl = PosterUrl.StartsWith("//") ? "https:" + PosterUrl : PosterUrl;
                 PosterImage = streamDownloader.DownloadImage(PosterUrl);
             }
 

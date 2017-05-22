@@ -17,17 +17,14 @@ namespace RecTimeLogic
         public string LongTitle => string.IsNullOrEmpty(ProgramTitle) ? Title : ProgramTitle + "-" + Title;
         public string BaseUrl { get; private set; }
 
-        public string ValidFileName
+        public string GetValidFileName(StreamInfo streamInfo)
         {
-            get
+            string fileName = LongTitle + streamInfo.FileEnding;
+            foreach (char c in System.IO.Path.GetInvalidFileNameChars())
             {
-                string fileName = LongTitle + ".mp4";
-                foreach (char c in System.IO.Path.GetInvalidFileNameChars())
-                {
-                    fileName = fileName.Replace(c, '_');
-                }
-                return fileName;
+                fileName = fileName.Replace(c, '_');
             }
+            return fileName;
         }
 
         protected string masterUrl;

@@ -25,7 +25,7 @@ namespace RecTimeLogic
                 };
             }
 
-            var match = Regex.Match(line, "frame=\\s*([0-9]+)\\s*fps=\\s*([0-9.]+).+size=\\s*([0-9]+)kB\\s*time=([0-9:.]+)\\s*bitrate=([0-9.]+)kbit.+speed=\\s*([0-9.]+)x");
+            var match = Regex.Match(line, "frame=\\s*([0-9]+)\\s*fps=\\s*([0-9.]+).+size=\\s*([0-9]+)kB\\s*time=([0-9:.]+)\\s*bitrate=\\s*([0-9.]+)kbit.+speed=\\s*([0-9.]+)x");
 
             if (match.Success)
             {

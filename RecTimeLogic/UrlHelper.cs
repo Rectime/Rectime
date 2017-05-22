@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace RecTimeLogic
 {
@@ -30,6 +31,11 @@ namespace RecTimeLogic
                 type = SourceType.UrPlay;
             else if (url.ToLower().Contains("urskola.se"))
                 type = SourceType.UrSkola;
+            else if (url.ToLower().Contains("youtube"))
+            {
+                type = SourceType.YouTube;
+                dataUrl = FindYoutubeDataUrl(url);
+            }
 
             return new Tuple<SourceType, string>(type, dataUrl);
         }
@@ -37,6 +43,15 @@ namespace RecTimeLogic
         public static string GetBaseMasterUrl(string url)
         {
             return url.Substring(0, url.LastIndexOf("/") + 1);
+        }
+
+        private const string YouTubeInfoPageUrl = "http://www.youtube.com/get_video_info?&video_id={0}&el=detailpage&ps=default&eurl=&gl=US&hl=en";
+
+        private static string FindYoutubeDataUrl(string url)
+        {
+            var ret = string.Empty;
+            var id = HttpUtility.ParseQueryString(new Uri(url).Query)["v"];
+            return string.IsNullOrEmpty(id) ? string.Empty : string.Format(YouTubeInfoPageUrl, id);
         }
 
         private static string FindDataUrl(string url)

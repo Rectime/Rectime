@@ -138,6 +138,7 @@ namespace RecTime
 
             foreach (var kvp in _streamButtons)
             {
+                kvp.Key.CheckedChanged -= Radio_CheckedChanged;
                 tabPage1.Controls.Remove(kvp.Key);
             }
             _streamButtons.Clear();
@@ -213,6 +214,7 @@ namespace RecTime
                 radio.Text = streamInfo.ToString();
                 radio.Size = new Size(250, 18);
                 radio.Location = new Point(20, 122 + i * 20);
+                radio.CheckedChanged += Radio_CheckedChanged;
                 tabPage1.Controls.Add(radio);
                 i++;
                 _streamButtons.Add(radio, streamInfo);
@@ -220,7 +222,7 @@ namespace RecTime
 
             if (_streamButtons.Count > 0)
             {
-                txtFilename.Text = _infoResult.ValidFileName;
+                txtFilename.Text = _infoResult.GetValidFileName(_infoResult.Streams.Last());
                 pictureBox.Image = _infoResult.PosterImage;
                 _streamButtons.Last().Key.Checked = true;
                 btnStartDownload.Visible = true;
@@ -229,6 +231,15 @@ namespace RecTime
             {
                 lblStatus.Text = "Status: Could not find stream";
             }
+        }
+
+        private void Radio_CheckedChanged(object sender, EventArgs e)
+        {
+            var radio = sender as MaterialRadioButton;
+            if (sender == null || !_streamButtons.ContainsKey(radio) || !radio.Checked)
+                return;
+
+            txtFilename.Text = _infoResult.GetValidFileName(_streamButtons[radio]);
         }
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)

@@ -19,13 +19,15 @@ namespace RecTime
             {
                 case SourceType.UrPlay:
                 case SourceType.UrSkola:
-                    break;
                 case SourceType.Svt1Live:
                 case SourceType.Svt24Live:
                 case SourceType.Svt2Live:
                 case SourceType.SvtBarnLive:
                 case SourceType.SvtKunskapLive:
                     Manager = new UrStreamManager(Url, new StreamDownloader());
+                    break;
+                case SourceType.YouTube:
+                    Manager = new YouTubeStreamManager(Url, new StreamDownloader());
                     break;
                 default:
                     Manager = new StreamManager(Url, new StreamDownloader());
