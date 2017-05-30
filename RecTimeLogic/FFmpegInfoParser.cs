@@ -39,8 +39,21 @@ namespace RecTimeLogic
                     Speed = double.Parse(match.Groups[6].Value, CultureInfo.InvariantCulture)
                 };
             }
-            else
-                return null;
+
+            //private string _line6 = "size=   13031kB time=00:14:09.96 bitrate= 125.6kbits/s speed=3.31x ";
+            var audioMatch = Regex.Match(line, "size=\\s*([0-9]+)kB\\s*time=([0-9:.]+)\\s*bitrate=\\s*([0-9.]+)kbit.+speed=\\s*([0-9.]+)x");
+            if (audioMatch.Success)
+            {
+                return new FFmpegInfo()
+                {
+                    Size = int.Parse(audioMatch.Groups[1].Value),
+                    Time = audioMatch.Groups[2].Value,
+                    Bitrate = double.Parse(audioMatch.Groups[3].Value, CultureInfo.InvariantCulture),
+                    Speed = double.Parse(audioMatch.Groups[4].Value, CultureInfo.InvariantCulture)
+                };
+            }
+
+            return null;
         }
     }
 

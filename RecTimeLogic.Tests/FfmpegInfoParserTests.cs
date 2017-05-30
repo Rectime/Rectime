@@ -11,6 +11,7 @@ namespace RecTimeLogic.Tests
         private string _line3 = "frame=  512 fps= 83 q=-1.0 size=    7203kB time=00:00:20.48 bitrate=2881.1kbits/s speed=3.32x  ";
         private string _line4 = "frame= 4825 fps=135 q=-1.0 size=   66103kB time=00:03:13.02 bitrate=2805.4kbits/s speed= 5.4x";
         private string _line5 = "frame= 1682 fps= 50 q=-1.0 size=    2275kB time=00:00:56.00 bitrate= 332.8kbits/s speed=1.67x";
+        private string _line6 = "size=   13031kB time=00:14:09.96 bitrate= 125.6kbits/s speed=3.31x ";
 
         private string _output = @"[h264 @ 06cae780] non-existing SPS 0 referenced in buffering period
 [h264 @ 06cae780] SPS unavailable in decode_picture_timing
@@ -88,6 +89,20 @@ Input #0, hls,applehttp, from 'http://svtplay3l-f.akamaihd.net/i/world/open/2016
             Assert.AreEqual("00:00:56.00", data.Time);
             Assert.AreEqual(332.8, data.Bitrate);
             Assert.AreEqual(1.67, data.Speed);
+        }
+
+        [TestMethod]
+        public void ShouldParseLine6()
+        {
+            var data = FFmpegInfoParser.Parse(_line6);
+
+            Assert.IsNotNull(data);
+            Assert.AreEqual(0, data.Frame);
+            Assert.AreEqual(0, data.Fps);
+            Assert.AreEqual(13031, data.Size);
+            Assert.AreEqual("00:14:09.96", data.Time);
+            Assert.AreEqual(125.6, data.Bitrate);
+            Assert.AreEqual(3.31, data.Speed);
         }
 
         [TestMethod]

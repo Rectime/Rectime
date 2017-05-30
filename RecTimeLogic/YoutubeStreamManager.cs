@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -70,11 +71,44 @@ namespace RecTimeLogic
 
                 urlEncoded = $"{urlEncoded}&fallback_host={fallbackHost}&signature={signature}";
                 var url = new Uri(HttpUtility.UrlDecode(HttpUtility.UrlDecode(urlEncoded)));
-                Streams.Add(new YouTubeStreamInfo(url.ToString(), quality, formatCode)
+                var stream = new YouTubeStreamInfo(url.ToString(), quality, formatCode)
                 {
                     Bandwidth = bandwidth,
                     ApproxSize = (Duration * (bandwidth / 1024) / 1024 / 8)
-                });
+                };
+
+                Streams.Add(stream);
+                Debug.WriteLine("Found stream id={0} quality={1}", stream.FormatCode, stream.Quality);
+            });
+
+            var bestMpaAudio = Streams.Cast<YouTubeStreamInfo>()
+                .Where(s => s.FormatCode >= 139 && s.FormatCode <= 141)
+                .OrderByDescending(s => s.FormatCode).FirstOrDefault();
+            var bestWebMAudio = Streams.Cast<YouTubeStreamInfo>()
+                .Where(s => s.FormatCode >= 170 && s.FormatCode <= 171)
+                .OrderByDescending(s => s.FormatCode).FirstOrDefault();
+
+            //If we have separate audio streams then select the best for later muxing.
+            //If not then hope there is audio in the stream..
+            //WebM & Mp4 Video only
+            Streams.Cast<YouTubeStreamInfo>().Where(s => s.FileEnding == ".mp4")
+                .ToList().ForEach(s =>
+            {
+                if (bestMpaAudio != null)
+                {
+                    s.AudioUrl = bestMpaAudio.AudioUrl;
+                    s.StreamType = StreamType.VideoSeparateAudio;
+                }
+            });
+            Streams.Cast<YouTubeStreamInfo>().Where(s => s.FileEnding == ".webm")
+                .ToList().ForEach(s =>
+            {
+                if (bestWebMAudio != null)
+                {
+                    s.AudioUrl = bestWebMAudio.AudioUrl;
+                    s.StreamType = StreamType.VideoSeparateAudio;
+                }
+
             });
 
             Streams.Reverse();

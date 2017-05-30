@@ -12,6 +12,8 @@ namespace RecTime
         protected StreamInfo StreamInfo;
         private readonly string _outputDirectory;
         string argFormat = @" -i ""{0}"" {2} -acodec copy -vcodec copy -absf aac_adtstoasc ""{1}""";
+        string argFormatSeparateAudio = @" -i ""{0}"" -i ""{3}"" {2} -acodec copy -vcodec copy -absf aac_adtstoasc ""{1}""";
+        string argFormatAudioOnly = @" -i ""{0}"" {2} ""{1}""";
 
         public string OutputFilename { get; private set; }
         public string Duration { get; protected set; }
@@ -42,7 +44,23 @@ namespace RecTime
             process.StartInfo.CreateNoWindow = true;
             process.StartInfo.FileName = "ffmpeg.exe";
             var timeLimit = TimeLimit == null ? "" : "-t "+TimeLimit.Value;
-            process.StartInfo.Arguments = string.Format(argFormat, StreamInfo.Url, _outputDirectory + @"\" + OutputFilename, timeLimit);
+
+            var args = string.Empty;
+
+            switch (StreamInfo.StreamType)
+            {
+                case StreamType.AudioOnly:
+                    args = string.Format(argFormatAudioOnly, StreamInfo.AudioUrl, _outputDirectory + @"\" + OutputFilename, timeLimit);
+                    break;
+                case StreamType.VideoSeparateAudio:
+                    args = string.Format(argFormatSeparateAudio, StreamInfo.Url, _outputDirectory + @"\" + OutputFilename, timeLimit, StreamInfo.AudioUrl);
+                    break;
+                default:
+                    args = string.Format(argFormat, StreamInfo.Url, _outputDirectory + @"\" + OutputFilename, timeLimit);
+                    break;
+            }
+
+            process.StartInfo.Arguments = args;
             process.ErrorDataReceived += ProcessErrorDataReceived;
             process.OutputDataReceived += ProcessOutputDataReceived;
 

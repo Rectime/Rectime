@@ -62,7 +62,24 @@ namespace RecTimeLogic
                         Format = "WebM";
                         FileEnding = ".vp8";
                         break;
-
+                    //139 = MP4 Audio, 44.1kHz 48kbps
+                    //140 = MP4 Audio, 44.1kHz 128kbps
+                    //141 = MP4 Audio, 44.1kHz 256kbps
+                    case 139:
+                    case 140:
+                    case 141:
+                        Format = "MP4 Audio";
+                        FileEnding = ".mpa";
+                        StreamType = StreamType.AudioOnly;
+                        break;
+                    //170 = WEBM Audio AAC, 44.1kHz 128kbps
+                    //171 = WEBM Audio AAC, 44.1kHz 256kbps
+                    case 170:
+                    case 171:
+                        Format = "WebM Audio";
+                        FileEnding = ".aac";
+                        StreamType = StreamType.AudioOnly;
+                        break;
                     default:
                         Format = "Unknown (" + value + ")";
                         break;
@@ -75,7 +92,13 @@ namespace RecTimeLogic
         {
             Quality = quality;
             FormatCode = formatCode;
-            Url = url;
+
+            if (StreamType == StreamType.AudioOnly)
+                AudioUrl = url;
+            else
+                Url = url;
+
+
 
             Resolution = Quality + " " + Format;
         }
