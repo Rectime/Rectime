@@ -30,6 +30,9 @@ namespace RecTime
         {
             var manager = new LiveStreamManager(Type, new StreamDownloader());
             manager.DownloadAndParseData();
+            if (manager.Streams.Count == 0)
+                return;
+
             StreamInfo = manager.Streams.Last();
 
             TimeLimit = Info.StopTime - DateTime.Now;

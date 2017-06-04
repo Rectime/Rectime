@@ -13,14 +13,14 @@ namespace RecTimeLogic
         private readonly Dictionary<SourceType, string> _channels =
             new Dictionary<SourceType, string>()
             {
-                { SourceType.Svt1Live, "https://www.svtplay.se/kanaler/svt1?output=json" },
-                { SourceType.Svt2Live, "https://www.svtplay.se/kanaler/svt2?output=json" },
-                { SourceType.Svt24Live, "https://www.svtplay.se/kanaler/svt24?output=json" },
-                { SourceType.SvtBarnLive, "https://www.svtplay.se/kanaler/barnkanalen?output=json" },
-                { SourceType.SvtKunskapLive, "https://www.svtplay.se/kanaler/kunskapskanalen?output=json" }
+                { SourceType.Svt1Live, "https://api.svt.se/videoplayer-api/video/ch-svt1" },
+                { SourceType.Svt2Live, "https://api.svt.se/videoplayer-api/video/ch-svt2" },
+                { SourceType.Svt24Live, "https://api.svt.se/videoplayer-api/video/ch-svt24" },
+                { SourceType.SvtBarnLive, "https://api.svt.se/videoplayer-api/video/ch-barnkanalen" },
+                { SourceType.SvtKunskapLive, "https://api.svt.se/videoplayer-api/video/ch-kunskapskanalen" }
             };
 
-
+        
         public LiveStreamManager(SourceType type, IStreamDownloader downloader) : base(null, downloader)
         {
             if (_channels.ContainsKey(type))
