@@ -2,8 +2,8 @@
 ;https://code.google.com/p/inno-download-plugin/
 #include <idp.iss>
 #define MyAppName "RecTime"
-#define MyAppVersion "1.2.3.0"
-#define MyAppVerName "RecTime v1.2.3.0"
+#define MyAppVersion "1.2.4.0"
+#define MyAppVerName "RecTime v1.2.4.0"
 #define MyCompany "rectime.se"
 #define MyAppURL "http://rectime.se"
 #define MyAppLocation "..\RecTime"

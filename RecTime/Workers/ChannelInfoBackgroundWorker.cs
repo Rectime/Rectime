@@ -44,20 +44,18 @@ namespace RecTime
             var loader = new StreamDownloader();
 
             WebClient wc = new WebClient();
-            wc.Encoding = System.Text.Encoding.UTF8;
-            var tmp = wc.DownloadString(DbUrl + fileInfo.FileName);
+            //wc.Encoding = System.Text.Encoding.UTF8;
+            //var tmp = wc.DownloadString(DbUrl + fileInfo.FileName);
 
-            // ** XMLTV uses no real GZIP
-            //MemoryStream stream = new MemoryStream(wc.DownloadData(DbUrl + fileInfo.FileName)); 
-            //GZipStream uncompressed = new GZipStream(stream, CompressionMode.Decompress);
-            //MemoryStream output = new MemoryStream();
-            //uncompressed.CopyTo(output);
+            MemoryStream stream = new MemoryStream(wc.DownloadData(DbUrl + fileInfo.FileName)); 
+            GZipStream uncompressed = new GZipStream(stream, CompressionMode.Decompress);
+            MemoryStream output = new MemoryStream();
+            uncompressed.CopyTo(output);
 
-            //var data = output.ToArray();
-            //Encoding ansi = Encoding.GetEncoding(1252);
-            //var s = ansi.GetString(data);
+            var data = output.ToArray();
+            var s = System.Text.Encoding.UTF8.GetString(data);
 
-            Info = StringXmlSerializer.Deserialize<ChannelInfo>(tmp);
+            Info = StringXmlSerializer.Deserialize<ChannelInfo>(s);
             Info.Type = _type;
         }
     }
