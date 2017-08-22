@@ -44,19 +44,34 @@ namespace RecTime
             var loader = new StreamDownloader();
 
             WebClient wc = new WebClient();
-            //wc.Encoding = System.Text.Encoding.UTF8;
-            //var tmp = wc.DownloadString(DbUrl + fileInfo.FileName);
+            MemoryStream stream = new MemoryStream(wc.DownloadData(DbUrl + fileInfo.FileName));
+            var rawData = stream.ToArray();
 
-            MemoryStream stream = new MemoryStream(wc.DownloadData(DbUrl + fileInfo.FileName)); 
-            GZipStream uncompressed = new GZipStream(stream, CompressionMode.Decompress);
-            MemoryStream output = new MemoryStream();
-            uncompressed.CopyTo(output);
+            if (IsGZipHeader(rawData))
+            {
+                GZipStream uncompressed = new GZipStream(stream, CompressionMode.Decompress);
+                MemoryStream output = new MemoryStream();
+                uncompressed.CopyTo(output);
 
-            var data = output.ToArray();
-            var s = System.Text.Encoding.UTF8.GetString(data);
+                var data = output.ToArray();
+                var xmlString = System.Text.Encoding.UTF8.GetString(data);
+                Info = StringXmlSerializer.Deserialize<ChannelInfo>(xmlString);
+            }
+            else
+            {
+                wc.Encoding = System.Text.Encoding.UTF8;
+                var xmlText = wc.DownloadString(DbUrl + fileInfo.FileName);
+                Info = StringXmlSerializer.Deserialize<ChannelInfo>(xmlText);
+            }
 
-            Info = StringXmlSerializer.Deserialize<ChannelInfo>(s);
             Info.Type = _type;
+        }
+
+        public static bool IsGZipHeader(byte[] arr)
+        {
+            return arr.Length >= 2 &&
+                arr[0] == 31 &&
+                arr[1] == 139;
         }
     }
 }
