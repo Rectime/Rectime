@@ -35,7 +35,7 @@ namespace RecTimeLogic.Tests
         public void ShouldParseStreams()
         {
             _underTest.DownloadAndParseData();
-            Assert.AreEqual(2, _underTest.Streams.Count);
+            Assert.AreEqual(8, _underTest.Streams.Count);
         }
 
     }

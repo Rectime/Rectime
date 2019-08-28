@@ -15,7 +15,7 @@ namespace RecTimeLogic
         public string PosterUrl { get; protected set; }
         public Image PosterImage { get; protected  set; }
         public SourceType Type { get; protected set; }
-        public string LongTitle => string.IsNullOrEmpty(ProgramTitle) ? Title : ProgramTitle + "-" + Title;
+        public string LongTitle => !string.IsNullOrEmpty(Title) ? Title : ProgramTitle + "-" + Title;
         public string BaseUrl { get; private set; }
 
         public string GetValidFileName(StreamInfo streamInfo)
@@ -62,9 +62,14 @@ namespace RecTimeLogic
 
             if (videoIdMatch.Success)
                 videoId = videoIdMatch.Groups[1].Value;
+            else
+            {
+                var tryAgain = Regex.Match(data, @"data-video-id=""(.+?)""");
+                if (tryAgain.Success)
+                    videoId = tryAgain.Groups[1].Value;
+            }
 
-
-            var titleMatch = Regex.Match(data, @"<title>(.+?)<");
+            var titleMatch = Regex.Match(data, @"<title data-react-helmet=""true"">(.+?)<");
             if (titleMatch.Success)
             {
                 Title = titleMatch.Groups[1].Value;
@@ -88,7 +93,10 @@ namespace RecTimeLogic
                 }
             }
 
-            data = streamDownloader.Download("https://api.svt.se/videoplayer-api/video/" + videoId);
+            if(Type == SourceType.ÖppetArkiv || Type == SourceType.Svt)
+                data = streamDownloader.Download("https://api.svt.se/videoplayer-api/video/" + videoId);
+            else
+                data = streamDownloader.Download("https://api.svt.se/video/" + videoId);
 
             var programTitleMatch = Regex.Match(data, @"""programTitle"":""(.+?)""");
             if (programTitleMatch.Success)
@@ -112,29 +120,46 @@ namespace RecTimeLogic
             if (string.IsNullOrEmpty(data))
                 return;
 
-            var lines = new List<string>(data.Trim().Split('\n'));
-            lines.RemoveAt(0);
+            //Separate audio?
+            string audioUrl = null;
 
-            for (int i = 0; i < lines.Count / 2; i++)
+            var audiomatch = Regex.Match(data, "#EXT-X-MEDIA:TYPE=AUDIO,URI=\"(?<audio>[^\"]+)\"");
+            if (audiomatch.Success)
             {
-                string line1 = lines[i*2];
-                string line2 = lines[i*2 + 1];
+                audioUrl = audiomatch.Groups["audio"].Value;
+            }
 
-                var matchLine1 = Regex.Match(line1, "BANDWIDTH=([0-9]+),RESOLUTION=([0-9x]+),CODECS=\"(.+)\"");
-                var matchLine2 = Regex.Match(line2, "(.+)\\?");
+            var lines = new List<string>(data.Trim().Split('\n'));
+            //lines.RemoveAt(0);
+
+            for (int i = 0; i < lines.Count - 1; i++)
+            {
+                string line1 = lines[i];
+                string line2 = lines[i + 1];
+
+                var matchLine1 = Regex.Match(line1, "BANDWIDTH=(?<band>[0-9]+),RESOLUTION=(?<res>[0-9x]+),CODECS=\"(?<codec>.+)\"");
+                var matchLine2 = Regex.Match(line2, "^[^#](.+)m3u8");
+
+                // Try again, new pattern
+                if (!matchLine1.Success)
+                {
+                    matchLine1 = Regex.Match(line1, "BANDWIDTH=(?<band>[0-9]+),CODECS=\"(?<codec>.+)\",RESOLUTION=(?<res>[0-9x]+)");
+                }
 
                 if (matchLine1.Success && matchLine2.Success)
                 {
-                    var bandwidth = int.Parse(matchLine1.Groups[1].Value);
+                    var bandwidth = int.Parse(matchLine1.Groups["band"].Value);
                     var info = new StreamInfo()
                     {
-                        Url = (matchLine2.Groups[1].Value.ToLower().StartsWith("http")) 
-                            ? matchLine2.Groups[1].Value : 
-                            UrlHelper.GetBaseMasterUrl(masterUrl) + matchLine2.Groups[1].Value,
+                        Url = (matchLine2.Groups[0].Value.ToLower().StartsWith("http")) 
+                            ? matchLine2.Groups[0].Value : 
+                            UrlHelper.GetBaseMasterUrl(masterUrl) + matchLine2.Groups[0].Value,
                         Bandwidth = bandwidth,
-                        Resolution = matchLine1.Groups[2].Value,
-                        Codec = matchLine1.Groups[3].Value,
-                        ApproxSize = (Duration * (bandwidth / 1024) / 1024 / 8)
+                        Resolution = matchLine1.Groups["res"].Value,
+                        Codec = matchLine1.Groups["codec"].Value,
+                        ApproxSize = (Duration * (bandwidth / 1024) / 1024 / 8),
+                        StreamType = (string.IsNullOrEmpty(audioUrl)) ? StreamType.VideoAndAudio : StreamType.VideoSeparateAudio,
+                        AudioUrl = (audioUrl != null && audioUrl.ToLower().StartsWith("http")) ? audioUrl : UrlHelper.GetBaseMasterUrl(masterUrl) + audioUrl
                     };
                     Streams.Add(info);
                 }

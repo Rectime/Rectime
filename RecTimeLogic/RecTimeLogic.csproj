@@ -67,6 +67,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StreamInfo.cs" />
     <Compile Include="StringXmlSerializer.cs" />
+    <Compile Include="Tv4StreamManager.cs" />
     <Compile Include="UrlHelper.cs" />
     <Compile Include="UrStreamManager.cs" />
     <Compile Include="YouTubeStreamInfo.cs" />

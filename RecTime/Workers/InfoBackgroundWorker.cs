@@ -29,6 +29,9 @@ namespace RecTime
                 case SourceType.YouTube:
                     Manager = new YouTubeStreamManager(Url, new StreamDownloader());
                     break;
+                case SourceType.Tv4Play:
+                    Manager = new Tv4StreamManager(url, new StreamDownloader());
+                    break;
                 default:
                     Manager = new StreamManager(Url, new StreamDownloader());
                     break;

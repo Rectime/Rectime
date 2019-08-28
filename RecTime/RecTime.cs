@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Security;
 using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
@@ -21,12 +23,18 @@ namespace RecTime
         private List<StreamBackgroundWorker> _workers = new List<StreamBackgroundWorker>(); 
         private Dictionary<MaterialRadioButton, StreamInfo> _streamButtons = new Dictionary<MaterialRadioButton, StreamInfo>();
         private bool _closing = false;
+        private List<LiveChannelPreview> _channelPreviews = new List<LiveChannelPreview>();
+        private List<Button> _channelCloseButtons = new List<Button>();
+        private List<Button> _channelRecButtons = new List<Button>();
 
         #region Constructor 
 
         public RecTime()
         {
             InitializeComponent();
+            Application.EnableVisualStyles();
+            this.DoubleBuffered = true;
+
             this.StartPosition = FormStartPosition.CenterScreen;
 
             var materialSkinManager = MaterialSkinManager.Instance;
@@ -44,6 +52,15 @@ namespace RecTime
             }
             _tracker = new GoogleAnalyticsTracker(Application.ProductVersion, 
                 Properties.Settings.Default.UserId.ToString());
+
+            _channelPreviews.Add(new LiveChannelPreview(pictureBoxSvt1, SourceType.Svt1Live));
+            _channelPreviews.Add(new LiveChannelPreview(pictureBoxSvt2, SourceType.Svt2Live));
+            _channelPreviews.Add(new LiveChannelPreview(pictureBoxSvt24, SourceType.Svt24Live));
+            _channelPreviews.Add(new LiveChannelPreview(pictureBoxBarn, SourceType.SvtBarnLive));
+            _channelPreviews.Add(new LiveChannelPreview(pictureBoxKunskap, SourceType.SvtKunskapLive));
+
+            _channelCloseButtons.AddRange(new[] { btnChannelClose1, btnChannelClose2, btnChannelClose24, btnChannelCloseBarn, btnChannelCloseKunskap});
+            _channelRecButtons.AddRange(new[] { btnChannelRec1, btnChannelRec2, btnChannelRec24, btnChannelRecBarn, btnChannelRecKunskap});
         }
 
         #endregion
@@ -318,6 +335,12 @@ namespace RecTime
             }
 
             _closing = true;
+
+            foreach (var liveChannelPreview in _channelPreviews)
+            {
+                liveChannelPreview.Kill();
+            }
+
             foreach (var streamBackgroundWorker in _workers)
             {
                 if (streamBackgroundWorker.IsBusy)
@@ -341,7 +364,8 @@ namespace RecTime
 
         private void RecTime_Load(object sender, EventArgs e)
         {
-            AutoUpdater.Start("http://rectime.se/update/latest.xml");
+            Random rnd = new Random();
+            AutoUpdater.Start("http://rectime.se/update/latest.xml?v=" + rnd.Next(10000));
             _tracker.SendView(materialTabControl1.TabPages[0].Text);
             materialLabelVersion.Text = "v." + Application.ProductVersion;
 
@@ -403,6 +427,62 @@ namespace RecTime
         }
 
         #endregion
+
+        private void pictureBoxChannelPreview_Click(object sender, EventArgs e)
+        {
+            var preview = _channelPreviews.FirstOrDefault(c => c.Parent == sender);
+            preview?.Activate();
+
+            var btnClose = _channelCloseButtons.FirstOrDefault(b => (string)b.Tag == preview.Channel.ToString());
+            if (btnClose != null) btnClose.Enabled = true;
+        }
+
+        private void btnChannelClose_Click(object sender, EventArgs e)
+        {
+            var btn = sender as Button;
+            
+            var preview = _channelPreviews.FirstOrDefault(c => c.Channel.ToString() == (string)btn.Tag);
+            preview?.Kill();
+            if (btn != null) btn.Enabled = false;
+        }
+
+        private void btnChannelRec_Click(object sender, EventArgs e)
+        {
+            var btn = sender as Button;
+            var type = (SourceType)Enum.Parse(typeof(SourceType), btn.Tag.ToString());
+
+            var dialog = new TimeSelectForm();
+            if (dialog.ShowDialog() == DialogResult.Cancel)
+                return;
+
+            _tracker.SendEvent("Download " + type, "Live", null, 0);
+            var ProgramInfo = new ProgramInfo()
+            {
+                Title = type.ToString(),
+                Start = DateTime.Now.ToString("yyyyMMddHHmmss zzz"),
+                Stop = (DateTime.Now + dialog.Duration).ToString("yyyyMMddHHmmss zzz")
+            };
+            var worker = new ChannelRecorderBackgroundWorker(type, ProgramInfo, txtOutputLocation.Text);
+            var filename = txtOutputLocation.Text + @"\" + worker.OutputFilename;
+            if (File.Exists(filename))
+            {
+                MessageBox.Show(this, "Filen finns redan: " + worker.OutputFilename, "Konflikt", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+
+            //no dupes
+            if (_workers.OfType<ChannelRecorderBackgroundWorker>().Any(w => w.Info.Equals(ProgramInfo)))
+                return;
+            _workers.Add(worker);
+
+            var data = new[] { ProgramInfo.Title, type.ToString(), "0 %" };
+            var item = new ListViewItem(data) { Tag = worker };
+            listViewQueue.Items.Add(item);
+
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+            worker.ProgressChanged += Worker_ProgressChanged;
+        }
 
     }
 }

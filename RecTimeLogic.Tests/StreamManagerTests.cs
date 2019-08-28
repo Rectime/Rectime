@@ -48,8 +48,8 @@ http://svtplay3p-f.akamaihd.net/i/se/open/20160824/1332829-001A/PG-1332829-001A-
         private StreamManager _underTest;
         private string _stream0DataUrl = "http://svtplay3p-f.akamaihd.net/i/se/open/20160824/1332829-001A/PG-1332829-001A-OLLYTHELITTLE-01_,988,240,348,456,636,1680,2796,.mp4.csmil/index_0_av.m3u8";
         private string _stream6DataUrl = "http://svtplay13a-f.akamaihd.net/i/world/open/20160613/1371702-001A/PG-1371702-001A-BON2016-02_,988,240,348,456,636,1680,2796,.mp4.csmil/index_6_av.m3u8";
-        private string _htmlUri = "http://www.svtplay.se/video/1276539/skapbilen-olle/avsnitt-1";
-        private string _dataUrl = "http://www.svtplay.se/video/1276539?output=json";
+        private string _htmlUri = "https://www.svtplay.se/video/21358098/sorgen-mitt-i-bygden/sorgen-mitt-i-bygden-sasong-1-bussolyckan-utanfor-sveg";
+        private string _dataUrl = "https://www.svtplay.se/video/21358098?output=json";
         private string _streamMasterDataUrl = "http://svtplay3p-f.akamaihd.net/i/se/open/20160824/1332829-001A/PG-1332829-001A-OLLYTHELITTLE-01_,988,240,348,456,636,1680,2796,.mp4.csmil/master.m3u8";
         private string _streamMasterDataUrlRelative = "http://svtplay13a-f.akamaihd.net/i/world/open/20160613/1371702-001A/PG-1371702-001A-BON2016-02_,988,240,348,456,636,1680,2796,.mp4.csmil/master.m3u8";
         private IStreamDownloader _downloader;

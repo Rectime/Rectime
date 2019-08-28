@@ -2,8 +2,8 @@
 ;https://code.google.com/p/inno-download-plugin/
 #include <idp.iss>
 #define MyAppName "RecTime"
-#define MyAppVersion "1.2.5.0"
-#define MyAppVerName "RecTime v1.2.5.0"
+#define MyAppVersion "1.3.3.0"
+#define MyAppVerName "RecTime v1.3.3.0"
 #define MyCompany "rectime.se"
 #define MyAppURL "http://rectime.se"
 #define MyAppLocation "..\RecTime"
@@ -37,6 +37,7 @@ Name: desktopicon; Description: {cm:CreateDesktopIcon}; GroupDescription: {cm:Ad
 Source: {#MyAppLocation}\bin\Release\{#MyAppExeName}; DestDir: {app}; Flags: ignoreversion
 Source: {#MyAppLocation}\bin\Release\{#MyAppExeName}.config; DestDir: {app}; Flags: ignoreversion
 Source: {#MyAppLocation}\bin\Release\ffmpeg.exe; DestDir: {app}; Flags: ignoreversion
+Source: {#MyAppLocation}\bin\Release\ffplay.exe; DestDir: {app}; Flags: ignoreversion
 Source: {#MyAppLocation}\bin\Release\*.dll; DestDir: {app}; Flags: ignoreversion
 
 [Icons]

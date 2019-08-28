@@ -13,11 +13,11 @@ namespace RecTimeLogic
         private readonly Dictionary<SourceType, string> _channels =
             new Dictionary<SourceType, string>()
             {
-                { SourceType.Svt1Live, "https://api.svt.se/videoplayer-api/video/ch-svt1" },
-                { SourceType.Svt2Live, "https://api.svt.se/videoplayer-api/video/ch-svt2" },
-                { SourceType.Svt24Live, "https://api.svt.se/videoplayer-api/video/ch-svt24" },
-                { SourceType.SvtBarnLive, "https://api.svt.se/videoplayer-api/video/ch-barnkanalen" },
-                { SourceType.SvtKunskapLive, "https://api.svt.se/videoplayer-api/video/ch-kunskapskanalen" }
+                { SourceType.Svt1Live, "https://api.svt.se/video/ch-svt1" },
+                { SourceType.Svt2Live, "https://api.svt.se/video/ch-svt2" },
+                { SourceType.Svt24Live, "https://api.svt.se/video/ch-svt24" },
+                { SourceType.SvtBarnLive, "https://api.svt.se/video/ch-barnkanalen" },
+                { SourceType.SvtKunskapLive, "https://api.svt.se/video/ch-kunskapskanalen" }
             };
 
         
@@ -47,30 +47,26 @@ namespace RecTimeLogic
         {
             if (string.IsNullOrEmpty(data))
                 return;
+           
+            var pattern =
+                @"#EXT-X-STREAM-INF:BANDWIDTH=([0-9]+),CODECS=""(.+?)"",RESOLUTION=([0-9x]+)(,AUDIO=""audio"")?[\r\n]+(.+?)[\r\n]";
+            var matches = Regex.Matches(data, pattern);
 
-            var lines = new List<string>(data.Trim().Split('\n'));
-            lines.RemoveAt(0);
-            lines.RemoveAt(0);
-
-            for (int i = 0; i < lines.Count / 2; i++)
+            foreach (Match match in matches)
             {
-                string line1 = lines[i * 2];
-                string line2 = lines[i * 2 + 1];
-
-                var matchLine1 = Regex.Match(line1, "RESOLUTION=([0-9x]+),BANDWIDTH=([0-9]+)");
-
-                if (matchLine1.Success)
+                if (match.Success)
                 {
-                    var bandwidth = int.Parse(matchLine1.Groups[2].Value);
+                    var bandwidth = int.Parse(match.Groups[1].Value);
                     var info = new StreamInfo()
                     {
-                        Url = UrlHelper.GetBaseMasterUrl(masterUrl) + line2,
+                        Url = UrlHelper.GetBaseMasterUrl(masterUrl) + match.Groups[match.Groups.Count -1 ].Value,
                         Bandwidth = bandwidth,
-                        Resolution = matchLine1.Groups[1].Value,
+                        Resolution = match.Groups[3].Value,
                         ApproxSize = (Duration * (bandwidth / 1024) / 1024 / 8)
                     };
                     Streams.Add(info);
                 }
+           
             }
         }
     }

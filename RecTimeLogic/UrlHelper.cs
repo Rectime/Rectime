@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Web;
 
 namespace RecTimeLogic
@@ -25,7 +21,12 @@ namespace RecTimeLogic
                 type = SourceType.ÖppetArkiv;
                 dataUrl = FindDataUrl(url);
             }
-            else if (url.ToLower().Contains("tv4play.se"))
+            else if (url.ToLower().Contains("svt.se"))
+            {
+                type = SourceType.Svt;
+                dataUrl = url;
+            }
+            else if (url.ToLower().Contains("tv4play.se") || url.ToLower().Contains("tv4.se"))
                 type = SourceType.Tv4Play;
             else if (url.ToLower().Contains("urplay.se"))
                 type = SourceType.UrPlay;

@@ -39,6 +39,24 @@
             this.txtOutputLocation = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.txtUrl = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            this.btnChannelCloseKunskap = new System.Windows.Forms.Button();
+            this.btnChannelCloseBarn = new System.Windows.Forms.Button();
+            this.btnChannelClose24 = new System.Windows.Forms.Button();
+            this.btnChannelClose2 = new System.Windows.Forms.Button();
+            this.btnChannelRecBarn = new System.Windows.Forms.Button();
+            this.btnChannelRecKunskap = new System.Windows.Forms.Button();
+            this.btnChannelRec24 = new System.Windows.Forms.Button();
+            this.btnChannelRec2 = new System.Windows.Forms.Button();
+            this.materialLabelLiveInfo = new MaterialSkin.Controls.MaterialLabel();
+            this.btnChannelRec1 = new System.Windows.Forms.Button();
+            this.btnChannelClose1 = new System.Windows.Forms.Button();
+            this.pictureBoxSvt1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxKunskap = new System.Windows.Forms.PictureBox();
+            this.pictureBoxSvt2 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxBarn = new System.Windows.Forms.PictureBox();
+            this.pictureBoxSvt24 = new System.Windows.Forms.PictureBox();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
             this.lblChannel = new MaterialSkin.Controls.MaterialLabel();
             this.btnSvt24 = new System.Windows.Forms.Button();
             this.btnSvtKunskap = new System.Windows.Forms.Button();
@@ -50,6 +68,15 @@
             this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.lblOffsetInfo = new MaterialSkin.Controls.MaterialLabel();
+            this.lblStop = new MaterialSkin.Controls.MaterialLabel();
+            this.lblSeconds2 = new MaterialSkin.Controls.MaterialLabel();
+            this.numericLiveStopOffset = new System.Windows.Forms.NumericUpDown();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblStart = new MaterialSkin.Controls.MaterialLabel();
+            this.lblSeconds1 = new MaterialSkin.Controls.MaterialLabel();
+            this.numericLiveStartOffset = new System.Windows.Forms.NumericUpDown();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.labelFFmpeg = new System.Windows.Forms.Label();
             this.materialLabelVersion = new MaterialSkin.Controls.MaterialLabel();
@@ -69,46 +96,45 @@
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
             this.lblStatus = new MaterialSkin.Controls.MaterialLabel();
-            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.timerChannels = new System.Windows.Forms.Timer(this.components);
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.numericLiveStartOffset = new System.Windows.Forms.NumericUpDown();
-            this.lblSeconds1 = new MaterialSkin.Controls.MaterialLabel();
-            this.lblStart = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
-            this.lblStop = new MaterialSkin.Controls.MaterialLabel();
-            this.lblSeconds2 = new MaterialSkin.Controls.MaterialLabel();
-            this.numericLiveStopOffset = new System.Windows.Forms.NumericUpDown();
-            this.lblOffsetInfo = new MaterialSkin.Controls.MaterialLabel();
+            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSvt1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxKunskap)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSvt2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBarn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSvt24)).BeginInit();
+            this.tabPage7.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericLiveStopOffset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericLiveStartOffset)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFFmpeg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDonate)).BeginInit();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDuration)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
-            this.tabPage6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericLiveStartOffset)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericLiveStopOffset)).BeginInit();
             this.SuspendLayout();
             // 
             // materialTabControl1
             // 
             this.materialTabControl1.Controls.Add(this.tabPage1);
             this.materialTabControl1.Controls.Add(this.tabPage5);
+            this.materialTabControl1.Controls.Add(this.tabPage7);
             this.materialTabControl1.Controls.Add(this.tabPage2);
             this.materialTabControl1.Controls.Add(this.tabPage6);
             this.materialTabControl1.Controls.Add(this.tabPage3);
             this.materialTabControl1.Depth = 0;
-            this.materialTabControl1.Location = new System.Drawing.Point(12, 125);
+            this.materialTabControl1.Location = new System.Drawing.Point(18, 192);
+            this.materialTabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.materialTabControl1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialTabControl1.Name = "materialTabControl1";
             this.materialTabControl1.SelectedIndex = 0;
-            this.materialTabControl1.Size = new System.Drawing.Size(524, 337);
+            this.materialTabControl1.Size = new System.Drawing.Size(889, 518);
             this.materialTabControl1.TabIndex = 0;
             this.materialTabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.materialTabControl1_Selected);
             // 
@@ -121,18 +147,20 @@
             this.tabPage1.Controls.Add(this.lblInfo);
             this.tabPage1.Controls.Add(this.txtOutputLocation);
             this.tabPage1.Controls.Add(this.txtUrl);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(516, 311);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage1.Size = new System.Drawing.Size(842, 485);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Lägg till";
             // 
             // pictureBox
             // 
-            this.pictureBox.Location = new System.Drawing.Point(274, 115);
+            this.pictureBox.Location = new System.Drawing.Point(411, 177);
+            this.pictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(242, 148);
+            this.pictureBox.Size = new System.Drawing.Size(363, 228);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 6;
             this.pictureBox.TabStop = false;
@@ -143,11 +171,12 @@
             this.btnStartDownload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnStartDownload.Depth = 0;
             this.btnStartDownload.Icon = null;
-            this.btnStartDownload.Location = new System.Drawing.Point(350, 288);
+            this.btnStartDownload.Location = new System.Drawing.Point(525, 443);
+            this.btnStartDownload.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnStartDownload.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnStartDownload.Name = "btnStartDownload";
             this.btnStartDownload.Primary = true;
-            this.btnStartDownload.Size = new System.Drawing.Size(170, 36);
+            this.btnStartDownload.Size = new System.Drawing.Size(247, 36);
             this.btnStartDownload.TabIndex = 5;
             this.btnStartDownload.Text = "Starta nedladdning";
             this.btnStartDownload.UseVisualStyleBackColor = true;
@@ -158,7 +187,8 @@
             // 
             this.txtFilename.Depth = 0;
             this.txtFilename.Hint = "Set filename";
-            this.txtFilename.Location = new System.Drawing.Point(9, 64);
+            this.txtFilename.Location = new System.Drawing.Point(14, 98);
+            this.txtFilename.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtFilename.MaxLength = 32767;
             this.txtFilename.MouseState = MaterialSkin.MouseState.HOVER;
             this.txtFilename.Name = "txtFilename";
@@ -166,7 +196,7 @@
             this.txtFilename.SelectedText = "";
             this.txtFilename.SelectionLength = 0;
             this.txtFilename.SelectionStart = 0;
-            this.txtFilename.Size = new System.Drawing.Size(507, 23);
+            this.txtFilename.Size = new System.Drawing.Size(760, 32);
             this.txtFilename.TabIndex = 4;
             this.txtFilename.TabStop = false;
             this.txtFilename.Text = "filnamn.mp4";
@@ -178,10 +208,11 @@
             this.lblInfo.Depth = 0;
             this.lblInfo.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblInfo.Location = new System.Drawing.Point(5, 90);
+            this.lblInfo.Location = new System.Drawing.Point(8, 138);
+            this.lblInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblInfo.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(83, 19);
+            this.lblInfo.Size = new System.Drawing.Size(115, 27);
             this.lblInfo.TabIndex = 3;
             this.lblInfo.Text = "Välj ström:";
             // 
@@ -189,7 +220,8 @@
             // 
             this.txtOutputLocation.Depth = 0;
             this.txtOutputLocation.Hint = "Välj mapp";
-            this.txtOutputLocation.Location = new System.Drawing.Point(9, 35);
+            this.txtOutputLocation.Location = new System.Drawing.Point(14, 54);
+            this.txtOutputLocation.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtOutputLocation.MaxLength = 32767;
             this.txtOutputLocation.MouseState = MaterialSkin.MouseState.HOVER;
             this.txtOutputLocation.Name = "txtOutputLocation";
@@ -197,7 +229,7 @@
             this.txtOutputLocation.SelectedText = "";
             this.txtOutputLocation.SelectionLength = 0;
             this.txtOutputLocation.SelectionStart = 0;
-            this.txtOutputLocation.Size = new System.Drawing.Size(524, 23);
+            this.txtOutputLocation.Size = new System.Drawing.Size(786, 32);
             this.txtOutputLocation.TabIndex = 2;
             this.txtOutputLocation.TabStop = false;
             this.txtOutputLocation.UseSystemPasswordChar = false;
@@ -207,7 +239,8 @@
             // 
             this.txtUrl.Depth = 0;
             this.txtUrl.Hint = "Kopiera Url adress";
-            this.txtUrl.Location = new System.Drawing.Point(9, 6);
+            this.txtUrl.Location = new System.Drawing.Point(14, 9);
+            this.txtUrl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtUrl.MaxLength = 32767;
             this.txtUrl.MouseState = MaterialSkin.MouseState.HOVER;
             this.txtUrl.Name = "txtUrl";
@@ -215,7 +248,7 @@
             this.txtUrl.SelectedText = "";
             this.txtUrl.SelectionLength = 0;
             this.txtUrl.SelectionStart = 0;
-            this.txtUrl.Size = new System.Drawing.Size(524, 23);
+            this.txtUrl.Size = new System.Drawing.Size(786, 32);
             this.txtUrl.TabIndex = 1;
             this.txtUrl.TabStop = false;
             this.txtUrl.UseSystemPasswordChar = false;
@@ -224,18 +257,264 @@
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.lblChannel);
-            this.tabPage5.Controls.Add(this.btnSvt24);
-            this.tabPage5.Controls.Add(this.btnSvtKunskap);
-            this.tabPage5.Controls.Add(this.btnSvt2);
-            this.tabPage5.Controls.Add(this.btnSvt1);
-            this.tabPage5.Controls.Add(this.btnChannelSvtb);
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Controls.Add(this.materialLabel3);
+            this.tabPage5.Controls.Add(this.btnChannelCloseKunskap);
+            this.tabPage5.Controls.Add(this.btnChannelCloseBarn);
+            this.tabPage5.Controls.Add(this.btnChannelClose24);
+            this.tabPage5.Controls.Add(this.btnChannelClose2);
+            this.tabPage5.Controls.Add(this.btnChannelRecBarn);
+            this.tabPage5.Controls.Add(this.btnChannelRecKunskap);
+            this.tabPage5.Controls.Add(this.btnChannelRec24);
+            this.tabPage5.Controls.Add(this.btnChannelRec2);
+            this.tabPage5.Controls.Add(this.materialLabelLiveInfo);
+            this.tabPage5.Controls.Add(this.btnChannelRec1);
+            this.tabPage5.Controls.Add(this.btnChannelClose1);
+            this.tabPage5.Controls.Add(this.pictureBoxSvt1);
+            this.tabPage5.Controls.Add(this.pictureBoxKunskap);
+            this.tabPage5.Controls.Add(this.pictureBoxSvt2);
+            this.tabPage5.Controls.Add(this.pictureBoxBarn);
+            this.tabPage5.Controls.Add(this.pictureBoxSvt24);
+            this.tabPage5.Location = new System.Drawing.Point(4, 29);
+            this.tabPage5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(516, 311);
+            this.tabPage5.Size = new System.Drawing.Size(842, 485);
             this.tabPage5.TabIndex = 3;
             this.tabPage5.Text = "Live";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // materialLabel3
+            // 
+            this.materialLabel3.AutoSize = true;
+            this.materialLabel3.Depth = 0;
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel3.Location = new System.Drawing.Point(316, 449);
+            this.materialLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel3.Name = "materialLabel3";
+            this.materialLabel3.Size = new System.Drawing.Size(488, 27);
+            this.materialLabel3.TabIndex = 25;
+            this.materialLabel3.Text = "Tryck på röd knapp för att starta direkt inspelning.";
+            // 
+            // btnChannelCloseKunskap
+            // 
+            this.btnChannelCloseKunskap.Enabled = false;
+            this.btnChannelCloseKunskap.Location = new System.Drawing.Point(572, 169);
+            this.btnChannelCloseKunskap.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnChannelCloseKunskap.Name = "btnChannelCloseKunskap";
+            this.btnChannelCloseKunskap.Size = new System.Drawing.Size(28, 29);
+            this.btnChannelCloseKunskap.TabIndex = 24;
+            this.btnChannelCloseKunskap.Tag = "SvtKunskapLive";
+            this.btnChannelCloseKunskap.Text = "x";
+            this.btnChannelCloseKunskap.UseVisualStyleBackColor = true;
+            this.btnChannelCloseKunskap.Click += new System.EventHandler(this.btnChannelClose_Click);
+            // 
+            // btnChannelCloseBarn
+            // 
+            this.btnChannelCloseBarn.Enabled = false;
+            this.btnChannelCloseBarn.Location = new System.Drawing.Point(572, 22);
+            this.btnChannelCloseBarn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnChannelCloseBarn.Name = "btnChannelCloseBarn";
+            this.btnChannelCloseBarn.Size = new System.Drawing.Size(28, 29);
+            this.btnChannelCloseBarn.TabIndex = 23;
+            this.btnChannelCloseBarn.Tag = "SvtBarnLive";
+            this.btnChannelCloseBarn.Text = "x";
+            this.btnChannelCloseBarn.UseVisualStyleBackColor = true;
+            this.btnChannelCloseBarn.Click += new System.EventHandler(this.btnChannelClose_Click);
+            // 
+            // btnChannelClose24
+            // 
+            this.btnChannelClose24.Enabled = false;
+            this.btnChannelClose24.Location = new System.Drawing.Point(285, 317);
+            this.btnChannelClose24.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnChannelClose24.Name = "btnChannelClose24";
+            this.btnChannelClose24.Size = new System.Drawing.Size(28, 29);
+            this.btnChannelClose24.TabIndex = 22;
+            this.btnChannelClose24.Tag = "Svt24Live";
+            this.btnChannelClose24.Text = "x";
+            this.btnChannelClose24.UseVisualStyleBackColor = true;
+            this.btnChannelClose24.Click += new System.EventHandler(this.btnChannelClose_Click);
+            // 
+            // btnChannelClose2
+            // 
+            this.btnChannelClose2.Enabled = false;
+            this.btnChannelClose2.Location = new System.Drawing.Point(286, 169);
+            this.btnChannelClose2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnChannelClose2.Name = "btnChannelClose2";
+            this.btnChannelClose2.Size = new System.Drawing.Size(28, 29);
+            this.btnChannelClose2.TabIndex = 21;
+            this.btnChannelClose2.Tag = "Svt2Live";
+            this.btnChannelClose2.Text = "x";
+            this.btnChannelClose2.UseVisualStyleBackColor = true;
+            this.btnChannelClose2.Click += new System.EventHandler(this.btnChannelClose_Click);
+            // 
+            // btnChannelRecBarn
+            // 
+            this.btnChannelRecBarn.BackColor = System.Drawing.Color.Red;
+            this.btnChannelRecBarn.Location = new System.Drawing.Point(572, 60);
+            this.btnChannelRecBarn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnChannelRecBarn.Name = "btnChannelRecBarn";
+            this.btnChannelRecBarn.Size = new System.Drawing.Size(28, 29);
+            this.btnChannelRecBarn.TabIndex = 20;
+            this.btnChannelRecBarn.Tag = "SvtBarnLive";
+            this.btnChannelRecBarn.UseVisualStyleBackColor = false;
+            this.btnChannelRecBarn.Click += new System.EventHandler(this.btnChannelRec_Click);
+            // 
+            // btnChannelRecKunskap
+            // 
+            this.btnChannelRecKunskap.BackColor = System.Drawing.Color.Red;
+            this.btnChannelRecKunskap.Location = new System.Drawing.Point(572, 208);
+            this.btnChannelRecKunskap.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnChannelRecKunskap.Name = "btnChannelRecKunskap";
+            this.btnChannelRecKunskap.Size = new System.Drawing.Size(28, 29);
+            this.btnChannelRecKunskap.TabIndex = 19;
+            this.btnChannelRecKunskap.Tag = "SvtKunskapLive";
+            this.btnChannelRecKunskap.UseVisualStyleBackColor = false;
+            this.btnChannelRecKunskap.Click += new System.EventHandler(this.btnChannelRec_Click);
+            // 
+            // btnChannelRec24
+            // 
+            this.btnChannelRec24.BackColor = System.Drawing.Color.Red;
+            this.btnChannelRec24.Location = new System.Drawing.Point(285, 355);
+            this.btnChannelRec24.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnChannelRec24.Name = "btnChannelRec24";
+            this.btnChannelRec24.Size = new System.Drawing.Size(28, 29);
+            this.btnChannelRec24.TabIndex = 18;
+            this.btnChannelRec24.Tag = "Svt24Live";
+            this.btnChannelRec24.UseVisualStyleBackColor = false;
+            this.btnChannelRec24.Click += new System.EventHandler(this.btnChannelRec_Click);
+            // 
+            // btnChannelRec2
+            // 
+            this.btnChannelRec2.BackColor = System.Drawing.Color.Red;
+            this.btnChannelRec2.Location = new System.Drawing.Point(286, 208);
+            this.btnChannelRec2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnChannelRec2.Name = "btnChannelRec2";
+            this.btnChannelRec2.Size = new System.Drawing.Size(28, 29);
+            this.btnChannelRec2.TabIndex = 17;
+            this.btnChannelRec2.Tag = "Svt2Live";
+            this.btnChannelRec2.UseVisualStyleBackColor = false;
+            this.btnChannelRec2.Click += new System.EventHandler(this.btnChannelRec_Click);
+            // 
+            // materialLabelLiveInfo
+            // 
+            this.materialLabelLiveInfo.AutoSize = true;
+            this.materialLabelLiveInfo.Depth = 0;
+            this.materialLabelLiveInfo.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabelLiveInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabelLiveInfo.Location = new System.Drawing.Point(316, 412);
+            this.materialLabelLiveInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.materialLabelLiveInfo.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabelLiveInfo.Name = "materialLabelLiveInfo";
+            this.materialLabelLiveInfo.Size = new System.Drawing.Size(388, 27);
+            this.materialLabelLiveInfo.TabIndex = 16;
+            this.materialLabelLiveInfo.Text = "Tryck på blocken för att starta preview.";
+            // 
+            // btnChannelRec1
+            // 
+            this.btnChannelRec1.BackColor = System.Drawing.Color.Red;
+            this.btnChannelRec1.Location = new System.Drawing.Point(285, 60);
+            this.btnChannelRec1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnChannelRec1.Name = "btnChannelRec1";
+            this.btnChannelRec1.Size = new System.Drawing.Size(28, 29);
+            this.btnChannelRec1.TabIndex = 15;
+            this.btnChannelRec1.Tag = "Svt1Live";
+            this.btnChannelRec1.UseVisualStyleBackColor = false;
+            this.btnChannelRec1.Click += new System.EventHandler(this.btnChannelRec_Click);
+            // 
+            // btnChannelClose1
+            // 
+            this.btnChannelClose1.Enabled = false;
+            this.btnChannelClose1.Location = new System.Drawing.Point(285, 22);
+            this.btnChannelClose1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnChannelClose1.Name = "btnChannelClose1";
+            this.btnChannelClose1.Size = new System.Drawing.Size(28, 29);
+            this.btnChannelClose1.TabIndex = 11;
+            this.btnChannelClose1.Tag = "Svt1Live";
+            this.btnChannelClose1.Text = "x";
+            this.btnChannelClose1.UseVisualStyleBackColor = true;
+            this.btnChannelClose1.Click += new System.EventHandler(this.btnChannelClose_Click);
+            // 
+            // pictureBoxSvt1
+            // 
+            this.pictureBoxSvt1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pictureBoxSvt1.Image = global::RecTime.Properties.Resources.svt1;
+            this.pictureBoxSvt1.Location = new System.Drawing.Point(36, 22);
+            this.pictureBoxSvt1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureBoxSvt1.Name = "pictureBoxSvt1";
+            this.pictureBoxSvt1.Size = new System.Drawing.Size(240, 138);
+            this.pictureBoxSvt1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBoxSvt1.TabIndex = 8;
+            this.pictureBoxSvt1.TabStop = false;
+            this.pictureBoxSvt1.Click += new System.EventHandler(this.pictureBoxChannelPreview_Click);
+            // 
+            // pictureBoxKunskap
+            // 
+            this.pictureBoxKunskap.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pictureBoxKunskap.Image = global::RecTime.Properties.Resources.kunskapskanalen;
+            this.pictureBoxKunskap.Location = new System.Drawing.Point(322, 169);
+            this.pictureBoxKunskap.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureBoxKunskap.Name = "pictureBoxKunskap";
+            this.pictureBoxKunskap.Size = new System.Drawing.Size(240, 138);
+            this.pictureBoxKunskap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxKunskap.TabIndex = 14;
+            this.pictureBoxKunskap.TabStop = false;
+            this.pictureBoxKunskap.Click += new System.EventHandler(this.pictureBoxChannelPreview_Click);
+            // 
+            // pictureBoxSvt2
+            // 
+            this.pictureBoxSvt2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pictureBoxSvt2.Image = global::RecTime.Properties.Resources.svt2;
+            this.pictureBoxSvt2.Location = new System.Drawing.Point(36, 169);
+            this.pictureBoxSvt2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureBoxSvt2.Name = "pictureBoxSvt2";
+            this.pictureBoxSvt2.Size = new System.Drawing.Size(240, 138);
+            this.pictureBoxSvt2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBoxSvt2.TabIndex = 10;
+            this.pictureBoxSvt2.TabStop = false;
+            this.pictureBoxSvt2.Click += new System.EventHandler(this.pictureBoxChannelPreview_Click);
+            // 
+            // pictureBoxBarn
+            // 
+            this.pictureBoxBarn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pictureBoxBarn.Image = global::RecTime.Properties.Resources.barnkanalen;
+            this.pictureBoxBarn.Location = new System.Drawing.Point(322, 22);
+            this.pictureBoxBarn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureBoxBarn.Name = "pictureBoxBarn";
+            this.pictureBoxBarn.Size = new System.Drawing.Size(240, 138);
+            this.pictureBoxBarn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxBarn.TabIndex = 13;
+            this.pictureBoxBarn.TabStop = false;
+            this.pictureBoxBarn.Click += new System.EventHandler(this.pictureBoxChannelPreview_Click);
+            // 
+            // pictureBoxSvt24
+            // 
+            this.pictureBoxSvt24.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pictureBoxSvt24.Image = global::RecTime.Properties.Resources.svt24;
+            this.pictureBoxSvt24.Location = new System.Drawing.Point(36, 317);
+            this.pictureBoxSvt24.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureBoxSvt24.Name = "pictureBoxSvt24";
+            this.pictureBoxSvt24.Size = new System.Drawing.Size(240, 138);
+            this.pictureBoxSvt24.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBoxSvt24.TabIndex = 12;
+            this.pictureBoxSvt24.TabStop = false;
+            this.pictureBoxSvt24.Click += new System.EventHandler(this.pictureBoxChannelPreview_Click);
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.lblChannel);
+            this.tabPage7.Controls.Add(this.btnSvt24);
+            this.tabPage7.Controls.Add(this.btnSvtKunskap);
+            this.tabPage7.Controls.Add(this.btnSvt2);
+            this.tabPage7.Controls.Add(this.btnSvt1);
+            this.tabPage7.Controls.Add(this.btnChannelSvtb);
+            this.tabPage7.Location = new System.Drawing.Point(4, 29);
+            this.tabPage7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Size = new System.Drawing.Size(842, 485);
+            this.tabPage7.TabIndex = 5;
+            this.tabPage7.Text = "Schemalägg";
+            this.tabPage7.UseVisualStyleBackColor = true;
             // 
             // lblChannel
             // 
@@ -243,21 +522,23 @@
             this.lblChannel.Depth = 0;
             this.lblChannel.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblChannel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblChannel.Location = new System.Drawing.Point(4, 18);
+            this.lblChannel.Location = new System.Drawing.Point(8, 6);
+            this.lblChannel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblChannel.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblChannel.Name = "lblChannel";
-            this.lblChannel.Size = new System.Drawing.Size(75, 19);
-            this.lblChannel.TabIndex = 6;
+            this.lblChannel.Size = new System.Drawing.Size(105, 27);
+            this.lblChannel.TabIndex = 12;
             this.lblChannel.Text = "Välj kanal";
             // 
             // btnSvt24
             // 
             this.btnSvt24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
             this.btnSvt24.Image = global::RecTime.Properties.Resources.svt24;
-            this.btnSvt24.Location = new System.Drawing.Point(241, 100);
+            this.btnSvt24.Location = new System.Drawing.Point(363, 132);
+            this.btnSvt24.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSvt24.Name = "btnSvt24";
-            this.btnSvt24.Size = new System.Drawing.Size(227, 54);
-            this.btnSvt24.TabIndex = 5;
+            this.btnSvt24.Size = new System.Drawing.Size(340, 83);
+            this.btnSvt24.TabIndex = 11;
             this.btnSvt24.Tag = "Svt24";
             this.btnSvt24.UseVisualStyleBackColor = false;
             this.btnSvt24.Click += new System.EventHandler(this.btnChannel_Click);
@@ -266,10 +547,11 @@
             // 
             this.btnSvtKunskap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
             this.btnSvtKunskap.Image = global::RecTime.Properties.Resources.kunskapskanalen;
-            this.btnSvtKunskap.Location = new System.Drawing.Point(241, 40);
+            this.btnSvtKunskap.Location = new System.Drawing.Point(363, 40);
+            this.btnSvtKunskap.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSvtKunskap.Name = "btnSvtKunskap";
-            this.btnSvtKunskap.Size = new System.Drawing.Size(227, 54);
-            this.btnSvtKunskap.TabIndex = 4;
+            this.btnSvtKunskap.Size = new System.Drawing.Size(340, 83);
+            this.btnSvtKunskap.TabIndex = 10;
             this.btnSvtKunskap.Tag = "Kunskapskanalen";
             this.btnSvtKunskap.UseVisualStyleBackColor = false;
             this.btnSvtKunskap.Click += new System.EventHandler(this.btnChannel_Click);
@@ -278,10 +560,11 @@
             // 
             this.btnSvt2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
             this.btnSvt2.Image = global::RecTime.Properties.Resources.svt2;
-            this.btnSvt2.Location = new System.Drawing.Point(8, 160);
+            this.btnSvt2.Location = new System.Drawing.Point(14, 225);
+            this.btnSvt2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSvt2.Name = "btnSvt2";
-            this.btnSvt2.Size = new System.Drawing.Size(227, 54);
-            this.btnSvt2.TabIndex = 3;
+            this.btnSvt2.Size = new System.Drawing.Size(340, 83);
+            this.btnSvt2.TabIndex = 9;
             this.btnSvt2.Tag = "Svt2";
             this.btnSvt2.UseVisualStyleBackColor = false;
             this.btnSvt2.Click += new System.EventHandler(this.btnChannel_Click);
@@ -290,10 +573,11 @@
             // 
             this.btnSvt1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
             this.btnSvt1.Image = global::RecTime.Properties.Resources.svt1;
-            this.btnSvt1.Location = new System.Drawing.Point(8, 100);
+            this.btnSvt1.Location = new System.Drawing.Point(14, 132);
+            this.btnSvt1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSvt1.Name = "btnSvt1";
-            this.btnSvt1.Size = new System.Drawing.Size(227, 54);
-            this.btnSvt1.TabIndex = 2;
+            this.btnSvt1.Size = new System.Drawing.Size(340, 83);
+            this.btnSvt1.TabIndex = 8;
             this.btnSvt1.Tag = "Svt1";
             this.btnSvt1.UseVisualStyleBackColor = false;
             this.btnSvt1.Click += new System.EventHandler(this.btnChannel_Click);
@@ -302,10 +586,11 @@
             // 
             this.btnChannelSvtb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
             this.btnChannelSvtb.Image = global::RecTime.Properties.Resources.barnkanalen;
-            this.btnChannelSvtb.Location = new System.Drawing.Point(8, 40);
+            this.btnChannelSvtb.Location = new System.Drawing.Point(14, 40);
+            this.btnChannelSvtb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnChannelSvtb.Name = "btnChannelSvtb";
-            this.btnChannelSvtb.Size = new System.Drawing.Size(227, 54);
-            this.btnChannelSvtb.TabIndex = 1;
+            this.btnChannelSvtb.Size = new System.Drawing.Size(340, 83);
+            this.btnChannelSvtb.TabIndex = 7;
             this.btnChannelSvtb.Tag = "Barnkanalen";
             this.btnChannelSvtb.UseVisualStyleBackColor = false;
             this.btnChannelSvtb.Click += new System.EventHandler(this.btnChannel_Click);
@@ -313,10 +598,11 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.listViewQueue);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(516, 311);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage2.Size = new System.Drawing.Size(881, 485);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Kö";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -332,12 +618,13 @@
             this.listViewQueue.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.listViewQueue.FullRowSelect = true;
             this.listViewQueue.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listViewQueue.Location = new System.Drawing.Point(3, 6);
+            this.listViewQueue.Location = new System.Drawing.Point(4, 9);
+            this.listViewQueue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listViewQueue.MouseLocation = new System.Drawing.Point(-1, -1);
             this.listViewQueue.MouseState = MaterialSkin.MouseState.OUT;
             this.listViewQueue.Name = "listViewQueue";
             this.listViewQueue.OwnerDraw = true;
-            this.listViewQueue.Size = new System.Drawing.Size(507, 305);
+            this.listViewQueue.Size = new System.Drawing.Size(869, 469);
             this.listViewQueue.TabIndex = 0;
             this.listViewQueue.UseCompatibleStateImageBehavior = false;
             this.listViewQueue.View = System.Windows.Forms.View.Details;
@@ -345,7 +632,7 @@
             // columnHeaderName
             // 
             this.columnHeaderName.Text = "Namn";
-            this.columnHeaderName.Width = 252;
+            this.columnHeaderName.Width = 335;
             // 
             // columnHeaderType
             // 
@@ -355,7 +642,150 @@
             // columnHeaderStatus
             // 
             this.columnHeaderStatus.Text = "Status";
-            this.columnHeaderStatus.Width = 120;
+            this.columnHeaderStatus.Width = 80;
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.lblOffsetInfo);
+            this.tabPage6.Controls.Add(this.lblStop);
+            this.tabPage6.Controls.Add(this.lblSeconds2);
+            this.tabPage6.Controls.Add(this.numericLiveStopOffset);
+            this.tabPage6.Controls.Add(this.materialLabel2);
+            this.tabPage6.Controls.Add(this.lblStart);
+            this.tabPage6.Controls.Add(this.lblSeconds1);
+            this.tabPage6.Controls.Add(this.numericLiveStartOffset);
+            this.tabPage6.Location = new System.Drawing.Point(4, 29);
+            this.tabPage6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Size = new System.Drawing.Size(842, 485);
+            this.tabPage6.TabIndex = 4;
+            this.tabPage6.Text = "Inställningar";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // lblOffsetInfo
+            // 
+            this.lblOffsetInfo.Depth = 0;
+            this.lblOffsetInfo.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblOffsetInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblOffsetInfo.Location = new System.Drawing.Point(351, 20);
+            this.lblOffsetInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblOffsetInfo.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblOffsetInfo.Name = "lblOffsetInfo";
+            this.lblOffsetInfo.Size = new System.Drawing.Size(454, 160);
+            this.lblOffsetInfo.TabIndex = 7;
+            this.lblOffsetInfo.Text = "Använd för att justera start o stop av inspelning då tablåtiderna ej är helt synk" +
+    "ade med Live-sändningarna.\r\nÄndringar påverkar kön men ej pågående nedladdningar" +
+    "!\r\n";
+            // 
+            // lblStop
+            // 
+            this.lblStop.AutoSize = true;
+            this.lblStop.Depth = 0;
+            this.lblStop.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblStop.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblStop.Location = new System.Drawing.Point(10, 117);
+            this.lblStop.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStop.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblStop.Name = "lblStop";
+            this.lblStop.Size = new System.Drawing.Size(62, 27);
+            this.lblStop.TabIndex = 6;
+            this.lblStop.Text = "Stop:";
+            // 
+            // lblSeconds2
+            // 
+            this.lblSeconds2.AutoSize = true;
+            this.lblSeconds2.Depth = 0;
+            this.lblSeconds2.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblSeconds2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblSeconds2.Location = new System.Drawing.Point(226, 117);
+            this.lblSeconds2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSeconds2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblSeconds2.Name = "lblSeconds2";
+            this.lblSeconds2.Size = new System.Drawing.Size(101, 27);
+            this.lblSeconds2.TabIndex = 5;
+            this.lblSeconds2.Text = "sekunder";
+            // 
+            // numericLiveStopOffset
+            // 
+            this.numericLiveStopOffset.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericLiveStopOffset.Location = new System.Drawing.Point(87, 114);
+            this.numericLiveStopOffset.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numericLiveStopOffset.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericLiveStopOffset.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.numericLiveStopOffset.Name = "numericLiveStopOffset";
+            this.numericLiveStopOffset.Size = new System.Drawing.Size(130, 33);
+            this.numericLiveStopOffset.TabIndex = 4;
+            this.numericLiveStopOffset.ValueChanged += new System.EventHandler(this.numericLiveStopOffset_ValueChanged);
+            // 
+            // materialLabel2
+            // 
+            this.materialLabel2.AutoSize = true;
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel2.Location = new System.Drawing.Point(8, 20);
+            this.materialLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            this.materialLabel2.Size = new System.Drawing.Size(267, 27);
+            this.materialLabel2.TabIndex = 3;
+            this.materialLabel2.Text = "Live kanaler förskjutningar\r\n";
+            // 
+            // lblStart
+            // 
+            this.lblStart.AutoSize = true;
+            this.lblStart.Depth = 0;
+            this.lblStart.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblStart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblStart.Location = new System.Drawing.Point(10, 71);
+            this.lblStart.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStart.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblStart.Name = "lblStart";
+            this.lblStart.Size = new System.Drawing.Size(63, 27);
+            this.lblStart.TabIndex = 2;
+            this.lblStart.Text = "Start:";
+            // 
+            // lblSeconds1
+            // 
+            this.lblSeconds1.AutoSize = true;
+            this.lblSeconds1.Depth = 0;
+            this.lblSeconds1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblSeconds1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblSeconds1.Location = new System.Drawing.Point(226, 71);
+            this.lblSeconds1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSeconds1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblSeconds1.Name = "lblSeconds1";
+            this.lblSeconds1.Size = new System.Drawing.Size(101, 27);
+            this.lblSeconds1.TabIndex = 1;
+            this.lblSeconds1.Text = "sekunder";
+            // 
+            // numericLiveStartOffset
+            // 
+            this.numericLiveStartOffset.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericLiveStartOffset.Location = new System.Drawing.Point(87, 68);
+            this.numericLiveStartOffset.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numericLiveStartOffset.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericLiveStartOffset.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.numericLiveStartOffset.Name = "numericLiveStartOffset";
+            this.numericLiveStartOffset.Size = new System.Drawing.Size(130, 33);
+            this.numericLiveStartOffset.TabIndex = 0;
+            this.numericLiveStartOffset.ValueChanged += new System.EventHandler(this.numericLiveStartOffset_ValueChanged);
             // 
             // tabPage3
             // 
@@ -364,9 +794,10 @@
             this.tabPage3.Controls.Add(this.materialLabel1);
             this.tabPage3.Controls.Add(this.pictureBoxFFmpeg);
             this.tabPage3.Controls.Add(this.pictureBoxDonate);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(516, 311);
+            this.tabPage3.Size = new System.Drawing.Size(842, 485);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Om";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -374,9 +805,10 @@
             // labelFFmpeg
             // 
             this.labelFFmpeg.AutoSize = true;
-            this.labelFFmpeg.Location = new System.Drawing.Point(419, 286);
+            this.labelFFmpeg.Location = new System.Drawing.Point(628, 440);
+            this.labelFFmpeg.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelFFmpeg.Name = "labelFFmpeg";
-            this.labelFFmpeg.Size = new System.Drawing.Size(62, 13);
+            this.labelFFmpeg.Size = new System.Drawing.Size(90, 20);
             this.labelFFmpeg.TabIndex = 4;
             this.labelFFmpeg.Text = "powered by";
             // 
@@ -386,10 +818,11 @@
             this.materialLabelVersion.Depth = 0;
             this.materialLabelVersion.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabelVersion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabelVersion.Location = new System.Drawing.Point(14, 34);
+            this.materialLabelVersion.Location = new System.Drawing.Point(21, 52);
+            this.materialLabelVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabelVersion.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabelVersion.Name = "materialLabelVersion";
-            this.materialLabelVersion.Size = new System.Drawing.Size(0, 19);
+            this.materialLabelVersion.Size = new System.Drawing.Size(0, 27);
             this.materialLabelVersion.TabIndex = 2;
             // 
             // materialLabel1
@@ -397,19 +830,21 @@
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(15, 67);
+            this.materialLabel1.Location = new System.Drawing.Point(22, 103);
+            this.materialLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(489, 186);
+            this.materialLabel1.Size = new System.Drawing.Size(734, 286);
             this.materialLabel1.TabIndex = 0;
             this.materialLabel1.Text = resources.GetString("materialLabel1.Text");
             // 
             // pictureBoxFFmpeg
             // 
             this.pictureBoxFFmpeg.Image = global::RecTime.Properties.Resources.ffmpeg;
-            this.pictureBoxFFmpeg.Location = new System.Drawing.Point(383, 294);
+            this.pictureBoxFFmpeg.Location = new System.Drawing.Point(574, 452);
+            this.pictureBoxFFmpeg.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBoxFFmpeg.Name = "pictureBoxFFmpeg";
-            this.pictureBoxFFmpeg.Size = new System.Drawing.Size(133, 35);
+            this.pictureBoxFFmpeg.Size = new System.Drawing.Size(200, 54);
             this.pictureBoxFFmpeg.TabIndex = 3;
             this.pictureBoxFFmpeg.TabStop = false;
             this.pictureBoxFFmpeg.Click += new System.EventHandler(this.pictureBoxFFmpeg_Click);
@@ -417,9 +852,10 @@
             // pictureBoxDonate
             // 
             this.pictureBoxDonate.Image = global::RecTime.Properties.Resources.donate;
-            this.pictureBoxDonate.Location = new System.Drawing.Point(206, 280);
+            this.pictureBoxDonate.Location = new System.Drawing.Point(309, 431);
+            this.pictureBoxDonate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBoxDonate.Name = "pictureBoxDonate";
-            this.pictureBoxDonate.Size = new System.Drawing.Size(109, 57);
+            this.pictureBoxDonate.Size = new System.Drawing.Size(164, 88);
             this.pictureBoxDonate.TabIndex = 1;
             this.pictureBoxDonate.TabStop = false;
             this.pictureBoxDonate.Click += new System.EventHandler(this.pictureBoxDonate_Click);
@@ -450,7 +886,7 @@
             this.labelLength.Location = new System.Drawing.Point(34, 250);
             this.labelLength.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelLength.Name = "labelLength";
-            this.labelLength.Size = new System.Drawing.Size(118, 19);
+            this.labelLength.Size = new System.Drawing.Size(172, 27);
             this.labelLength.TabIndex = 7;
             this.labelLength.Text = "Längd (minuter):";
             // 
@@ -469,7 +905,7 @@
             0,
             0});
             this.numericUpDownDuration.Name = "numericUpDownDuration";
-            this.numericUpDownDuration.Size = new System.Drawing.Size(120, 23);
+            this.numericUpDownDuration.Size = new System.Drawing.Size(120, 31);
             this.numericUpDownDuration.TabIndex = 6;
             this.numericUpDownDuration.Value = new decimal(new int[] {
             60,
@@ -482,13 +918,13 @@
             this.dateTimePickerStart.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePickerStart.Location = new System.Drawing.Point(38, 201);
             this.dateTimePickerStart.Name = "dateTimePickerStart";
-            this.dateTimePickerStart.Size = new System.Drawing.Size(238, 23);
+            this.dateTimePickerStart.Size = new System.Drawing.Size(238, 31);
             this.dateTimePickerStart.TabIndex = 5;
             // 
             // radioBtnKunskap
             // 
             this.radioBtnKunskap.Depth = 0;
-            this.radioBtnKunskap.Font = new System.Drawing.Font("Roboto", 10F);
+            this.radioBtnKunskap.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.radioBtnKunskap.Location = new System.Drawing.Point(0, 0);
             this.radioBtnKunskap.Margin = new System.Windows.Forms.Padding(0);
             this.radioBtnKunskap.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -501,7 +937,7 @@
             // radioBtnSvt24
             // 
             this.radioBtnSvt24.Depth = 0;
-            this.radioBtnSvt24.Font = new System.Drawing.Font("Roboto", 10F);
+            this.radioBtnSvt24.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.radioBtnSvt24.Location = new System.Drawing.Point(0, 0);
             this.radioBtnSvt24.Margin = new System.Windows.Forms.Padding(0);
             this.radioBtnSvt24.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -514,7 +950,7 @@
             // radioBtnSvt2
             // 
             this.radioBtnSvt2.Depth = 0;
-            this.radioBtnSvt2.Font = new System.Drawing.Font("Roboto", 10F);
+            this.radioBtnSvt2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.radioBtnSvt2.Location = new System.Drawing.Point(0, 0);
             this.radioBtnSvt2.Margin = new System.Windows.Forms.Padding(0);
             this.radioBtnSvt2.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -527,7 +963,7 @@
             // radioBtnSvt1
             // 
             this.radioBtnSvt1.Depth = 0;
-            this.radioBtnSvt1.Font = new System.Drawing.Font("Roboto", 10F);
+            this.radioBtnSvt1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.radioBtnSvt1.Location = new System.Drawing.Point(0, 0);
             this.radioBtnSvt1.Margin = new System.Windows.Forms.Padding(0);
             this.radioBtnSvt1.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -547,7 +983,7 @@
             this.btnAddLive.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnAddLive.Name = "btnAddLive";
             this.btnAddLive.Primary = true;
-            this.btnAddLive.Size = new System.Drawing.Size(124, 36);
+            this.btnAddLive.Size = new System.Drawing.Size(177, 36);
             this.btnAddLive.TabIndex = 0;
             this.btnAddLive.Text = "Start Live Rec";
             this.btnAddLive.UseVisualStyleBackColor = true;
@@ -557,10 +993,11 @@
             this.materialTabSelector1.BaseTabControl = this.materialTabControl1;
             this.materialTabSelector1.Depth = 0;
             this.materialTabSelector1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.materialTabSelector1.Location = new System.Drawing.Point(-1, 63);
+            this.materialTabSelector1.Location = new System.Drawing.Point(-2, 97);
+            this.materialTabSelector1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.materialTabSelector1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialTabSelector1.Name = "materialTabSelector1";
-            this.materialTabSelector1.Size = new System.Drawing.Size(554, 56);
+            this.materialTabSelector1.Size = new System.Drawing.Size(954, 86);
             this.materialTabSelector1.TabIndex = 1;
             this.materialTabSelector1.Text = "materialTabSelector1";
             // 
@@ -568,10 +1005,11 @@
             // 
             this.materialDivider1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialDivider1.Depth = 0;
-            this.materialDivider1.Location = new System.Drawing.Point(0, 461);
+            this.materialDivider1.Location = new System.Drawing.Point(0, 709);
+            this.materialDivider1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialDivider1.Name = "materialDivider1";
-            this.materialDivider1.Size = new System.Drawing.Size(553, 1);
+            this.materialDivider1.Size = new System.Drawing.Size(830, 2);
             this.materialDivider1.TabIndex = 2;
             this.materialDivider1.Text = "materialDivider1";
             // 
@@ -581,22 +1019,13 @@
             this.lblStatus.Depth = 0;
             this.lblStatus.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblStatus.Location = new System.Drawing.Point(21, 473);
+            this.lblStatus.Location = new System.Drawing.Point(32, 728);
+            this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStatus.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(56, 19);
+            this.lblStatus.Size = new System.Drawing.Size(79, 27);
             this.lblStatus.TabIndex = 3;
             this.lblStatus.Text = "Status:";
-            // 
-            // pictureBoxLogo
-            // 
-            this.pictureBoxLogo.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBoxLogo.Image = global::RecTime.Properties.Resources.icon_small;
-            this.pictureBoxLogo.Location = new System.Drawing.Point(6, 25);
-            this.pictureBoxLogo.Name = "pictureBoxLogo";
-            this.pictureBoxLogo.Size = new System.Drawing.Size(34, 36);
-            this.pictureBoxLogo.TabIndex = 7;
-            this.pictureBoxLogo.TabStop = false;
             // 
             // timerChannels
             // 
@@ -604,151 +1033,29 @@
             this.timerChannels.Interval = 1000;
             this.timerChannels.Tick += new System.EventHandler(this.timerChannels_Tick);
             // 
-            // tabPage6
+            // pictureBoxLogo
             // 
-            this.tabPage6.Controls.Add(this.lblOffsetInfo);
-            this.tabPage6.Controls.Add(this.lblStop);
-            this.tabPage6.Controls.Add(this.lblSeconds2);
-            this.tabPage6.Controls.Add(this.numericLiveStopOffset);
-            this.tabPage6.Controls.Add(this.materialLabel2);
-            this.tabPage6.Controls.Add(this.lblStart);
-            this.tabPage6.Controls.Add(this.lblSeconds1);
-            this.tabPage6.Controls.Add(this.numericLiveStartOffset);
-            this.tabPage6.Location = new System.Drawing.Point(4, 22);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(516, 311);
-            this.tabPage6.TabIndex = 4;
-            this.tabPage6.Text = "Inställningar";
-            this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // numericLiveStartOffset
-            // 
-            this.numericLiveStartOffset.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericLiveStartOffset.Location = new System.Drawing.Point(56, 33);
-            this.numericLiveStartOffset.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericLiveStartOffset.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.numericLiveStartOffset.Name = "numericLiveStartOffset";
-            this.numericLiveStartOffset.Size = new System.Drawing.Size(87, 24);
-            this.numericLiveStartOffset.TabIndex = 0;
-            this.numericLiveStartOffset.ValueChanged += new System.EventHandler(this.numericLiveStartOffset_ValueChanged);
-            // 
-            // lblSeconds1
-            // 
-            this.lblSeconds1.AutoSize = true;
-            this.lblSeconds1.Depth = 0;
-            this.lblSeconds1.Font = new System.Drawing.Font("Roboto", 11F);
-            this.lblSeconds1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblSeconds1.Location = new System.Drawing.Point(149, 35);
-            this.lblSeconds1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblSeconds1.Name = "lblSeconds1";
-            this.lblSeconds1.Size = new System.Drawing.Size(70, 19);
-            this.lblSeconds1.TabIndex = 1;
-            this.lblSeconds1.Text = "sekunder";
-            // 
-            // lblStart
-            // 
-            this.lblStart.AutoSize = true;
-            this.lblStart.Depth = 0;
-            this.lblStart.Font = new System.Drawing.Font("Roboto", 11F);
-            this.lblStart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblStart.Location = new System.Drawing.Point(5, 35);
-            this.lblStart.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblStart.Name = "lblStart";
-            this.lblStart.Size = new System.Drawing.Size(45, 19);
-            this.lblStart.TabIndex = 2;
-            this.lblStart.Text = "Start:";
-            // 
-            // materialLabel2
-            // 
-            this.materialLabel2.AutoSize = true;
-            this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel2.Location = new System.Drawing.Point(5, 13);
-            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(186, 19);
-            this.materialLabel2.TabIndex = 3;
-            this.materialLabel2.Text = "Live kanaler förskjutningar\r\n";
-            // 
-            // lblStop
-            // 
-            this.lblStop.AutoSize = true;
-            this.lblStop.Depth = 0;
-            this.lblStop.Font = new System.Drawing.Font("Roboto", 11F);
-            this.lblStop.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblStop.Location = new System.Drawing.Point(5, 65);
-            this.lblStop.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblStop.Name = "lblStop";
-            this.lblStop.Size = new System.Drawing.Size(44, 19);
-            this.lblStop.TabIndex = 6;
-            this.lblStop.Text = "Stop:";
-            // 
-            // lblSeconds2
-            // 
-            this.lblSeconds2.AutoSize = true;
-            this.lblSeconds2.Depth = 0;
-            this.lblSeconds2.Font = new System.Drawing.Font("Roboto", 11F);
-            this.lblSeconds2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblSeconds2.Location = new System.Drawing.Point(149, 65);
-            this.lblSeconds2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblSeconds2.Name = "lblSeconds2";
-            this.lblSeconds2.Size = new System.Drawing.Size(70, 19);
-            this.lblSeconds2.TabIndex = 5;
-            this.lblSeconds2.Text = "sekunder";
-            // 
-            // numericLiveStopOffset
-            // 
-            this.numericLiveStopOffset.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericLiveStopOffset.Location = new System.Drawing.Point(56, 63);
-            this.numericLiveStopOffset.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericLiveStopOffset.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.numericLiveStopOffset.Name = "numericLiveStopOffset";
-            this.numericLiveStopOffset.Size = new System.Drawing.Size(87, 24);
-            this.numericLiveStopOffset.TabIndex = 4;
-            this.numericLiveStopOffset.ValueChanged += new System.EventHandler(this.numericLiveStopOffset_ValueChanged);
-            // 
-            // lblOffsetInfo
-            // 
-            this.lblOffsetInfo.Depth = 0;
-            this.lblOffsetInfo.Font = new System.Drawing.Font("Roboto", 11F);
-            this.lblOffsetInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblOffsetInfo.Location = new System.Drawing.Point(234, 13);
-            this.lblOffsetInfo.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblOffsetInfo.Name = "lblOffsetInfo";
-            this.lblOffsetInfo.Size = new System.Drawing.Size(279, 104);
-            this.lblOffsetInfo.TabIndex = 7;
-            this.lblOffsetInfo.Text = "Använd för att justera start o stop av inspelning då tablåtiderna ej är helt synk" +
-    "ade med Live-sändningarna.\r\nÄndringar påverkar kön men ej pågående nedladdningar" +
-    "!\r\n";
+            this.pictureBoxLogo.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBoxLogo.Image = global::RecTime.Properties.Resources.icon_small;
+            this.pictureBoxLogo.Location = new System.Drawing.Point(9, 38);
+            this.pictureBoxLogo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureBoxLogo.Name = "pictureBoxLogo";
+            this.pictureBoxLogo.Size = new System.Drawing.Size(51, 55);
+            this.pictureBoxLogo.TabIndex = 7;
+            this.pictureBoxLogo.TabStop = false;
             // 
             // RecTime
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(548, 501);
+            this.ClientSize = new System.Drawing.Size(920, 771);
             this.Controls.Add(this.pictureBoxLogo);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.materialDivider1);
             this.Controls.Add(this.materialTabSelector1);
             this.Controls.Add(this.materialTabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.Name = "RecTime";
             this.Sizable = false;
@@ -762,7 +1069,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSvt1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxKunskap)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSvt2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBarn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSvt24)).EndInit();
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage7.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericLiveStopOffset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericLiveStartOffset)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFFmpeg)).EndInit();
@@ -771,10 +1089,6 @@
             this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDuration)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
-            this.tabPage6.ResumeLayout(false);
-            this.tabPage6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericLiveStartOffset)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericLiveStopOffset)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -816,12 +1130,6 @@
         private System.Windows.Forms.Label labelFFmpeg;
         private System.Windows.Forms.PictureBox pictureBoxFFmpeg;
         private System.Windows.Forms.TabPage tabPage5;
-        private MaterialSkin.Controls.MaterialLabel lblChannel;
-        private System.Windows.Forms.Button btnSvt24;
-        private System.Windows.Forms.Button btnSvtKunskap;
-        private System.Windows.Forms.Button btnSvt2;
-        private System.Windows.Forms.Button btnSvt1;
-        private System.Windows.Forms.Button btnChannelSvtb;
         private System.Windows.Forms.Timer timerChannels;
         private System.Windows.Forms.TabPage tabPage6;
         private MaterialSkin.Controls.MaterialLabel lblOffsetInfo;
@@ -832,6 +1140,30 @@
         private MaterialSkin.Controls.MaterialLabel lblStart;
         private MaterialSkin.Controls.MaterialLabel lblSeconds1;
         private System.Windows.Forms.NumericUpDown numericLiveStartOffset;
+        private System.Windows.Forms.TabPage tabPage7;
+        private MaterialSkin.Controls.MaterialLabel lblChannel;
+        private System.Windows.Forms.Button btnSvt24;
+        private System.Windows.Forms.Button btnSvtKunskap;
+        private System.Windows.Forms.Button btnSvt2;
+        private System.Windows.Forms.Button btnSvt1;
+        private System.Windows.Forms.Button btnChannelSvtb;
+        private System.Windows.Forms.Button btnChannelRec1;
+        private System.Windows.Forms.PictureBox pictureBoxSvt1;
+        private System.Windows.Forms.PictureBox pictureBoxKunskap;
+        private System.Windows.Forms.PictureBox pictureBoxSvt2;
+        private System.Windows.Forms.PictureBox pictureBoxBarn;
+        private System.Windows.Forms.Button btnChannelClose1;
+        private System.Windows.Forms.PictureBox pictureBoxSvt24;
+        private MaterialSkin.Controls.MaterialLabel materialLabelLiveInfo;
+        private System.Windows.Forms.Button btnChannelCloseKunskap;
+        private System.Windows.Forms.Button btnChannelCloseBarn;
+        private System.Windows.Forms.Button btnChannelClose24;
+        private System.Windows.Forms.Button btnChannelClose2;
+        private System.Windows.Forms.Button btnChannelRecBarn;
+        private System.Windows.Forms.Button btnChannelRecKunskap;
+        private System.Windows.Forms.Button btnChannelRec24;
+        private System.Windows.Forms.Button btnChannelRec2;
+        private MaterialSkin.Controls.MaterialLabel materialLabel3;
     }
 }
 

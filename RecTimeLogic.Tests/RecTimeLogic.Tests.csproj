@@ -59,8 +59,10 @@
     <Compile Include="ChannelInfoFileTests.cs" />
     <Compile Include="ChannelInfoTests.cs" />
     <Compile Include="FfmpegInfoParserTests.cs" />
+    <Compile Include="LiveStreamManagerTests.cs" />
     <Compile Include="StreamManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tv4StreamManagerTests.cs" />
     <Compile Include="UrlHelperTests.cs" />
     <Compile Include="YouTubeStreamManagerTests.cs" />
   </ItemGroup>

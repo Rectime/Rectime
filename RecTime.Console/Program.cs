@@ -15,7 +15,7 @@ namespace RecTime.Console
 
             System.Console.Write("Url: ");
             string url = System.Console.ReadLine();
-            StreamManager manager = new StreamManager(url, new StreamDownloader());
+            StreamManager manager = new LiveStreamManager(SourceType.Svt1Live, new StreamDownloader());
 
             System.Console.WriteLine("Downloading Data & stream info...");
             manager.DownloadAndParseData();
