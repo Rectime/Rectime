@@ -1,8 +1,6 @@
-﻿using System;
-using System.Diagnostics;
-using MoreLinq;
+﻿using System.Diagnostics;
 using RecTimeLogic;
-using System.Threading;
+using System.Linq;
 
 namespace RecTime.Console
 {
@@ -20,7 +18,7 @@ namespace RecTime.Console
             System.Console.WriteLine("Downloading Data & stream info...");
             manager.DownloadAndParseData();
                 
-            var stream = manager.Streams.MaxBy(s => s.Bandwidth);
+            var stream = manager.Streams.OrderByDescending(s => s.Bandwidth).First();
             System.Console.WriteLine("Selected stream: " + stream.Bandwidth + "kbit/s " + stream.Resolution);
 
             var streamUrl = stream.Url;

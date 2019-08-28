@@ -4,8 +4,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Security;
 using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
@@ -42,8 +40,12 @@ namespace RecTime
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
 
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string path = (Directory.Exists(Properties.Settings.Default.DownloadPath)) ?
+                Properties.Settings.Default.DownloadPath : Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
             txtOutputLocation.Text = path;
+            Properties.Settings.Default.DownloadPath = path;
+            Properties.Settings.Default.Save();
 
             if (Properties.Settings.Default.UserId == Guid.Empty)
             {
@@ -145,6 +147,8 @@ namespace RecTime
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
                 txtOutputLocation.Text = folderBrowserDialog.SelectedPath;
+                Properties.Settings.Default.DownloadPath = txtOutputLocation.Text;
+                Properties.Settings.Default.Save();
             }
         }
 
@@ -426,8 +430,6 @@ namespace RecTime
             System.Diagnostics.Process.Start("https://ffmpeg.org");
         }
 
-        #endregion
-
         private void pictureBoxChannelPreview_Click(object sender, EventArgs e)
         {
             var preview = _channelPreviews.FirstOrDefault(c => c.Parent == sender);
@@ -484,5 +486,6 @@ namespace RecTime
             worker.ProgressChanged += Worker_ProgressChanged;
         }
 
+        #endregion
     }
 }
