@@ -99,7 +99,8 @@
             this.timerChannels = new System.Windows.Forms.Timer(this.components);
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.queueContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemRemove = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsCheckBoxVTTtoSRT = new MaterialSkin.Controls.MaterialCheckBox();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -611,10 +612,11 @@
             // columnHeaderStatus
             // 
             this.columnHeaderStatus.Text = "Status";
-            this.columnHeaderStatus.Width = 80;
+            this.columnHeaderStatus.Width = 120;
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.settingsCheckBoxVTTtoSRT);
             this.tabPage6.Controls.Add(this.lblOffsetInfo);
             this.tabPage6.Controls.Add(this.lblStop);
             this.tabPage6.Controls.Add(this.lblSeconds2);
@@ -878,7 +880,7 @@
             // radioBtnKunskap
             // 
             this.radioBtnKunskap.Depth = 0;
-            this.radioBtnKunskap.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.radioBtnKunskap.Font = new System.Drawing.Font("Roboto", 10F);
             this.radioBtnKunskap.Location = new System.Drawing.Point(0, 0);
             this.radioBtnKunskap.Margin = new System.Windows.Forms.Padding(0);
             this.radioBtnKunskap.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -891,7 +893,7 @@
             // radioBtnSvt24
             // 
             this.radioBtnSvt24.Depth = 0;
-            this.radioBtnSvt24.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.radioBtnSvt24.Font = new System.Drawing.Font("Roboto", 10F);
             this.radioBtnSvt24.Location = new System.Drawing.Point(0, 0);
             this.radioBtnSvt24.Margin = new System.Windows.Forms.Padding(0);
             this.radioBtnSvt24.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -904,7 +906,7 @@
             // radioBtnSvt2
             // 
             this.radioBtnSvt2.Depth = 0;
-            this.radioBtnSvt2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.radioBtnSvt2.Font = new System.Drawing.Font("Roboto", 10F);
             this.radioBtnSvt2.Location = new System.Drawing.Point(0, 0);
             this.radioBtnSvt2.Margin = new System.Windows.Forms.Padding(0);
             this.radioBtnSvt2.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -917,7 +919,7 @@
             // radioBtnSvt1
             // 
             this.radioBtnSvt1.Depth = 0;
-            this.radioBtnSvt1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.radioBtnSvt1.Font = new System.Drawing.Font("Roboto", 10F);
             this.radioBtnSvt1.Location = new System.Drawing.Point(0, 0);
             this.radioBtnSvt1.Margin = new System.Windows.Forms.Padding(0);
             this.radioBtnSvt1.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -997,15 +999,35 @@
             // queueContextMenuStrip
             // 
             this.queueContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
+            this.toolStripMenuItemRemove});
             this.queueContextMenuStrip.Name = "queueContextMenuStrip";
-            this.queueContextMenuStrip.Size = new System.Drawing.Size(181, 48);
+            this.queueContextMenuStrip.Size = new System.Drawing.Size(112, 26);
             // 
-            // toolStripMenuItem1
+            // toolStripMenuItemRemove
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem1.Text = "toolStripMenuItem1";
+            this.toolStripMenuItemRemove.Name = "toolStripMenuItemRemove";
+            this.toolStripMenuItemRemove.Size = new System.Drawing.Size(111, 22);
+            this.toolStripMenuItemRemove.Text = "Ta bort";
+            this.toolStripMenuItemRemove.Click += new System.EventHandler(this.ToolStripMenuItemRemove_Click);
+            // 
+            // settingsCheckBoxVTTtoSRT
+            // 
+            this.settingsCheckBoxVTTtoSRT.AutoSize = true;
+            this.settingsCheckBoxVTTtoSRT.BackColor = System.Drawing.Color.Transparent;
+            this.settingsCheckBoxVTTtoSRT.Depth = 0;
+            this.settingsCheckBoxVTTtoSRT.Font = new System.Drawing.Font("Roboto", 10F);
+            this.settingsCheckBoxVTTtoSRT.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.settingsCheckBoxVTTtoSRT.Location = new System.Drawing.Point(11, 110);
+            this.settingsCheckBoxVTTtoSRT.Margin = new System.Windows.Forms.Padding(0);
+            this.settingsCheckBoxVTTtoSRT.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.settingsCheckBoxVTTtoSRT.MouseState = MaterialSkin.MouseState.HOVER;
+            this.settingsCheckBoxVTTtoSRT.Name = "settingsCheckBoxVTTtoSRT";
+            this.settingsCheckBoxVTTtoSRT.Ripple = true;
+            this.settingsCheckBoxVTTtoSRT.Size = new System.Drawing.Size(145, 30);
+            this.settingsCheckBoxVTTtoSRT.TabIndex = 8;
+            this.settingsCheckBoxVTTtoSRT.Text = "VTT till SRT (subs)";
+            this.settingsCheckBoxVTTtoSRT.UseVisualStyleBackColor = false;
+            this.settingsCheckBoxVTTtoSRT.CheckedChanged += new System.EventHandler(this.SettingsCheckBoxVTTtoSRT_CheckedChanged);
             // 
             // RecTime
             // 
@@ -1128,7 +1150,8 @@
         private System.Windows.Forms.Button btnChannelRec2;
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private System.Windows.Forms.ContextMenuStrip queueContextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRemove;
+        private MaterialSkin.Controls.MaterialCheckBox settingsCheckBoxVTTtoSRT;
     }
 }
 

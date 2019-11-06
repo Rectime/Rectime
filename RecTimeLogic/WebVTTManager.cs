@@ -28,7 +28,7 @@ namespace RecTimeLogic
             streamDownloader = downloader;
         }
 
-        public void DownloadAndProcess()
+        public void DownloadAndProcess(bool forceSrt = false)
         {
             _output = string.Empty;
             _sequence = 0;
@@ -38,8 +38,15 @@ namespace RecTimeLogic
             if(_playList.StartsWith("https://svt"))
             {
                 var vttFile = _playList.Replace(".m3u8", ".vtt");
-                _output = streamDownloader.Download(vttFile);
-                IsVTT = true;
+                var vttData = streamDownloader.Download(vttFile);
+
+                IsVTT = !forceSrt;
+
+                if (forceSrt)
+                    ParseLines(vttData, 0, 2);
+                else
+                    _output = vttData;
+
                 return;
             }
 
@@ -75,14 +82,19 @@ namespace RecTimeLogic
             double secondsOffset = timeOffset / (double)mpeg2time;
             Debug.WriteLine("Seconds offset: " + secondsOffset);
 
-            var lines = segment.Split(new[] { Environment.NewLine, "\n" }, StringSplitOptions.None).Skip(3);
-            foreach(var line in lines)
+            ParseLines(segment, secondsOffset, 3);
+        }
+
+        private void ParseLines(string segment, double secondsOffset, int offset)
+        {
+            var lines = segment.Split(new[] { Environment.NewLine, "\n" }, StringSplitOptions.None).Skip(offset);
+            foreach (var line in lines)
             {
                 var parts = line.Split(_delimiters, StringSplitOptions.None);
                 if (parts.Length != 2)
                 {
                     // this is not a timecode line
-                    if(!string.IsNullOrEmpty(line.Trim()))
+                    if (!string.IsNullOrEmpty(line.Trim()))
                         _output += line + Environment.NewLine;
                 }
                 else

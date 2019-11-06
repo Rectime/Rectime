@@ -13,7 +13,7 @@ namespace RecTime
 
 
         public ChannelRecorderBackgroundWorker(SourceType type, ProgramInfo info, string outputDirectory) 
-            : base(null, outputDirectory, type + info.Filename)
+            : base(null, outputDirectory, type + info.Filename, false)
         {
             Info = info;
             Type = type;

@@ -70,5 +70,17 @@ namespace RecTime.Properties {
                 this["DownloadPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ConvertVTTtoSRT {
+            get {
+                return ((bool)(this["ConvertVTTtoSRT"]));
+            }
+            set {
+                this["ConvertVTTtoSRT"] = value;
+            }
+        }
     }
 }

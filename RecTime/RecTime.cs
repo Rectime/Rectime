@@ -191,11 +191,12 @@ namespace RecTime
                 }
 
                 var worker = new StreamBackgroundWorker(_streamButtons.First(b => b.Key.Checked).Value,
-                    txtOutputLocation.Text, txtFilename.Text);
+                    txtOutputLocation.Text, txtFilename.Text, Properties.Settings.Default.ConvertVTTtoSRT);
                 _workers.Add(worker);
 
                 //Define
-                var data = new []{_infoResult.Title, _infoResult.Type.ToString(), "0 %" };
+                var title = _infoResult.Title.Length > 50 ? _infoResult.Title.Substring(0, 50) + "..." : _infoResult.Title;
+                var data = new []{title, _infoResult.Type.ToString(), "0 %" };
                 var item = new ListViewItem(data) { Tag = worker };
                 listViewQueue.Items.Add(item);
                 
@@ -387,6 +388,7 @@ namespace RecTime
 
             numericLiveStartOffset.Value = Properties.Settings.Default.LiveStartOffset;
             numericLiveStopOffset.Value = Properties.Settings.Default.LiveStopOffset;
+            settingsCheckBoxVTTtoSRT.Checked = Properties.Settings.Default.ConvertVTTtoSRT;
         }
 
         #endregion
@@ -509,6 +511,40 @@ namespace RecTime
                     queueContextMenuStrip.Show(Cursor.Position);
                 }
             }
+        }
+
+        private void ToolStripMenuItemRemove_Click(object sender, EventArgs e)
+        {
+            var item = listViewQueue.FocusedItem;
+
+            if (item == null)
+                return;
+
+            var worker = item.Tag as StreamBackgroundWorker;
+            if (worker == null)
+                return;
+
+            if(!worker.IsBusy)
+            {
+                listViewQueue.Items.Remove(item);
+                _workers.Remove(worker);
+            }
+            else
+            {
+                if (MessageBox.Show(this, "Nedladdning pågår.\n\r\n\rVill du avsluta?", "Ej klar", MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning) == DialogResult.No)
+                    return;
+
+                listViewQueue.Items.Remove(item);
+                worker.CancelAsync();
+                _workers.Remove(worker);
+            }
+        }
+
+        private void SettingsCheckBoxVTTtoSRT_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ConvertVTTtoSRT = settingsCheckBoxVTTtoSRT.Checked;
+            Properties.Settings.Default.Save();
         }
     }
 }

@@ -22,12 +22,14 @@ namespace RecTime
         public bool HasRun { get; protected set; }
         public TimeSpan? TimeLimit { get; set; }
         public virtual bool IsChannelRecorder => false;
+        public bool ForceSrt { get; private set; }
 
-        public StreamBackgroundWorker(StreamInfo streamInfo, string outputDirectory, string outputFilename)
+        public StreamBackgroundWorker(StreamInfo streamInfo, string outputDirectory, string outputFilename, bool forceSrt)
         {
             string invalidChars = Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
             string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
 
+            ForceSrt = forceSrt;
             this.OutputFilename = Regex.Replace(outputFilename, invalidRegStr, "_");
             this._outputDirectory = outputDirectory;
             this.StreamInfo = streamInfo;
@@ -65,7 +67,7 @@ namespace RecTime
             {
                 ReportProgress(0, "Downloading subtitles");
                 var subtitleManager = new WebVTTManager(StreamInfo.SubtitleUrl, new StreamDownloader());
-                subtitleManager.DownloadAndProcess();
+                subtitleManager.DownloadAndProcess(ForceSrt);
                 var fileName = _outputDirectory + @"\";
                 fileName += (subtitleManager.IsVTT) ? OutputFilename.Replace(".mp4", ".vtt") : OutputFilename.Replace(".mp4", ".srt");
                 File.WriteAllText(fileName, subtitleManager.Output);
