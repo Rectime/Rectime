@@ -250,7 +250,17 @@ namespace RecTime
             }
             else
             {
-                lblStatus.Text = "Status: Could not find stream";
+                lblStatus.Text = "Status: Kunde ej hitta video stream";
+            }
+
+            if(e.Error != null)
+            {
+                switch(e.Error)
+                {
+                    case DrmProtectionException drm:
+                        lblStatus.Text = "Status: " + drm.Message;
+                        break;
+                }
             }
         }
 
@@ -280,15 +290,17 @@ namespace RecTime
                 if (TimeSpan.TryParse(infoData.Time, out timeNow) &&
                     TimeSpan.TryParse(worker.Duration, out timeDuration) && timeDuration.TotalSeconds > 0)
                 {
-                    string percentage = string.Format("{0:0.0 %}", (timeNow.TotalSeconds/timeDuration.TotalSeconds));
-                    lblStatus.Text = string.Format("Status: {0,6} {1} ({2}/{3})",percentage, infoData, workerInProgress, workerCount);
+                    string percentage = $"{(timeNow.TotalSeconds / timeDuration.TotalSeconds):0.0 %}";
+                    lblStatus.Text = $"Status: {percentage,6} {infoData} ({workerInProgress}/{workerCount})";
                     UpdateQueueStatus(worker, percentage);
                 }
                 else
-                    lblStatus.Text = string.Format("Status: {0} ({1}/{2})", infoData, workerInProgress, workerCount);
-
-
+                    lblStatus.Text = $"Status: {infoData} ({workerInProgress}/{workerCount})";
             }
+
+            var info = e.UserState as string;
+            if (!string.IsNullOrEmpty(info))
+                lblStatus.Text = $"Status: {info}";
         }
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -487,5 +499,16 @@ namespace RecTime
         }
 
         #endregion
+
+        private void ListViewQueue_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (listViewQueue.FocusedItem.Bounds.Contains(e.Location))
+                {
+                    queueContextMenuStrip.Show(Cursor.Position);
+                }
+            }
+        }
     }
 }

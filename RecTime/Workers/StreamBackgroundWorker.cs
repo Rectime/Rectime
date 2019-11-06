@@ -4,6 +4,7 @@ using RecTimeLogic;
 using System.Threading;
 using System;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace RecTime
 {
@@ -60,6 +61,15 @@ namespace RecTime
                     break;
             }
 
+            if (!string.IsNullOrEmpty(StreamInfo.SubtitleUrl))
+            {
+                ReportProgress(0, "Downloading subtitles");
+                var subtitleManager = new WebVTTManager(StreamInfo.SubtitleUrl, new StreamDownloader());
+                subtitleManager.DownloadAndProcess();
+                var fileName = _outputDirectory + @"\";
+                fileName += (subtitleManager.IsVTT) ? OutputFilename.Replace(".mp4", ".vtt") : OutputFilename.Replace(".mp4", ".srt");
+                File.WriteAllText(fileName, subtitleManager.Output);
+            }
             process.StartInfo.Arguments = args;
             process.ErrorDataReceived += ProcessErrorDataReceived;
             process.OutputDataReceived += ProcessOutputDataReceived;

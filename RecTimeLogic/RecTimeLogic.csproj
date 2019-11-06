@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="ChannelInfo.cs" />
     <Compile Include="ChannelInfoFile.cs" />
+    <Compile Include="DrmProtectionException.cs" />
     <Compile Include="FFmpegInfoParser.cs" />
     <Compile Include="GoogleAnalyticsTracker.cs" />
     <Compile Include="IStreamDownloader.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Tv4StreamManager.cs" />
     <Compile Include="UrlHelper.cs" />
     <Compile Include="UrStreamManager.cs" />
+    <Compile Include="WebVTTManager.cs" />
     <Compile Include="YouTubeStreamInfo.cs" />
     <Compile Include="YoutubeStreamManager.cs" />
   </ItemGroup>

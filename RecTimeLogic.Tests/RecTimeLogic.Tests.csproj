@@ -60,6 +60,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tv4StreamManagerTests.cs" />
     <Compile Include="UrlHelperTests.cs" />
+    <Compile Include="WebVTTManagerTests.cs" />
     <Compile Include="YouTubeStreamManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>

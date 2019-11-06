@@ -11,7 +11,7 @@ namespace RecTimeLogic.Tests
         [TestInitialize]
         public void Setup()
         {
-            _underTest = new Tv4StreamManager("https://www.tv4play.se/program/bagges-heml%C3%B6sa-hundar/11794320", new StreamDownloader());
+            _underTest = new Tv4StreamManager("https://www.tv4play.se/program/false-flag/12490263", new StreamDownloader());
         }
 
         [TestMethod]

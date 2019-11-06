@@ -23,6 +23,10 @@ namespace RecTimeLogic
                 masterUrl = $"https://playback-api.b17g.net/asset/{match.Groups[1]}?service=tv4&device=browser&drm=widevine&protocol=hls%2Cdash";
                 var data = streamDownloader.Download(masterUrl);
 
+                var drm = Regex.Match(data, @"""isDrmProtected"":(.+?),");
+                if (drm.Success && drm.Groups[1].Value.Trim() == "true")
+                    throw new DrmProtectionException("DRM skyddad video! Kan ej laddas ned tyvärr.");
+
                 var title = Regex.Match(data, @"""title"":""(.+?)""");
                 if (title.Success)
                     Title = title.Groups[1].Value;
@@ -53,19 +57,27 @@ namespace RecTimeLogic
                     var manifest = Regex.Match(data, @"""manifestUrl"":""(.+?)""");
                     if (manifest.Success)
                     {
-
-                        var stream = new StreamInfo()
+                        if (manifest.Groups[1].Value.EndsWith(".m3u8"))
                         {
-                            Url = manifest.Groups[1].Value,
-                            Bandwidth = bitrate,
-                            ApproxSize = (Duration * (bitrate / 1024) / 1024 / 8)
-                        };
+                            masterUrl = manifest.Groups[1].Value;
+                            Streams.Clear();
+                            ParseStreams(streamDownloader.Download(masterUrl));
+                        }
+                        else
+                        {
+                            var stream = new StreamInfo()
+                            {
+                                Url = manifest.Groups[1].Value,
+                                Bandwidth = bitrate,
+                                ApproxSize = (Duration * (bitrate / 1024) / 1024 / 8)
+                            };
 
-                        var type = Regex.Match(data, @"""type"":""(.+?)""");
-                        if (type.Success)
-                            stream.Resolution = type.Groups[1].Value;
+                            var type = Regex.Match(data, @"""type"":""(.+?)""");
+                            if (type.Success)
+                                stream.Resolution = type.Groups[1].Value;
 
-                        Streams.Add(stream);
+                            Streams.Add(stream);
+                        }
 
                     }
                 }

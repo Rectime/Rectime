@@ -10,6 +10,7 @@ namespace RecTimeLogic
     {
         public string Url { get; set; }
         public string AudioUrl { get; set; }
+        public string SubtitleUrl { get; set; }
         public string Resolution { get; set; }
         public int Bandwidth { get; set; }
         public string Codec { get; set; }

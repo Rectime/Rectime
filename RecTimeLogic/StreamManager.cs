@@ -115,15 +115,24 @@ namespace RecTimeLogic
             }
         }
 
-        private void ParseStreams(string data)
+        protected void ParseStreams(string data)
         {
             if (string.IsNullOrEmpty(data))
                 return;
 
+            //Subtitles?
+            string subtitleUrl = null;
+
+            var subtitlematch = Regex.Match(data, "#EXT-X-MEDIA:TYPE=SUBTITLES(.+)URI=\"(?<subtitle>[^\"]+)\"");
+            if (subtitlematch.Success)
+            {
+                subtitleUrl = subtitlematch.Groups["subtitle"].Value;
+            }
+
             //Separate audio?
             string audioUrl = null;
 
-            var audiomatch = Regex.Match(data, "#EXT-X-MEDIA:TYPE=AUDIO,URI=\"(?<audio>[^\"]+)\"");
+            var audiomatch = Regex.Match(data, "#EXT-X-MEDIA:TYPE=AUDIO(.+)URI=\"(?<audio>[^\"]+)\"");
             if (audiomatch.Success)
             {
                 audioUrl = audiomatch.Groups["audio"].Value;
@@ -159,8 +168,11 @@ namespace RecTimeLogic
                         Codec = matchLine1.Groups["codec"].Value,
                         ApproxSize = (Duration * (bandwidth / 1024) / 1024 / 8),
                         StreamType = (string.IsNullOrEmpty(audioUrl)) ? StreamType.VideoAndAudio : StreamType.VideoSeparateAudio,
-                        AudioUrl = (audioUrl != null && audioUrl.ToLower().StartsWith("http")) ? audioUrl : UrlHelper.GetBaseMasterUrl(masterUrl) + audioUrl
+                        AudioUrl = (audioUrl != null && audioUrl.ToLower().StartsWith("http")) ? audioUrl : UrlHelper.GetBaseMasterUrl(masterUrl) + audioUrl,
                     };
+                    if (subtitleUrl != null)
+                        info.SubtitleUrl = (subtitleUrl.ToLower().StartsWith("http")) ? subtitleUrl : UrlHelper.GetBaseMasterUrl(masterUrl) + subtitleUrl;
+
                     Streams.Add(info);
                 }
             }
