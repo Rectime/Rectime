@@ -14,6 +14,7 @@
         SvtBarnLive,
         SvtKunskapLive,
         YouTube,
-        Svt
+        Svt,
+        Vimeo
     }
 }

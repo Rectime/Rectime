@@ -69,6 +69,7 @@
             this.columnHeaderType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.settingsCheckBoxVTTtoSRT = new MaterialSkin.Controls.MaterialCheckBox();
             this.lblOffsetInfo = new MaterialSkin.Controls.MaterialLabel();
             this.lblStop = new MaterialSkin.Controls.MaterialLabel();
             this.lblSeconds2 = new MaterialSkin.Controls.MaterialLabel();
@@ -100,7 +101,7 @@
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.queueContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemRemove = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsCheckBoxVTTtoSRT = new MaterialSkin.Controls.MaterialCheckBox();
+            this.checkBoxSubs = new MaterialSkin.Controls.MaterialCheckBox();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -137,15 +138,17 @@
             this.materialTabControl1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialTabControl1.Name = "materialTabControl1";
             this.materialTabControl1.SelectedIndex = 0;
-            this.materialTabControl1.Size = new System.Drawing.Size(593, 337);
+            this.materialTabControl1.Size = new System.Drawing.Size(593, 370);
             this.materialTabControl1.TabIndex = 0;
             this.materialTabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.materialTabControl1_Selected);
             // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
+            this.tabPage1.Controls.Add(this.checkBoxSubs);
             this.tabPage1.Controls.Add(this.pictureBox);
             this.tabPage1.Controls.Add(this.btnStartDownload);
+            this.tabPage1.Controls.Add(this.materialDivider1);
             this.tabPage1.Controls.Add(this.txtFilename);
             this.tabPage1.Controls.Add(this.lblInfo);
             this.tabPage1.Controls.Add(this.txtOutputLocation);
@@ -153,7 +156,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(585, 311);
+            this.tabPage1.Size = new System.Drawing.Size(585, 344);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Lägg till";
             // 
@@ -172,7 +175,7 @@
             this.btnStartDownload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnStartDownload.Depth = 0;
             this.btnStartDownload.Icon = null;
-            this.btnStartDownload.Location = new System.Drawing.Point(350, 288);
+            this.btnStartDownload.Location = new System.Drawing.Point(346, 310);
             this.btnStartDownload.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnStartDownload.Name = "btnStartDownload";
             this.btnStartDownload.Primary = true;
@@ -632,6 +635,25 @@
             this.tabPage6.Text = "Inställningar";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // settingsCheckBoxVTTtoSRT
+            // 
+            this.settingsCheckBoxVTTtoSRT.AutoSize = true;
+            this.settingsCheckBoxVTTtoSRT.BackColor = System.Drawing.Color.Transparent;
+            this.settingsCheckBoxVTTtoSRT.Depth = 0;
+            this.settingsCheckBoxVTTtoSRT.Font = new System.Drawing.Font("Roboto", 10F);
+            this.settingsCheckBoxVTTtoSRT.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.settingsCheckBoxVTTtoSRT.Location = new System.Drawing.Point(11, 110);
+            this.settingsCheckBoxVTTtoSRT.Margin = new System.Windows.Forms.Padding(0);
+            this.settingsCheckBoxVTTtoSRT.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.settingsCheckBoxVTTtoSRT.MouseState = MaterialSkin.MouseState.HOVER;
+            this.settingsCheckBoxVTTtoSRT.Name = "settingsCheckBoxVTTtoSRT";
+            this.settingsCheckBoxVTTtoSRT.Ripple = true;
+            this.settingsCheckBoxVTTtoSRT.Size = new System.Drawing.Size(145, 30);
+            this.settingsCheckBoxVTTtoSRT.TabIndex = 8;
+            this.settingsCheckBoxVTTtoSRT.Text = "VTT till SRT (subs)";
+            this.settingsCheckBoxVTTtoSRT.UseVisualStyleBackColor = false;
+            this.settingsCheckBoxVTTtoSRT.CheckedChanged += new System.EventHandler(this.SettingsCheckBoxVTTtoSRT_CheckedChanged);
+            // 
             // lblOffsetInfo
             // 
             this.lblOffsetInfo.Depth = 0;
@@ -960,7 +982,7 @@
             // 
             this.materialDivider1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialDivider1.Depth = 0;
-            this.materialDivider1.Location = new System.Drawing.Point(0, 461);
+            this.materialDivider1.Location = new System.Drawing.Point(9, 355);
             this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialDivider1.Name = "materialDivider1";
             this.materialDivider1.Size = new System.Drawing.Size(553, 1);
@@ -973,7 +995,7 @@
             this.lblStatus.Depth = 0;
             this.lblStatus.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblStatus.Location = new System.Drawing.Point(21, 473);
+            this.lblStatus.Location = new System.Drawing.Point(21, 489);
             this.lblStatus.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(56, 19);
@@ -1010,33 +1032,31 @@
             this.toolStripMenuItemRemove.Text = "Ta bort";
             this.toolStripMenuItemRemove.Click += new System.EventHandler(this.ToolStripMenuItemRemove_Click);
             // 
-            // settingsCheckBoxVTTtoSRT
+            // checkBoxSubs
             // 
-            this.settingsCheckBoxVTTtoSRT.AutoSize = true;
-            this.settingsCheckBoxVTTtoSRT.BackColor = System.Drawing.Color.Transparent;
-            this.settingsCheckBoxVTTtoSRT.Depth = 0;
-            this.settingsCheckBoxVTTtoSRT.Font = new System.Drawing.Font("Roboto", 10F);
-            this.settingsCheckBoxVTTtoSRT.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.settingsCheckBoxVTTtoSRT.Location = new System.Drawing.Point(11, 110);
-            this.settingsCheckBoxVTTtoSRT.Margin = new System.Windows.Forms.Padding(0);
-            this.settingsCheckBoxVTTtoSRT.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.settingsCheckBoxVTTtoSRT.MouseState = MaterialSkin.MouseState.HOVER;
-            this.settingsCheckBoxVTTtoSRT.Name = "settingsCheckBoxVTTtoSRT";
-            this.settingsCheckBoxVTTtoSRT.Ripple = true;
-            this.settingsCheckBoxVTTtoSRT.Size = new System.Drawing.Size(145, 30);
-            this.settingsCheckBoxVTTtoSRT.TabIndex = 8;
-            this.settingsCheckBoxVTTtoSRT.Text = "VTT till SRT (subs)";
-            this.settingsCheckBoxVTTtoSRT.UseVisualStyleBackColor = false;
-            this.settingsCheckBoxVTTtoSRT.CheckedChanged += new System.EventHandler(this.SettingsCheckBoxVTTtoSRT_CheckedChanged);
+            this.checkBoxSubs.AutoSize = true;
+            this.checkBoxSubs.Checked = true;
+            this.checkBoxSubs.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxSubs.Depth = 0;
+            this.checkBoxSubs.Font = new System.Drawing.Font("Roboto", 10F);
+            this.checkBoxSubs.Location = new System.Drawing.Point(369, 266);
+            this.checkBoxSubs.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBoxSubs.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.checkBoxSubs.MouseState = MaterialSkin.MouseState.HOVER;
+            this.checkBoxSubs.Name = "checkBoxSubs";
+            this.checkBoxSubs.Ripple = true;
+            this.checkBoxSubs.Size = new System.Drawing.Size(147, 30);
+            this.checkBoxSubs.TabIndex = 7;
+            this.checkBoxSubs.Text = "Ladda ned textning";
+            this.checkBoxSubs.UseVisualStyleBackColor = true;
             // 
             // RecTime
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(613, 501);
+            this.ClientSize = new System.Drawing.Size(613, 517);
             this.Controls.Add(this.pictureBoxLogo);
             this.Controls.Add(this.lblStatus);
-            this.Controls.Add(this.materialDivider1);
             this.Controls.Add(this.materialTabSelector1);
             this.Controls.Add(this.materialTabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1152,6 +1172,7 @@
         private System.Windows.Forms.ContextMenuStrip queueContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRemove;
         private MaterialSkin.Controls.MaterialCheckBox settingsCheckBoxVTTtoSRT;
+        private MaterialSkin.Controls.MaterialCheckBox checkBoxSubs;
     }
 }
 

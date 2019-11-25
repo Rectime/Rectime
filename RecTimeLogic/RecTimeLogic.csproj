@@ -59,6 +59,7 @@
     <Compile Include="Tv4StreamManager.cs" />
     <Compile Include="UrlHelper.cs" />
     <Compile Include="UrStreamManager.cs" />
+    <Compile Include="VimeoStreamManager.cs" />
     <Compile Include="WebVTTManager.cs" />
     <Compile Include="YouTubeStreamInfo.cs" />
     <Compile Include="YoutubeStreamManager.cs" />
@@ -72,6 +73,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Bcl.Build">
       <Version>1.0.14</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

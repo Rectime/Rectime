@@ -37,6 +37,11 @@ namespace RecTimeLogic
                 type = SourceType.YouTube;
                 dataUrl = FindYoutubeDataUrl(url);
             }
+            else if(url.ToLower().Contains("vimeo.com") )
+            {
+                type = SourceType.Vimeo;
+                dataUrl = url;
+            }
 
             return new Tuple<SourceType, string>(type, dataUrl);
         }

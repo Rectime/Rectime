@@ -69,13 +69,15 @@ namespace RecTimeLogic
                     videoId = tryAgain.Groups[1].Value;
             }
 
-            var titleMatch = Regex.Match(data, @"<title data-react-helmet=""true"">(.+?)<");
+            var titleMatch = Regex.Match(data, @"<title( data-react-helmet=""true"")?>(.+?)<");
             if (titleMatch.Success)
             {
-                Title = titleMatch.Groups[1].Value;
+                Title = titleMatch.Groups[2].Value;
                 if (Title.Contains("|"))
                     Title = Title.Substring(0, Title.IndexOf('|') - 1);
             }
+            else
+                Title = "unknown";
 
             var imageMatch = Regex.Match(data, @"""thumbnailUrl"" content=""(.+?)""");
             if (imageMatch.Success)

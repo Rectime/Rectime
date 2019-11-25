@@ -190,8 +190,9 @@ namespace RecTime
                     return;
                 }
 
-                var worker = new StreamBackgroundWorker(_streamButtons.First(b => b.Key.Checked).Value,
-                    txtOutputLocation.Text, txtFilename.Text, Properties.Settings.Default.ConvertVTTtoSRT);
+                var info = _streamButtons.First(b => b.Key.Checked).Value;
+                info.SubtitleUrl = (checkBoxSubs.Checked) ? info.SubtitleUrl : null;
+                var worker = new StreamBackgroundWorker(info, txtOutputLocation.Text, txtFilename.Text, Properties.Settings.Default.ConvertVTTtoSRT);
                 _workers.Add(worker);
 
                 //Define
@@ -248,6 +249,7 @@ namespace RecTime
                 pictureBox.Image = _infoResult.PosterImage;
                 _streamButtons.Last().Key.Checked = true;
                 btnStartDownload.Visible = true;
+                lblStatus.Text = $"Status: Hittade {_streamButtons.Count} strömmar";
             }
             else
             {
