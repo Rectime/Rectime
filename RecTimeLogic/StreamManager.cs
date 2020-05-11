@@ -108,12 +108,23 @@ namespace RecTimeLogic
             if (durationMatch.Success)
                 Duration = int.Parse(durationMatch.Groups[1].Value);
 
+            //obsolete check ?
             var match = Regex.Match(data, "https:[^\\s:\"\\?]+master\\.m3u8");
             if (match.Success)
             {
                 masterUrl = match.Captures[0].Value;
                 Streams.Clear();
                 ParseStreams(streamDownloader.Download(masterUrl));
+            }
+            else
+            {
+                match = Regex.Match(data, "https:[^\\s:\"\\?]+full\\.m3u8");
+                if (match.Success)
+                {
+                    masterUrl = match.Captures[0].Value;
+                    Streams.Clear();
+                    ParseStreams(streamDownloader.Download(masterUrl));
+                }
             }
         }
 
