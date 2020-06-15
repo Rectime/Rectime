@@ -29,6 +29,11 @@ namespace RecTimeLogic
         {
             return Resolution + " " + Bandwidth/1000 + "kbit/s (" + ApproxSize + "MB) " + Extra;
         }
+
+        public StreamInfo ShallowCopy()
+        {
+            return (StreamInfo)this.MemberwiseClone();
+        }
     }
 
     public enum StreamType

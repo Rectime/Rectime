@@ -77,7 +77,7 @@ namespace RecTimeLogic
                 string line2 = lines[i + 1];
 
                 var matchLine1 = Regex.Match(line1, "AVERAGE-BANDWIDTH=(?<band>[0-9]+),RESOLUTION=(?<res>[0-9x]+),");
-                var matchLine2 = Regex.Match(line2, "^[^#](.+)m3u8");
+                var matchLine2 = Regex.Match(line2, @"^[^#][\.\.\/]*(\/\d+\/.*m3u8)");
 
                 if (matchLine1.Success && matchLine2.Success)
                 {

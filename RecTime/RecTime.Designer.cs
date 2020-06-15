@@ -32,8 +32,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RecTime));
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.checkBoxSubs = new MaterialSkin.Controls.MaterialCheckBox();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.btnStartDownload = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
             this.txtFilename = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.lblInfo = new MaterialSkin.Controls.MaterialLabel();
             this.txtOutputLocation = new MaterialSkin.Controls.MaterialSingleLineTextField();
@@ -95,13 +97,13 @@
             this.btnAddLive = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialTabSelector1 = new MaterialSkin.Controls.MaterialTabSelector();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
             this.lblStatus = new MaterialSkin.Controls.MaterialLabel();
             this.timerChannels = new System.Windows.Forms.Timer(this.components);
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.queueContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemRemove = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkBoxSubs = new MaterialSkin.Controls.MaterialCheckBox();
+            this.groupBoxStreams = new System.Windows.Forms.GroupBox();
+            this.panelStreams = new System.Windows.Forms.Panel();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -123,6 +125,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDuration)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.queueContextMenuStrip.SuspendLayout();
+            this.groupBoxStreams.SuspendLayout();
             this.SuspendLayout();
             // 
             // materialTabControl1
@@ -145,6 +148,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
+            this.tabPage1.Controls.Add(this.groupBoxStreams);
             this.tabPage1.Controls.Add(this.checkBoxSubs);
             this.tabPage1.Controls.Add(this.pictureBox);
             this.tabPage1.Controls.Add(this.btnStartDownload);
@@ -160,9 +164,27 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Lägg till";
             // 
+            // checkBoxSubs
+            // 
+            this.checkBoxSubs.AutoSize = true;
+            this.checkBoxSubs.Checked = true;
+            this.checkBoxSubs.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxSubs.Depth = 0;
+            this.checkBoxSubs.Font = new System.Drawing.Font("Roboto", 10F);
+            this.checkBoxSubs.Location = new System.Drawing.Point(419, 273);
+            this.checkBoxSubs.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBoxSubs.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.checkBoxSubs.MouseState = MaterialSkin.MouseState.HOVER;
+            this.checkBoxSubs.Name = "checkBoxSubs";
+            this.checkBoxSubs.Ripple = true;
+            this.checkBoxSubs.Size = new System.Drawing.Size(147, 30);
+            this.checkBoxSubs.TabIndex = 7;
+            this.checkBoxSubs.Text = "Ladda ned textning";
+            this.checkBoxSubs.UseVisualStyleBackColor = true;
+            // 
             // pictureBox
             // 
-            this.pictureBox.Location = new System.Drawing.Point(274, 115);
+            this.pictureBox.Location = new System.Drawing.Point(324, 122);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(242, 148);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -175,7 +197,7 @@
             this.btnStartDownload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnStartDownload.Depth = 0;
             this.btnStartDownload.Icon = null;
-            this.btnStartDownload.Location = new System.Drawing.Point(346, 310);
+            this.btnStartDownload.Location = new System.Drawing.Point(396, 310);
             this.btnStartDownload.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnStartDownload.Name = "btnStartDownload";
             this.btnStartDownload.Primary = true;
@@ -185,6 +207,17 @@
             this.btnStartDownload.UseVisualStyleBackColor = true;
             this.btnStartDownload.Visible = false;
             this.btnStartDownload.Click += new System.EventHandler(this.btnStartDownload_Click);
+            // 
+            // materialDivider1
+            // 
+            this.materialDivider1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialDivider1.Depth = 0;
+            this.materialDivider1.Location = new System.Drawing.Point(9, 355);
+            this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider1.Name = "materialDivider1";
+            this.materialDivider1.Size = new System.Drawing.Size(553, 1);
+            this.materialDivider1.TabIndex = 2;
+            this.materialDivider1.Text = "materialDivider1";
             // 
             // txtFilename
             // 
@@ -275,7 +308,7 @@
             this.tabPage5.Controls.Add(this.pictureBoxSvt24);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(585, 311);
+            this.tabPage5.Size = new System.Drawing.Size(585, 344);
             this.tabPage5.TabIndex = 3;
             this.tabPage5.Text = "Live";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -491,7 +524,7 @@
             this.tabPage7.Controls.Add(this.btnChannelSvtb);
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(585, 311);
+            this.tabPage7.Size = new System.Drawing.Size(585, 344);
             this.tabPage7.TabIndex = 5;
             this.tabPage7.Text = "Schemalägg";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -575,7 +608,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(585, 311);
+            this.tabPage2.Size = new System.Drawing.Size(585, 344);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Kö";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -630,7 +663,7 @@
             this.tabPage6.Controls.Add(this.numericLiveStartOffset);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(585, 311);
+            this.tabPage6.Size = new System.Drawing.Size(585, 344);
             this.tabPage6.TabIndex = 4;
             this.tabPage6.Text = "Inställningar";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -780,7 +813,7 @@
             this.tabPage3.Controls.Add(this.pictureBoxDonate);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(585, 311);
+            this.tabPage3.Size = new System.Drawing.Size(585, 344);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Om";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -978,17 +1011,6 @@
             this.materialTabSelector1.TabIndex = 1;
             this.materialTabSelector1.Text = "materialTabSelector1";
             // 
-            // materialDivider1
-            // 
-            this.materialDivider1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialDivider1.Depth = 0;
-            this.materialDivider1.Location = new System.Drawing.Point(9, 355);
-            this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialDivider1.Name = "materialDivider1";
-            this.materialDivider1.Size = new System.Drawing.Size(553, 1);
-            this.materialDivider1.TabIndex = 2;
-            this.materialDivider1.Text = "materialDivider1";
-            // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
@@ -1032,23 +1054,22 @@
             this.toolStripMenuItemRemove.Text = "Ta bort";
             this.toolStripMenuItemRemove.Click += new System.EventHandler(this.ToolStripMenuItemRemove_Click);
             // 
-            // checkBoxSubs
+            // groupBoxStreams
             // 
-            this.checkBoxSubs.AutoSize = true;
-            this.checkBoxSubs.Checked = true;
-            this.checkBoxSubs.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxSubs.Depth = 0;
-            this.checkBoxSubs.Font = new System.Drawing.Font("Roboto", 10F);
-            this.checkBoxSubs.Location = new System.Drawing.Point(369, 266);
-            this.checkBoxSubs.Margin = new System.Windows.Forms.Padding(0);
-            this.checkBoxSubs.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.checkBoxSubs.MouseState = MaterialSkin.MouseState.HOVER;
-            this.checkBoxSubs.Name = "checkBoxSubs";
-            this.checkBoxSubs.Ripple = true;
-            this.checkBoxSubs.Size = new System.Drawing.Size(147, 30);
-            this.checkBoxSubs.TabIndex = 7;
-            this.checkBoxSubs.Text = "Ladda ned textning";
-            this.checkBoxSubs.UseVisualStyleBackColor = true;
+            this.groupBoxStreams.Controls.Add(this.panelStreams);
+            this.groupBoxStreams.Location = new System.Drawing.Point(9, 115);
+            this.groupBoxStreams.Name = "groupBoxStreams";
+            this.groupBoxStreams.Size = new System.Drawing.Size(309, 223);
+            this.groupBoxStreams.TabIndex = 8;
+            this.groupBoxStreams.TabStop = false;
+            // 
+            // panelStreams
+            // 
+            this.panelStreams.AutoScroll = true;
+            this.panelStreams.Location = new System.Drawing.Point(0, 7);
+            this.panelStreams.Name = "panelStreams";
+            this.panelStreams.Size = new System.Drawing.Size(309, 216);
+            this.panelStreams.TabIndex = 0;
             // 
             // RecTime
             // 
@@ -1094,6 +1115,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDuration)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             this.queueContextMenuStrip.ResumeLayout(false);
+            this.groupBoxStreams.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1173,6 +1195,8 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRemove;
         private MaterialSkin.Controls.MaterialCheckBox settingsCheckBoxVTTtoSRT;
         private MaterialSkin.Controls.MaterialCheckBox checkBoxSubs;
+        private System.Windows.Forms.GroupBox groupBoxStreams;
+        private System.Windows.Forms.Panel panelStreams;
     }
 }
 

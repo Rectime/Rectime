@@ -12,8 +12,8 @@ namespace RecTime
     {
         protected StreamInfo StreamInfo;
         private readonly string _outputDirectory;
-        string argFormat = @" -i ""{0}"" {2} -acodec copy -vcodec copy -absf aac_adtstoasc ""{1}""";
-        string argFormatSeparateAudio = @" -i ""{0}"" -i ""{3}"" {2} -acodec copy -vcodec copy -absf aac_adtstoasc ""{1}""";
+        string argFormat = @" -i ""{0}"" {2} -c copy ""{1}""";
+        string argFormatSeparateAudio = @" -i ""{0}"" -i ""{3}"" {2} -c copy ""{1}""";
         string argFormatAudioOnly = @" -i ""{0}"" {2} ""{1}""";
 
         public string OutputFilename { get; private set; }

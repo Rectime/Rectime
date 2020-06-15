@@ -14,6 +14,7 @@ namespace RecTimeLogic
 
         public string Format { get; private set; }
         public string Quality { get; set; }
+
         public int FormatCode
         {
             get {  return _formatCode; }
@@ -39,6 +40,11 @@ namespace RecTimeLogic
                     case 135:
                     case 136:
                     case 137:
+                    case 299:
+                    case 398:
+                    case 399:
+                    case 400:
+                    case 401:
                         Format = "MP4";
                         FileEnding = ".mp4";
                         break;
@@ -59,8 +65,12 @@ namespace RecTimeLogic
                     case 244:
                     case 247:
                     case 248:
+                    case 302:
+                    case 303:
+                    case 313:
+                    case 315:
                         Format = "WebM";
-                        FileEnding = ".vp8";
+                        FileEnding = ".webm";
                         break;
                     //139 = MP4 Audio, 44.1kHz 48kbps
                     //140 = MP4 Audio, 44.1kHz 128kbps
@@ -76,6 +86,9 @@ namespace RecTimeLogic
                     //171 = WEBM Audio AAC, 44.1kHz 256kbps
                     case 170:
                     case 171:
+                    case 249:
+                    case 250:
+                    case 251:
                         Format = "WebM Audio";
                         FileEnding = ".aac";
                         StreamType = StreamType.AudioOnly;

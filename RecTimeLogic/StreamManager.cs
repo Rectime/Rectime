@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 
@@ -143,12 +145,26 @@ namespace RecTimeLogic
             }
 
             //Separate audio?
-            string audioUrl = null;
+            var audio = new Dictionary<string, Tuple<string, string>>();
 
-            var audiomatch = Regex.Match(data, "#EXT-X-MEDIA:TYPE=AUDIO(.+)URI=\"(?<audio>[^\"]+)\"");
-            if (audiomatch.Success)
+            //SvtPlay / Öppet Arkiv
+            var audiomatches = Regex.Matches(data, "#EXT-X-MEDIA:TYPE=AUDIO(.+)URI=\"(?<audio>[^\"]+)\"(.+)GROUP-ID=\"(?<id>[^\"]+)\"(.*)CHANNELS=\"(?<channels>[^\"]+)\"");
+            foreach(Match audiomatch in audiomatches)
             {
-                audioUrl = audiomatch.Groups["audio"].Value;
+                if(audiomatch.Success)
+                {
+                    audio.Add(audiomatch.Groups["id"].Value, new Tuple<string, string>(audiomatch.Groups["audio"].Value, audiomatch.Groups["channels"].Value));
+                }
+            }
+
+            //Tv4Play
+            if (audio.Count == 0)
+            {
+                var audiomatch2 = Regex.Match(data, "#EXT-X-MEDIA:TYPE=AUDIO(.+)URI=\"(?<audio>[^\"]+)\"");
+                if (audiomatch2.Success)
+                {
+                    audio.Add("default", new Tuple<string, string>(audiomatch2.Groups["audio"].Value, "2"));
+                }
             }
 
             var lines = new List<string>(data.Trim().Split('\n'));
@@ -180,15 +196,39 @@ namespace RecTimeLogic
                         Resolution = matchLine1.Groups["res"].Value,
                         Codec = matchLine1.Groups["codec"].Value,
                         ApproxSize = (Duration * (bandwidth / 1024) / 1024 / 8),
-                        StreamType = (string.IsNullOrEmpty(audioUrl)) ? StreamType.VideoAndAudio : StreamType.VideoSeparateAudio,
-                        AudioUrl = (audioUrl != null && audioUrl.ToLower().StartsWith("http")) ? audioUrl : UrlHelper.GetBaseMasterUrl(masterUrl) + audioUrl,
+                        StreamType = StreamType.VideoAndAudio
+                        //StreamType = (string.IsNullOrEmpty(audioUrl)) ? StreamType.VideoAndAudio : StreamType.VideoSeparateAudio,
+                        //AudioUrl = (audioUrl != null && audioUrl.ToLower().StartsWith("http")) ? audioUrl : UrlHelper.GetBaseMasterUrl(masterUrl) + audioUrl,
                     };
+
                     if (subtitleUrl != null)
                         info.SubtitleUrl = (subtitleUrl.ToLower().StartsWith("http")) ? subtitleUrl : UrlHelper.GetBaseMasterUrl(masterUrl) + subtitleUrl;
 
                     Streams.Add(info);
                 }
             }
+
+            // remove duplicates..
+            // add audio
+            var distinct = Streams.GroupBy(s => s.Url).Select(x => x.First()).ToList();
+
+            //Separate audio?
+            if (audio.Count > 0)
+            {
+                Streams.Clear();
+                foreach (var audioInfo in audio)
+                {
+                    foreach(var stream in distinct)
+                    {
+                        var copy = stream.ShallowCopy();
+                        copy.StreamType = StreamType.VideoSeparateAudio;
+                        copy.AudioUrl = (audioInfo.Value.Item1.ToLower().StartsWith("http")) ? audioInfo.Value.Item1 : UrlHelper.GetBaseMasterUrl(masterUrl) + audioInfo.Value.Item1;
+                        copy.Extra = audioInfo.Value.Item2 + "CH";
+                        Streams.Add(copy);
+                    }
+                }
+            }
+
         }
     }
 }

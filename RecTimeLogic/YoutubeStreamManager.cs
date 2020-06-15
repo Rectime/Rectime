@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -12,6 +14,7 @@ namespace RecTimeLogic
     public class YouTubeStreamManager : StreamManager
     {
         private const string VideoUrlsSeparator = ",";
+        private const string YouTubeInfoPageUrl = "https://www.youtube.com/get_video_info?&video_id={0}&el=embedded&ps=default&eurl={1}&hl=en";
 
         public YouTubeStreamManager(string url, IStreamDownloader streamDownloader) : base(url, streamDownloader)
         {
@@ -19,74 +22,48 @@ namespace RecTimeLogic
 
         public override void DownloadAndParseData()
         {
+            var id = HttpUtility.ParseQueryString(new Uri(DataUrl).Query)["v"];
+            var eurl = WebUtility.HtmlEncode($"https://youtube.googleapis.com/v/{id}");
+            DataUrl = string.Format(YouTubeInfoPageUrl, id, eurl);
+
             string info = streamDownloader.Download(DataUrl);
             var infoColletion = HttpUtility.ParseQueryString(info);
 
-            Title = infoColletion["title"];
-            if (string.IsNullOrEmpty(Title))
-                Title = HttpUtility.ParseQueryString(new Uri(BaseUrl).Query)["v"];
+            dynamic json = JObject.Parse(infoColletion["player_response"]);
+            Title = json.videoDetails.title;
 
-            Duration = string.IsNullOrEmpty(infoColletion["length_seconds"]) ? 0 : int.Parse(infoColletion["length_seconds"]);
-
-            var availableFormats = infoColletion["url_encoded_fmt_stream_map"];
-            if (availableFormats == string.Empty)
-                return; 
-
-            var formatList = new List<string>(Regex.Split(availableFormats, VideoUrlsSeparator));
-
-            //formatList.ForEach(format =>
-            //{
-            //    if (string.IsNullOrEmpty(format.Trim()))
-            //        return; 
-
-            //    var formatInfoCollection = HttpUtility.ParseQueryString(format);
-            //    var urlEncoded = formatInfoCollection["url"];
-            //    var itag = formatInfoCollection["itag"];
-            //    var quality = formatInfoCollection["quality"];
-            //    var signature = formatInfoCollection["sig"];
-            //    var fallbackHost = formatInfoCollection["fallback_host"];
-            //    var formatCode = int.Parse(itag);
-
-            //    urlEncoded = string.Format("{0}&fallback_host={1}&signature={2}", urlEncoded, fallbackHost, signature);
-            //    var url = new Uri(HttpUtility.UrlDecode(HttpUtility.UrlDecode(urlEncoded)));
-            //    Streams.Add(new YouTubeStreamInfo(url.ToString(), quality, formatCode));
-            //});
-
-            var hdFormats = infoColletion["adaptive_fmts"];
-            formatList = new List<string>(Regex.Split(hdFormats, VideoUrlsSeparator));
-            formatList.ForEach(format =>
+            foreach (dynamic d in json.streamingData.adaptiveFormats)
             {
-                if (string.IsNullOrEmpty(format.Trim()))
-                    return;
-
-                var formatInfoCollection = HttpUtility.ParseQueryString(format);
-                var urlEncoded = formatInfoCollection["url"];
-                var itag = formatInfoCollection["itag"];
-                var quality = formatInfoCollection["quality_label"];
-                var signature = formatInfoCollection["sig"];
-                var bitrate = formatInfoCollection["bitrate"];
-                var bandwidth = string.IsNullOrEmpty(bitrate) ? 0 : int.Parse(bitrate);
-                var fallbackHost = formatInfoCollection["fallback_host"];
-                var formatCode = int.Parse(itag);
-
-                urlEncoded = $"{urlEncoded}&fallback_host={fallbackHost}&signature={signature}";
-                var url = new Uri(HttpUtility.UrlDecode(HttpUtility.UrlDecode(urlEncoded)));
-                var stream = new YouTubeStreamInfo(url.ToString(), quality, formatCode)
+                var formatCode = int.Parse(d.itag.ToString());
+                var quality = d.quality.ToString();
+                var url = new Uri(HttpUtility.UrlDecode(HttpUtility.UrlDecode(d.url.ToString())));
+                var stream = new YouTubeStreamInfo(url.ToString(), quality, formatCode);
+                int duration = 0;
+                try
                 {
-                    Bandwidth = bandwidth,
-                    ApproxSize = (Duration * (bandwidth / 1024) / 1024 / 8)
-                };
+                    duration = int.Parse(d.approxDurationMs.ToString());
+                    Duration = duration;
+                }
+                catch { duration = Duration; }
+
+                var bitrate = int.Parse(d.bitrate.ToString());
+                stream.ApproxSize = (duration / 1000) * (bitrate / 1024) / 1024 / 8;
+                stream.Bandwidth = bitrate;
+                try
+                {
+                    stream.Extra = d.fps.ToString() + "fps";
+                }
+                catch { }
 
                 Streams.Add(stream);
-                Debug.WriteLine("Found stream id={0} quality={1}", stream.FormatCode, stream.Quality);
-            });
-
+            }
+            
             var bestMpaAudio = Streams.Cast<YouTubeStreamInfo>()
-                .Where(s => s.FormatCode >= 139 && s.FormatCode <= 141)
-                .OrderByDescending(s => s.FormatCode).FirstOrDefault();
+                .Where(s => s.Format == "MP4 Audio")
+                .OrderByDescending(s => s.Bandwidth).FirstOrDefault();
             var bestWebMAudio = Streams.Cast<YouTubeStreamInfo>()
-                .Where(s => s.FormatCode >= 170 && s.FormatCode <= 171)
-                .OrderByDescending(s => s.FormatCode).FirstOrDefault();
+                .Where(s => s.Format == "WebM Audio")
+                .OrderByDescending(s => s.Bandwidth).FirstOrDefault();
 
             //If we have separate audio streams then select the best for later muxing.
             //If not then hope there is audio in the stream..
@@ -111,14 +88,15 @@ namespace RecTimeLogic
 
             });
 
-            Streams.Reverse();
             Streams.RemoveAll(s => s.Resolution.Contains("Unknown"));
+            var ordered = Streams.OrderBy(s => s.Bandwidth).ToList();
+            Streams.Clear();
+            Streams.AddRange(ordered);
 
-            PosterUrl = infoColletion["thumbnail_url"];
+            PosterUrl = json.videoDetails.thumbnail.thumbnails[0].url;
             if (!string.IsNullOrEmpty(PosterUrl))
                 PosterImage = streamDownloader.DownloadImage(PosterUrl);
-
-
+            
         }
     }
 }

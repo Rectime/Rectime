@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Net;
 using System.Text.RegularExpressions;
 
 namespace RecTimeLogic
@@ -17,6 +18,9 @@ namespace RecTimeLogic
         public override void DownloadAndParseData()
         {
             //base.DownloadAndParseData();
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.ServerCertificateValidationCallback += (s, certificate, chain, sslPolicyErrors) => true;
 
             var html = streamDownloader.Download(BaseUrl);
 
@@ -41,14 +45,21 @@ namespace RecTimeLogic
             if (durationMatch.Success)
                 Duration = int.Parse(durationMatch.Groups[1].Value);
 
-            var streamHdMatch = Regex.Match(html, @"""file_http_hd"":""(.+?)""");
+            var streamHdMatch = Regex.Match(html, @"""file_http_hd"":""([^\""]+?)""");
             if (streamHdMatch.Success)
             {
                 var streamUrl = _urBaseurl + UnEscapeString(streamHdMatch.Groups[1].Value) + playlist;
                 ParseStreams(streamDownloader.Download(streamUrl), UnEscapeString(streamHdMatch.Groups[1].Value), "");
             }
 
-            var streamHdSubMatch = Regex.Match(html, @"""file_http_sub_hd"":""(.+?)""");
+            var streamMatch = Regex.Match(html, @"""file_http"":""([^\""]+?)""");
+            if (streamMatch.Success)
+            {
+                var streamUrl = _urBaseurl + UnEscapeString(streamMatch.Groups[1].Value) + playlist;
+                ParseStreams(streamDownloader.Download(streamUrl), UnEscapeString(streamMatch.Groups[1].Value), "");
+            }
+
+            var streamHdSubMatch = Regex.Match(html, @"""file_http_sub_hd"":""([^\""]+?)""");
             if (streamHdSubMatch.Success)
             {
                 var streamUrl = _urBaseurl + UnEscapeString(streamHdSubMatch.Groups[1].Value) + playlist;

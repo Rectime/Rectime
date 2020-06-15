@@ -160,7 +160,7 @@ namespace RecTime
             foreach (var kvp in _streamButtons)
             {
                 kvp.Key.CheckedChanged -= Radio_CheckedChanged;
-                tabPage1.Controls.Remove(kvp.Key);
+                panelStreams.Controls.Remove(kvp.Key);
             }
             _streamButtons.Clear();
             pictureBox.Image = null;
@@ -235,10 +235,10 @@ namespace RecTime
             {
                 var radio = new MaterialRadioButton();
                 radio.Text = streamInfo.ToString();
-                radio.Size = new Size(250, 18);
-                radio.Location = new Point(20, 122 + i * 20);
+                radio.Size = new Size(270, 18);
+                radio.Location = new Point(5, 5 + i * 20);
                 radio.CheckedChanged += Radio_CheckedChanged;
-                tabPage1.Controls.Add(radio);
+                panelStreams.Controls.Add(radio);
                 i++;
                 _streamButtons.Add(radio, streamInfo);
             }
