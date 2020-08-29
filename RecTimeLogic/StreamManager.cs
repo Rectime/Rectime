@@ -71,6 +71,15 @@ namespace RecTimeLogic
                     videoId = tryAgain.Groups[1].Value;
             }
 
+            //new Svtplay vide Id
+            if(string.IsNullOrEmpty(videoId))
+            {
+                var tryAgain = Regex.Match(data, @"""content"":{""id"":""(.+?)""");
+                if (tryAgain.Success)
+                    videoId = tryAgain.Groups[1].Value;
+            }
+
+
             var titleMatch = Regex.Match(data, @"<title( data-react-helmet=""true"")?>(.+?)<");
             if (titleMatch.Success)
             {
