@@ -74,7 +74,7 @@ namespace RecTimeLogic
             //new Svtplay vide Id
             if(string.IsNullOrEmpty(videoId))
             {
-                var tryAgain = Regex.Match(data, @"""content"":{""id"":""(.+?)""");
+                var tryAgain = Regex.Match(data, @"videoSvtId"":""([^""]{6,})");
                 if (tryAgain.Success)
                     videoId = tryAgain.Groups[1].Value;
             }
