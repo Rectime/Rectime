@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -74,9 +75,15 @@ namespace RecTimeLogic
             //new Svtplay vide Id
             if(string.IsNullOrEmpty(videoId))
             {
-                var tryAgain = Regex.Match(data, @"videoSvtId"":""([^""]{6,})");
+                var tryAgain = Regex.Match(data, @"__svtplay_apollo'\] = ({.*});");
                 if (tryAgain.Success)
-                    videoId = tryAgain.Groups[1].Value;
+                {
+                    dynamic json = JObject.Parse(tryAgain.Groups[1].Value);
+                    JObject root = json.ROOT_QUERY;
+                    var name = root.Properties().FirstOrDefault(p => p.Name.StartsWith("listablesBy"));
+                    var tmpId = root[name.Name][0]["id"].ToString();
+                    videoId = json[tmpId].videoSvtId;
+                }
             }
 
 
@@ -129,18 +136,30 @@ namespace RecTimeLogic
             }
             else
             {
-                match = Regex.Match(data, "https:[^\\s:\"\\?]+full\\.m3u8");
-                if (match.Success)
+                Streams.Clear();
+                dynamic json = JObject.Parse(data);
+                foreach(var item in json.videoReferences)
                 {
-                    masterUrl = match.Captures[0].Value;
-                    Streams.Clear();
-                    ParseStreams(streamDownloader.Download(masterUrl));
+                    if(item.format.ToString().StartsWith("hls"))
+                    {
+                        masterUrl = item.url.ToString();
+                        ParseStreams(streamDownloader.Download(item.url.ToString()));
+                    }
                 }
+                /*var matches = Regex.Matches(data, @"url"":\s+""(https:[^\s:\""\?]+full\.m3u8)");
+                foreach(Match m in matches)
+                {
+                    masterUrl = m.Captures[1].Value;
+                    ParseStreams(streamDownloader.Download(masterUrl));
+                }*/
             }
+            Streams = Streams.GroupBy(s => s.ToString()).Select(x => x.First()).ToList();
+            Streams = Streams.OrderBy(s => s.ApproxSize).ToList();
         }
 
         protected void ParseStreams(string data)
         {
+            List<StreamInfo> streams = new List<StreamInfo>();
             if (string.IsNullOrEmpty(data))
                 return;
 
@@ -213,18 +232,18 @@ namespace RecTimeLogic
                     if (subtitleUrl != null)
                         info.SubtitleUrl = (subtitleUrl.ToLower().StartsWith("http")) ? subtitleUrl : UrlHelper.GetBaseMasterUrl(masterUrl) + subtitleUrl;
 
-                    Streams.Add(info);
+                    streams.Add(info);
                 }
             }
 
             // remove duplicates..
             // add audio
-            var distinct = Streams.GroupBy(s => s.Url).Select(x => x.First()).ToList();
+            var distinct = streams.GroupBy(s => s.Url).Select(x => x.First()).ToList();
 
             //Separate audio?
             if (audio.Count > 0)
             {
-                Streams.Clear();
+                streams.Clear();
                 foreach (var audioInfo in audio)
                 {
                     foreach(var stream in distinct)
@@ -233,10 +252,12 @@ namespace RecTimeLogic
                         copy.StreamType = StreamType.VideoSeparateAudio;
                         copy.AudioUrl = (audioInfo.Value.Item1.ToLower().StartsWith("http")) ? audioInfo.Value.Item1 : UrlHelper.GetBaseMasterUrl(masterUrl) + audioInfo.Value.Item1;
                         copy.Extra = audioInfo.Value.Item2 + "CH";
-                        Streams.Add(copy);
+                        streams.Add(copy);
                     }
                 }
             }
+
+            Streams.AddRange(streams);
 
         }
     }

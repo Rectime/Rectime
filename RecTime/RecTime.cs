@@ -250,6 +250,7 @@ namespace RecTime
                 _streamButtons.Last().Key.Checked = true;
                 btnStartDownload.Visible = true;
                 lblStatus.Text = $"Status: Hittade {_streamButtons.Count} strömmar";
+                panelStreams.ScrollControlIntoView(_streamButtons.Last().Key);
             }
             else
             {
