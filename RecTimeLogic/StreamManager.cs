@@ -154,7 +154,7 @@ namespace RecTimeLogic
                 }*/
             }
             Streams = Streams.GroupBy(s => s.ToString()).Select(x => x.First()).ToList();
-            Streams = Streams.OrderBy(s => s.ApproxSize).ToList();
+            Streams = Streams.OrderBy(s => s.ApproxSize).ThenBy(s => s.Extra).ToList();
         }
 
         protected void ParseStreams(string data)
@@ -181,7 +181,8 @@ namespace RecTimeLogic
             {
                 if(audiomatch.Success)
                 {
-                    audio.Add(audiomatch.Groups["id"].Value, new Tuple<string, string>(audiomatch.Groups["audio"].Value, audiomatch.Groups["channels"].Value));
+                    if(!audio.ContainsKey(audiomatch.Groups["id"].Value))
+                        audio.Add(audiomatch.Groups["id"].Value, new Tuple<string, string>(audiomatch.Groups["audio"].Value, audiomatch.Groups["channels"].Value));
                 }
             }
 
