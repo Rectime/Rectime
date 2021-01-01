@@ -57,7 +57,7 @@ namespace RecTimeLogic
                     var manifest = Regex.Match(data, @"""manifestUrl"":""(.+?)""");
                     if (manifest.Success)
                     {
-                        if (manifest.Groups[1].Value.EndsWith(".m3u8"))
+                        if (manifest.Groups[1].Value.Contains(".m3u8"))
                         {
                             masterUrl = manifest.Groups[1].Value;
                             Streams.Clear();
