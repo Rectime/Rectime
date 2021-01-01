@@ -28,7 +28,7 @@ namespace RecTimeLogic
             }
             else if (url.ToLower().Contains("tv4play.se") || url.ToLower().Contains("tv4.se"))
                 type = SourceType.Tv4Play;
-            else if (url.ToLower().Contains("urplay.se"))
+            else if (url.ToLower().Contains("urplay.se") || url.ToLower().Contains("url.se"))
                 type = SourceType.UrPlay;
             else if (url.ToLower().Contains("urskola.se"))
                 type = SourceType.UrSkola;

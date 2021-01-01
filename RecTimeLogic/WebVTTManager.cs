@@ -35,9 +35,10 @@ namespace RecTimeLogic
             var playlist = streamDownloader.Download(_playList);
             MpegTs = 0;
 
-            if(_playList.StartsWith("https://svt"))
+            if(_playList.StartsWith("https://svt") || _playList.StartsWith("https://undertexter.ur")) 
             {
                 var vttFile = _playList.Replace(".m3u8", ".vtt");
+                vttFile = vttFile.Replace(".tt", ".vtt");
                 var vttData = streamDownloader.Download(vttFile);
 
                 IsVTT = !forceSrt;
