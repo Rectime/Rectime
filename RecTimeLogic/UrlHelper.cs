@@ -60,8 +60,16 @@ namespace RecTimeLogic
             {
                 ret = url.Substring(0, url.ToLower().IndexOf("/video/") + 7);
                 ret += match.Groups[1].Value + "?output=json";
+                return ret;
             }
             // url /klipp/ .. ?
+
+            match = Regex.Match(url, "klipp/([0-9]+)", RegexOptions.IgnoreCase);
+            if (match.Success)
+            {
+                ret = url.Substring(0, url.ToLower().IndexOf("/klipp/") + 7);
+                ret += match.Groups[1].Value + "?output=json";
+            }
 
             return ret;
         }
