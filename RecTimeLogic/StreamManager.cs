@@ -72,7 +72,7 @@ namespace RecTimeLogic
                     videoId = tryAgain.Groups[1].Value;
             }
 
-            //new Svtplay vide Id
+            //new Svtplay video Id
             if(string.IsNullOrEmpty(videoId))
             {
                 var tryAgain = Regex.Match(data, @"__svtplay_apollo'\] = ({.*});");
@@ -83,6 +83,31 @@ namespace RecTimeLogic
                     var name = root.Properties().FirstOrDefault(p => p.Name.StartsWith("listablesBy"));
                     var tmpId = root[name.Name][0]["id"].ToString();
                     videoId = json[tmpId].videoSvtId;
+                }
+                else
+                {
+                    var newFix = Regex.Match(data, @"<script id=""__NEXT_DATA__"" type=""application/json"">({.+})</script>");
+                    if(newFix.Success)
+                    {
+                        var json = JObject.Parse(newFix.Groups[1].Value);
+                        foreach (var subData in json["props"]["urqlState"])
+                        {
+                            var subJson = JObject.Parse(subData.Children()["data"].First().Value<string>());
+                            JToken token = subJson.SelectToken("listablesByEscenicId[0].videoSvtId", errorWhenNoMatch: false);
+                            if(token != null)
+                            {
+                                videoId = token.ToString();
+                                break;
+                            }
+                            //try
+                            //{
+                                //videoId = subJson["listablesByEscenicId"][0]["videoSvtId"].ToString();
+                            //    break;
+                            //}
+                            //catch { }
+                        }
+
+                    }
                 }
             }
 
