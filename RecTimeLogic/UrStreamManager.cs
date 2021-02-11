@@ -29,30 +29,37 @@ namespace RecTimeLogic
             var html = streamDownloader.Download(BaseUrl);
 
             var jsonAttr = Regex.Match(html, @"/Player/Player"" data-react-props=""([^\""]+)""");
+
+            // try again
+            if(!jsonAttr.Success)
+            {
+                jsonAttr = Regex.Match(html, @"/ProgramContainer"" data-react-props=""([^\""]+)""");
+            }
+
             if(jsonAttr.Success)
             {
                 var jsonText = WebUtility.HtmlDecode(jsonAttr.Groups[1].Value);
                 dynamic json = JObject.Parse(jsonText);
 
                 // Title
-                Title = json.currentProduct.title;
-                var episode = json.currentProduct["episodeNumber"];
-                Title = (episode == null) ? Title : Title + " - avsnitt " + episode;
+                Title = json.program.mainTitle;
+                var episode = json.program.title;
+                Title = (episode == null) ? Title : Title + " - " + episode;
 
                 //Image
                 try
                 {
-                    PosterUrl = json.currentProduct.image["1280x720"];
+                    PosterUrl = json.program.image["1280x720"];
                     PosterImage = streamDownloader.DownloadImage(PosterUrl);
                 }
                 catch { }
 
                 //Duration
-                try { Duration = int.Parse(json.currentProduct.duration.ToString()); } catch { }
+                try { Duration = int.Parse(json.program.duration.ToString()); } catch { }
 
                 try
                 {
-                    var location = json.currentProduct.streamingInfo.raw.sd.location.ToString();
+                    var location = json.program.streamingInfo.raw.sd.location.ToString();
                     var streamUrl = _urBaseurl + location + "playlist.m3u8";
                     ParseStreams(streamDownloader.Download(streamUrl), location, "");
                 }
@@ -60,7 +67,7 @@ namespace RecTimeLogic
 
                 try
                 {
-                    var location = json.currentProduct.streamingInfo.raw.hd.location.ToString();
+                    var location = json.program.streamingInfo.raw.hd.location.ToString();
                     var streamUrl = _urBaseurl + location + "playlist.m3u8";
                     ParseStreams(streamDownloader.Download(streamUrl), location, "");
                 }
@@ -70,8 +77,8 @@ namespace RecTimeLogic
                 //subtitle?
                 var subtitle = string.Empty;
 
-                try { subtitle = json.currentProduct.streamingInfo.raw.tt.location.ToString(); } catch { }
-                try { subtitle = json.currentProduct.streamingInfo.sweComplete.tt.location.ToString(); } catch { }
+                try { subtitle = json.program.streamingInfo.raw.tt.location.ToString(); } catch { }
+                try { subtitle = json.program.streamingInfo.sweComplete.tt.location.ToString(); } catch { }
 
                 if (!string.IsNullOrEmpty(subtitle))
                     foreach (var s in Streams)
