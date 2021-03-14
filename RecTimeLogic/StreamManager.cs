@@ -93,7 +93,24 @@ namespace RecTimeLogic
                         foreach (var subData in json["props"]["urqlState"])
                         {
                             var subJson = JObject.Parse(subData.Children()["data"].First().Value<string>());
+
+                            //image?
+                            JToken img1 = subJson.SelectToken("detailsPage.images.wide.changed", errorWhenNoMatch: false);
+                            JToken img2 = subJson.SelectToken("detailsPage.images.wide.id", errorWhenNoMatch: false);
+                            if (img1 != null && img2 != null)
+                            {
+                                PosterUrl = $"https://www.svtstatic.se/image/large/600/{img2}/{img1}?format=auto&chromaSubSampling=false";
+                                PosterImage = streamDownloader.DownloadImage(PosterUrl);
+                            }
+
                             JToken token = subJson.SelectToken("listablesByEscenicId[0].videoSvtId", errorWhenNoMatch: false);
+                            if(token != null)
+                            {
+                                videoId = token.ToString();
+                                break;
+                            }
+
+                            token = subJson.SelectToken("detailsPage.video.svtId", errorWhenNoMatch: false);
                             if(token != null)
                             {
                                 videoId = token.ToString();
