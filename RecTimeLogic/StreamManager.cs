@@ -92,7 +92,17 @@ namespace RecTimeLogic
                         var json = JObject.Parse(newFix.Groups[1].Value);
                         foreach (var subData in json["props"]["urqlState"])
                         {
-                            var subJson = JObject.Parse(subData.Children()["data"].First().Value<string>());
+                            var tmp = subData.ToString();
+                            JObject subJson;
+
+                            try
+                            {
+                                subJson = JObject.Parse(subData.Children()["data"].First().Value<string>());
+                            }
+                            catch
+                            {
+                                continue;
+                            }
 
                             //image?
                             JToken img1 = subJson.SelectToken("detailsPage.images.wide.changed", errorWhenNoMatch: false);
