@@ -105,8 +105,8 @@ namespace RecTimeLogic
                             }
 
                             //image?
-                            JToken img1 = subJson.SelectToken("detailsPage.images.wide.changed", errorWhenNoMatch: false);
-                            JToken img2 = subJson.SelectToken("detailsPage.images.wide.id", errorWhenNoMatch: false);
+                            JToken img1 = subJson.SelectToken("detailsPageByPath.images.wide.changed", errorWhenNoMatch: false);
+                            JToken img2 = subJson.SelectToken("detailsPageByPath.images.wide.id", errorWhenNoMatch: false);
                             if (img1 != null && img2 != null)
                             {
                                 PosterUrl = $"https://www.svtstatic.se/image/large/600/{img2}/{img1}?format=auto&chromaSubSampling=false";
@@ -120,7 +120,7 @@ namespace RecTimeLogic
                                 break;
                             }
 
-                            token = subJson.SelectToken("detailsPage.video.svtId", errorWhenNoMatch: false);
+                            token = subJson.SelectToken("detailsPageByPath.video.svtId", errorWhenNoMatch: false);
                             if(token != null)
                             {
                                 videoId = token.ToString();
