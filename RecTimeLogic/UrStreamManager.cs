@@ -28,13 +28,7 @@ namespace RecTimeLogic
 
             var html = streamDownloader.Download(BaseUrl);
 
-            var jsonAttr = Regex.Match(html, @"/Player/Player"" data-react-props=""([^\""]+)""");
-
-            // try again
-            if(!jsonAttr.Success)
-            {
-                jsonAttr = Regex.Match(html, @"/ProgramContainer"" data-react-props=""([^\""]+)""");
-            }
+            var jsonAttr = Regex.Match(html, @"__NEXT_DATA__"" type=""application\/json"">(.+)<\/script>");
 
             if(jsonAttr.Success)
             {
@@ -42,24 +36,29 @@ namespace RecTimeLogic
                 dynamic json = JObject.Parse(jsonText);
 
                 // Title
-                Title = json.program.mainTitle;
-                var episode = json.program.title;
-                Title = (episode == null) ? Title : Title + " - " + episode;
+                Title = json.props.pageProps.program.mainTitle;
+                var episode = json.props.pageProps.program.title;
+                var episodeNr = json.props.pageProps.program.episodeNumber;
+                Title = (episode == null) ? Title : (episodeNr == null) ? $"{Title} - { episode}" : $"{Title} - {episodeNr} - {episode}";
 
                 //Image
                 try
                 {
-                    PosterUrl = json.program.image["1280x720"];
+                    PosterUrl = json.props.pageProps.program.image["1280x720"];
                     PosterImage = streamDownloader.DownloadImage(PosterUrl);
                 }
                 catch { }
 
                 //Duration
-                try { Duration = int.Parse(json.program.duration.ToString()); } catch { }
+                try { Duration = int.Parse(json.props.pageProps.program.duration.ToString()); } catch { }
+
+                var redirect = streamDownloader.Download("https://streaming-loadbalancer.ur.se/loadbalancer.json");
+                dynamic jsonRedirect = JObject.Parse(redirect);
+                _urBaseurl = $"https://{jsonRedirect.redirect}/";
 
                 try
                 {
-                    var location = json.program.streamingInfo.raw.sd.location.ToString();
+                    var location = json.props.pageProps.program.streamingInfo.raw.sd.location.ToString();
                     var streamUrl = _urBaseurl + location + "playlist.m3u8";
                     ParseStreams(streamDownloader.Download(streamUrl), location, "");
                 }
@@ -67,7 +66,7 @@ namespace RecTimeLogic
 
                 try
                 {
-                    var location = json.program.streamingInfo.raw.hd.location.ToString();
+                    var location = json.props.pageProps.program.streamingInfo.raw.hd.location.ToString();
                     var streamUrl = _urBaseurl + location + "playlist.m3u8";
                     ParseStreams(streamDownloader.Download(streamUrl), location, "");
                 }
@@ -77,8 +76,8 @@ namespace RecTimeLogic
                 //subtitle?
                 var subtitle = string.Empty;
 
-                try { subtitle = json.program.streamingInfo.raw.tt.location.ToString(); } catch { }
-                try { subtitle = json.program.streamingInfo.sweComplete.tt.location.ToString(); } catch { }
+                try { subtitle = json.props.pageProps.program.streamingInfo.raw.tt.location.ToString(); } catch { }
+                try { subtitle = json.props.pageProps.program.streamingInfo.sweComplete.tt.location.ToString(); } catch { }
 
                 if (!string.IsNullOrEmpty(subtitle))
                     foreach (var s in Streams)

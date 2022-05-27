@@ -1,3 +1,11 @@
+﻿; -- CodeDependencies.iss --
+;
+; This script shows how to download and install any dependency such as .NET,
+; Visual C++ or SQL Server during your application's installation process.
+;
+; contribute: https://github.com/DomGries/InnoDependencyInstaller
+
+
 ; -----------
 ; SHARED CODE
 ; -----------
@@ -587,48 +595,88 @@ begin
   end;
 end;
 
+
 [Setup]
+; -------------
+; EXAMPLE SETUP
+; -------------
 #ifndef Dependency_NoExampleSetup
+
+; comment out dependency defines to disable installing them
+#define UseDotNet35
+#define UseDotNet40
+#define UseDotNet45
+#define UseDotNet46
+#define UseDotNet47
 #define UseDotNet48
 
-#define MyAppName "RecTime"
-#define MyAppVersion "1.4.18.0"
-#define MyAppVerName "RecTime v1.4.18.0"
-#define MyCompany "rectime.se"
-#define MyAppURL "http://rectime.se"
-#define MyAppLocation "..\RecTime"
-#define MyAppExeName "RecTime.exe"
+; requires netcorecheck.exe and netcorecheck_x64.exe (see download link below)
+#define UseNetCoreCheck
+#ifdef UseNetCoreCheck
+  #define UseNetCore31
+  #define UseNetCore31Asp
+  #define UseNetCore31Desktop
+  #define UseDotNet50
+  #define UseDotNet50Asp
+  #define UseDotNet50Desktop
+  #define UseDotNet60
+  #define UseDotNet60Asp
+  #define UseDotNet60Desktop
+#endif
 
-AppName={#MyAppName}
-AppVerName={#MyAppVerName}
-AppPublisher={#MyCompany}
+#define UseVC2005
+#define UseVC2008
+#define UseVC2010
+#define UseVC2012
+#define UseVC2013
+#define UseVC2015To2022
+
+; requires dxwebsetup.exe (see download link below)
+;#define UseDirectX
+
+#define UseSql2008Express
+#define UseSql2012Express
+#define UseSql2014Express
+#define UseSql2016Express
+#define UseSql2017Express
+#define UseSql2019Express
+
+#define UseWebView2
+
+#define MyAppSetupName 'MyProgram'
+#define MyAppVersion '1.0'
+#define MyAppPublisher 'Inno Setup'
+#define MyAppCopyright 'Copyright © Inno Setup'
+#define MyAppURL 'https://jrsoftware.org/isinfo.php'
+
+AppName={#MyAppSetupName}
+AppVersion={#MyAppVersion}
+AppVerName={#MyAppSetupName} {#MyAppVersion}
+AppCopyright={#MyAppCopyright}
+VersionInfoVersion={#MyAppVersion}
+VersionInfoCompany={#MyAppPublisher}
+AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName={pf}\{#MyAppName}
-DefaultGroupName={#MyAppName}
-DisableProgramGroupPage=yes
-OutputBaseFilename=RecTime-{#MyAppVersion}WinSetup
-VersionInfoVersion={#MyAppVersion}
-AppVersion={#MyAppVersion}
-Compression=lzma
-SolidCompression=yes
-SetupIconFile =..\gfx\icon.ico
-UninstallDisplayIcon={app}\{#MyAppExeName}
+OutputBaseFilename={#MyAppSetupName}-{#MyAppVersion}
+DefaultGroupName={#MyAppSetupName}
+DefaultDirName={autopf}\{#MyAppSetupName}
+UninstallDisplayIcon={app}\MyProgram.exe
+SourceDir=src
+OutputDir={#SourcePath}\bin
+AllowNoIcons=yes
+PrivilegesRequired=admin
+
+; remove next line if you only deploy 32-bit binaries and dependencies
+ArchitecturesInstallIn64BitMode=x64
 
 [Languages]
-Name: english; MessagesFile: compiler:Default.isl
-
-[Tasks]
-Name: desktopicon; Description: {cm:CreateDesktopIcon}; GroupDescription: {cm:AdditionalIcons}; Flags: unchecked
+Name: en; MessagesFile: "compiler:Default.isl"
+Name: nl; MessagesFile: "compiler:Languages\Dutch.isl"
+Name: de; MessagesFile: "compiler:Languages\German.isl"
 
 [Files]
-Source: {#MyAppLocation}\bin\Release\{#MyAppExeName}; DestDir: {app}; Flags: ignoreversion
-Source: {#MyAppLocation}\bin\Release\{#MyAppExeName}.config; DestDir: {app}; Flags: ignoreversion
-Source: {#MyAppLocation}\bin\Release\ffmpeg.exe; DestDir: {app}; Flags: ignoreversion
-Source: {#MyAppLocation}\bin\Release\ffplay.exe; DestDir: {app}; Flags: ignoreversion
-Source: {#MyAppLocation}\bin\Release\*.dll; DestDir: {app}; Flags: ignoreversion
-
 #ifdef UseNetCoreCheck
 ; download netcorecheck.exe: https://go.microsoft.com/fwlink/?linkid=2135256
 ; download netcorecheck_x64.exe: https://go.microsoft.com/fwlink/?linkid=2135504
@@ -640,14 +688,19 @@ Source: "netcorecheck_x64.exe"; Flags: dontcopy noencryption
 Source: "dxwebsetup.exe"; Flags: dontcopy noencryption
 #endif
 
+Source: "MyProg-x64.exe"; DestDir: "{app}"; DestName: "MyProg.exe"; Check: Dependency_IsX64; Flags: ignoreversion
+Source: "MyProg.exe"; DestDir: "{app}"; Check: not Dependency_IsX64; Flags: ignoreversion
 
 [Icons]
-Name: {group}\{#MyAppName}; Filename: {app}\{#MyAppExeName}
-Name: {group}\{cm:UninstallProgram,{#MyAppName}}; Filename: {uninstallexe}
-Name: {commondesktop}\{#MyAppName}; Filename: {app}\{#MyAppExeName}; Tasks: desktopicon
+Name: "{group}\{#MyAppSetupName}"; Filename: "{app}\MyProg.exe"
+Name: "{group}\{cm:UninstallProgram,{#MyAppSetupName}}"; Filename: "{uninstallexe}"
+Name: "{commondesktop}\{#MyAppSetupName}"; Filename: "{app}\MyProg.exe"; Tasks: desktopicon
+
+[Tasks]
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"
 
 [Run]
-Filename: {app}\{#MyAppExeName}; Description: {cm:LaunchProgram,{#MyAppName}}; Flags: nowait postinstall skipifsilent
+Filename: "{app}\MyProg.exe"; Description: "{cm:LaunchProgram,{#MyAppSetupName}}"; Flags: nowait postinstall skipifsilent
 
 [Code]
 function InitializeSetup: Boolean;

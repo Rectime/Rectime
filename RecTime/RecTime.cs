@@ -30,6 +30,7 @@ namespace RecTime
         public RecTime()
         {
             InitializeComponent();
+            materialTabControl1.TabPages.Remove(tabPage7);
             Application.EnableVisualStyles();
             this.DoubleBuffered = true;
 

@@ -49,21 +49,23 @@ namespace RecTimeLogic
                 return;
            
             var pattern =
-                @"#EXT-X-STREAM-INF:BANDWIDTH=([0-9]+),CODECS=""(.+?)"",RESOLUTION=([0-9x]+)(,AUDIO=""audio"")?[\r\n]+(.+?)[\r\n]";
+                @"#EXT-X-STREAM-INF:(.+?)[\r\n]+(.+?)[\r\n]";
             var matches = Regex.Matches(data, pattern);
 
             foreach (Match match in matches)
             {
                 if (match.Success)
                 {
-                    var bandwidth = int.Parse(match.Groups[1].Value);
+                    var meta = match.Groups[1].Value;
                     var info = new StreamInfo()
                     {
-                        Url = UrlHelper.GetBaseMasterUrl(masterUrl) + match.Groups[match.Groups.Count -1 ].Value,
-                        Bandwidth = bandwidth,
-                        Resolution = match.Groups[3].Value,
-                        ApproxSize = (Duration * (bandwidth / 1024) / 1024 / 8)
+                        Url = UrlHelper.GetBaseMasterUrl(masterUrl) + match.Groups[match.Groups.Count -1 ].Value
                     };
+
+                    //Bandwidth = bandwidth,
+                    //Resolution = match.Groups[3].Value,
+                    //ApproxSize = (Duration * (bandwidth / 1024) / 1024 / 8)
+
                     Streams.Add(info);
                 }
            

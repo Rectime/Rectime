@@ -11,7 +11,11 @@ namespace RecTimeLogic
 
         public override void DownloadAndParseData()
         {
-            var match = Regex.Match(this.BaseUrl, @"^https?:\/\/(?:www\.)?tv4(?:play)?\.se\/.*(?:-|\/)(\d+)");
+            var url = BaseUrl;
+            if (this.BaseUrl.Contains("?playlist"))
+                url = BaseUrl.Substring(0, BaseUrl.IndexOf("?playlist"));
+
+            var match = Regex.Match(url, @"^https?:\/\/(?:www\.)?tv4(?:play)?\.se\/.*(?:-|\/)(\d+)");
             if (match.Success)
             {
                 Streams.Clear();
