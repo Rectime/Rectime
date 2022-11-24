@@ -592,8 +592,8 @@ end;
 #define UseDotNet48
 
 #define MyAppName "RecTime"
-#define MyAppVersion "1.4.18.0"
-#define MyAppVerName "RecTime v1.4.18.0"
+#define MyAppVersion "1.4.19.0"
+#define MyAppVerName "RecTime v1.4.19.0"
 #define MyCompany "rectime.se"
 #define MyAppURL "http://rectime.se"
 #define MyAppLocation "..\RecTime"

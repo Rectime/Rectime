@@ -55,7 +55,7 @@ namespace RecTimeLogic
         {
             string ret = string.Empty;
 
-            var match = Regex.Match(url, "video/([0-9]+)", RegexOptions.IgnoreCase);
+            var match = Regex.Match(url, "video/([0-9a-zA-Z]+)", RegexOptions.IgnoreCase);
             if (match.Success)
             {
                 ret = url.Substring(0, url.ToLower().IndexOf("/video/") + 7);
@@ -64,7 +64,7 @@ namespace RecTimeLogic
             }
             // url /klipp/ .. ?
 
-            match = Regex.Match(url, "klipp/([0-9]+)", RegexOptions.IgnoreCase);
+            match = Regex.Match(url, "klipp/([0-9a-zA-Z]+)", RegexOptions.IgnoreCase);
             if (match.Success)
             {
                 ret = url.Substring(0, url.ToLower().IndexOf("/klipp/") + 7);

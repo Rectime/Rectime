@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using Newtonsoft.Json.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 
 namespace RecTimeLogic
@@ -24,66 +25,44 @@ namespace RecTimeLogic
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 ServicePointManager.ServerCertificateValidationCallback += (s, certificate, chain, sslPolicyErrors) => true;
 
-                masterUrl = $"https://playback-api.b17g.net/asset/{match.Groups[1]}?service=tv4&device=browser&drm=widevine&protocol=hls%2Cdash";
+                //masterUrl = $"https://playback-api.b17g.net/asset/{match.Groups[1]}?service=tv4&device=browser&drm=widevine&protocol=hls%2Cdash";
+                masterUrl = $"https://playback2.a2d.tv/play/{match.Groups[1]}?service=tv4&device=browser&browser=GoogleChrome&protocol=hls%2Cdash&drm=widevine&capabilities=live-drm-adstitch-2%2Cexpired_assets";
                 var data = streamDownloader.Download(masterUrl);
 
-                var drm = Regex.Match(data, @"""isDrmProtected"":(.+?),");
-                if (drm.Success && drm.Groups[1].Value.Trim() == "true")
+                var json = JObject.Parse(data);
+
+                JToken title = json.SelectToken("metadata.title", errorWhenNoMatch: false);
+                if (title != null)
+                    Title = title.ToString();
+
+                JToken drm = json.SelectToken("metadata.isDrmProtected", errorWhenNoMatch: false);
+                if (drm != null && drm.ToString().ToLower() == "true")
                     throw new DrmProtectionException("DRM skyddad video! Kan ej laddas ned tyvärr.");
 
-                var title = Regex.Match(data, @"""title"":""(.+?)""");
-                if (title.Success)
-                    Title = title.Groups[1].Value;
-
-                var imageMatch = Regex.Match(data, @"""image"":""(.+?)""");
-                if (imageMatch.Success)
+                JToken imageMatch = json.SelectToken("metadata.image", errorWhenNoMatch: false);
+                if (imageMatch != null)
                 {
-                    PosterUrl = imageMatch.Groups[1].Value;
+                    PosterUrl = imageMatch.ToString();
                     PosterImage = streamDownloader.DownloadImage(PosterUrl);
                 }
 
-                var durationMatch = Regex.Match(data, @"""duration"":(\d+)");
-                if (durationMatch.Success)
-                    Duration = int.Parse(durationMatch.Groups[1].Value);
+                JToken durationMatch = json.SelectToken("metadata.duration", errorWhenNoMatch: false);
+                if (durationMatch != null)
+                    Duration = int.Parse(durationMatch.ToString());
 
                 int bitrate = 0;
-                var bitMatch = Regex.Match(data, @"""ns_st_cl"":""(\d+)""");
-                if (bitMatch.Success)
-                    bitrate = int.Parse(bitMatch.Groups[1].Value);
+                JToken bitMatch = json.SelectToken("trackingData.comScore.ns_st_cl", errorWhenNoMatch: false);
+                if (bitMatch != null)
+                    bitrate = int.Parse(bitMatch.ToString());
 
 
-                var media = Regex.Match(data, @"""mediaUri"":""(.+?)""");
-                if (media.Success)
+                JToken media = json.SelectToken("playbackItem.manifestUrl", errorWhenNoMatch: false);
+                if (media != null)
                 {
-                    var mediaUrl = "https://playback-api.b17g.net" + media.Groups[1].Value;
-                    data = streamDownloader.Download(mediaUrl);
-
-                    var manifest = Regex.Match(data, @"""manifestUrl"":""(.+?)""");
-                    if (manifest.Success)
-                    {
-                        if (manifest.Groups[1].Value.Contains(".m3u8"))
-                        {
-                            masterUrl = manifest.Groups[1].Value;
-                            Streams.Clear();
-                            ParseStreams(streamDownloader.Download(masterUrl));
-                        }
-                        else
-                        {
-                            var stream = new StreamInfo()
-                            {
-                                Url = manifest.Groups[1].Value,
-                                Bandwidth = bitrate,
-                                ApproxSize = (Duration * (bitrate / 1024) / 1024 / 8)
-                            };
-
-                            var type = Regex.Match(data, @"""type"":""(.+?)""");
-                            if (type.Success)
-                                stream.Resolution = type.Groups[1].Value;
-
-                            Streams.Add(stream);
-                        }
-
-                    }
+                    masterUrl = media.ToString();
+                    Streams.Clear();
+                    ParseStreams(streamDownloader.Download(masterUrl));
+                      
                 }
             }
         }
